@@ -4,100 +4,94 @@
     <meta charset="utf-8" >
 
 <title>c++刷题笔记 | lxb&#39;blog</title>
+<meta name="description" content="菜鸡成长之路">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="shortcut icon" href="https://liuxbo.github.io/favicon.ico?v=1588772010813">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://liuxbo.github.io/favicon.ico?v=1588771529246">
+<link rel="stylesheet" href="https://unpkg.com/papercss@1.6.1/dist/paper.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://liuxbo.github.io/styles/main.css">
 
 
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
 
 <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
 
-
-    <meta name="description" content="1. c++字符串数组的\0问题
-#include&lt;stdio.h&gt;
-int main() {
-	char str1[8] = { 'd','e','d','g','o' };
-	char str2[5] = { 'd','e'..." />
-    <meta name="keywords" content="c++" />
   </head>
   <body>
-    <div id="app" class="main">
-
-      <div class="sidebar" :class="{ 'full-height': menuVisible }">
-  <div class="top-container" data-aos="fade-right">
-    <div class="top-header-container">
-      <a class="site-title-container" href="https://liuxbo.github.io">
-        <img src="https://liuxbo.github.io/images/avatar.png?v=1588771529246" class="site-logo">
-        <h1 class="site-title">lxb&#39;blog</h1>
-      </a>
-      <div class="menu-btn" @click="menuVisible = !menuVisible">
-        <div class="line"></div>
-      </div>
-    </div>
-    <div>
-      
-        
-          <a href="/" class="site-nav">
-            首页
-          </a>
-        
-      
-        
-          <a href="/archives" class="site-nav">
-            归档
-          </a>
-        
-      
-        
-          <a href="/tags" class="site-nav">
-            标签
-          </a>
-        
-      
-        
-          <a href="/post/about" class="site-nav">
-            关于
-          </a>
-        
-      
-    </div>
+  
+    <nav class="navbar border fixed split-nav">
+  <div class="nav-brand">
+    <h3><a href="https://liuxbo.github.io">lxb&#39;blog</a></h3>
   </div>
-  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
-    <div class="social-container">
-      
+  <div class="collapsible">
+    <input id="collapsible1" type="checkbox" name="collapsible1">
+    <button>
+      <label for="collapsible1">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+      </label>
+    </button>
+    <div class="collapsible-body">
+      <ul class="inline">
         
-      
-        
-      
-        
-      
-        
-      
-        
-      
-    </div>
-    <div class="site-description">
-      菜鸡成长之路
-    </div>
-    <div class="site-footer">
-      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://liuxbo.github.io/atom.xml" target="_blank">RSS</a>
-    </div>
-  </div>
-</div>
-
-
-      <div class="main-container">
-        <div class="content-container" data-aos="fade-up">
-          <div class="post-detail">
-            <h2 class="post-title">c++刷题笔记</h2>
-            <div class="post-date">2020-05-06</div>
+          <li>
             
-            <div class="post-content" v-pre>
+              <a href="/" class="menu">
+                首页
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/archives" class="menu">
+                归档
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/tags" class="menu">
+                标签
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/post/about" class="menu">
+                关于
+              </a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div id="top" class="row site">
+      <div class="sm-12 md-8 col">
+        <div class="paper">
+          <article class="article">
+            <h1>c++刷题笔记</h1>
+            <p class="article-meta">
+              2020-05-06
+              
+                <a href="https://liuxbo.github.io/tag/ebIooEyCk/" class="badge ">
+                  c++
+                </a>
+              
+            </p>
+            
+            <div class="post-content">
               <h3 id="1-c字符串数组的0问题">1. c++字符串数组的\0问题</h3>
 <pre><code>#include&lt;stdio.h&gt;
 int main() {
@@ -1887,49 +1881,132 @@ isfri[abs(stoi(a))*10000+abs(stoi(b))]=isfri[abs(stoi(b))*10000+abs(stoi(a))]=tr
 </code></pre>
 
             </div>
-            
-              <div class="tag-container">
-                
-                  <a href="https://liuxbo.github.io/tag/ebIooEyCk/" class="tag">
-                    c++
-                  </a>
-                
-              </div>
-            
-            
-              <div class="next-post">
-                <div class="next">下一篇</div>
-                <a href="https://liuxbo.github.io/post/hello-gridea/">
-                  <h3 class="post-title">
-                    Hello Gridea
-                  </h3>
-                </a>
-              </div>
-            
-
-            
-
-          </div>
-
+          </article>
         </div>
+        <div class="paper" data-aos="fade-in">
+          
+            <div class="next-post">
+              <div class="next">
+                下一篇
+              </div>
+              <a href="https://liuxbo.github.io/post/hello-gridea/">
+                <h3 class="post-title">
+                  Hello Gridea
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+        
       </div>
+
+      <div class="sm-12 md-4 col sidebar">
+  <div class="paper info-container">
+    <img src="https://liuxbo.github.io/images/avatar.png?v=1588772010813" class="no-responsive avatar">
+    <div class="text-muted">菜鸡成长之路</div>
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+  </div>
+  <div class="paper">
+    <div class="sidebar-title">
+      最新文章
+    </div>
+    <div class="row">
+      <ul>
+        
+          
+            <li>
+              <a href="https://liuxbo.github.io/post/yi-qing/">疫情</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://liuxbo.github.io/post/pat-kao-shi-da-gang/">PAT考试大纲</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://liuxbo.github.io/post/idea-de-shi-yong/">IDEA的使用</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://liuxbo.github.io/post/pat-ti-jie/">PAT题解</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://liuxbo.github.io/post/cshua-ti-bi-ji/">c++刷题笔记</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://liuxbo.github.io/post/about/">关于</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://liuxbo.github.io/post/hello-gridea/">Hello Gridea</a>
+            </li>
+          
+        
+      </ul>
+    </div>
+  </div>
+  <div class="paper">
+    <div class="sidebar-title">
+      标签列表
+    </div>
+    <div class="row">
+      
+        <a href="https://liuxbo.github.io/tag/a8Kpb5X9y/" class="badge warning">
+          PAT
+        </a>
+      
+        <a href="https://liuxbo.github.io/tag/ebIooEyCk/" class="badge secondary">
+          c++
+        </a>
+      
+        <a href="https://liuxbo.github.io/tag/EQMozh8Pu/" class="badge warning">
+          Gridea
+        </a>
+      
+    </div>
+  </div>
+  <div class="paper">
+    Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://liuxbo.github.io/atom.xml" target="_blank">RSS</a>
+  </div>
+</div>
+
+
     </div>
 
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
 <script type="application/javascript">
 
 AOS.init();
 
-var app = new Vue({
-  el: '#app',
-  data: {
-    menuVisible: false,
-  },
-})
+hljs.initHighlightingOnLoad()
 
 </script>
-
-
 
 
 
