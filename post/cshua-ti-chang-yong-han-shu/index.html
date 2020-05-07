@@ -6,7 +6,7 @@
 <meta name="keywords" content="Gridea静态个人博客">
 <meta name="description" content="菜鸡成长之路">
 <meta name="theme-color" content="#000">
-<title>PAT考试大纲 | lxb&#39;blog</title>
+<title>c++刷题常用函数 | lxb&#39;blog</title>
 <link rel="shortcut icon" href="https://liuxbo.github.io/favicon.ico?v=1588857340454">
 <link rel="stylesheet" href="https://liuxbo.github.io/styles/main.css">
 
@@ -25,8 +25,8 @@
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
     onload="renderMathInElement(document.body);"></script>
 
-    <meta name="description" content="PAT考试大纲" />
-    <meta name="keywords" content="PAT" />
+    <meta name="description" content="c++刷题常用函数" />
+    <meta name="keywords" content="" />
   </head>
   <body>
     <div class="head-top-line"></div>
@@ -260,8 +260,8 @@
               <div class="article-box">
     <header class="post-header">
   <h1 class="post-title">
-    <a class="post-title-link" href="https://liuxbo.github.io/post/pat-kao-shi-da-gang/">
-      PAT考试大纲
+    <a class="post-title-link" href="https://liuxbo.github.io/post/cshua-ti-chang-yong-han-shu/">
+      c++刷题常用函数
     </a>
   </h1>
   <div class="post-meta">
@@ -269,56 +269,102 @@
     <span class="meta-item pc-show">
       <i class="fa fa-calendar-o"></i>
       <span>发布于</span>
-      <span>2020-05-06</span>
+      <span>2020-05-07</span>
       <span class="post-meta-divider pc-show">|</span>
     </span>
     
-      <span class="meta-item">
-        <i class="fa fa-folder-o"></i>
-        <span class="pc-show">分类于</span>
-        
-          
-            <a href="https://liuxbo.github.io/tag/a8Kpb5X9y/">
-              <span>PAT</span>
-            </a>
-          
-        
-      </span>
-      <span class="post-meta-divider">|</span>
-    
     <span class="meta-item">
       <i class="fa fa-clock-o"></i>
-      <span>2分钟</span>
+      <span>5分钟</span>
     </span>
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>473<span class="pc-show">字数</span></span>
+      <span>968<span class="pc-show">字数</span></span>
     </span>
   </div>
 </header>
 </div>
               <div class="post-body next-md-body" id="post_body">
-                <p>考试大纲<br>
-乙级（Basic Level）</p>
-<p>考生应具备以下基本能力：<br>
-1· 基本的C/C++的代码设计能力，以及相关开发环境的基本调试技巧；<br>
-2· 理解并掌握最基本的数据存储结构，即：数组、链表；<br>
-3· 理解并熟练编程实现与基本数据结构相关的基础算法，包括递归、排序、查找等；<br>
-4· 能够分析算法的时间复杂度、空间复杂度和算法稳定性；<br>
-5· 具备问题抽象和建模的初步能力，并能够用所学方法解决实际问题。</p>
-<p>甲级（Advanced Level）</p>
-<p>在达到乙级要求的基础上，还要求：<br>
-1· 具有充分的英文阅读理解能力；<br>
-2· 理解并掌握基础数据结构，包括：线性表、树、图；<br>
-3· 理解并熟练编程实现经典高级算法，包括哈希映射、并查集、最短路径、拓扑排序、关键路径、贪心、深度优先搜索、广度优先搜索、回溯剪枝等；<br>
-4· 具备较强的问题抽象和建模能力，能实现对复杂实际问题的模拟求解。</p>
-<p>顶级（Top Level）</p>
-<p>在达到甲级要求的基础上，还要求：<br>
-1· 对高级、复杂数据结构掌握其用法并能够熟练使用，如后缀数组、树状数组、线段树、Treap、静态KDTree等；<br>
-2· 能够利用经典算法思想解决较难的算法问题，如动态规划、计算几何、图论高级应用（包括最大流/最小割，强连通分支、最近公共祖先、最小生成树、欧拉序列）等，并灵活运用；<br>
-3· 能够解决复杂的模拟问题，编写并调试代码量较大的程序；<br>
-4· 具有缜密的科学思维，考虑问题周全，能够正确应对复杂问题的边界情况。</p>
+                <ul>
+<li>
+<p><code>math.h</code>头文件函数</p>
+<p><code>fabs(double x)</code>  取绝对值 ，</p>
+<p><code>floor(double x)</code>和<code>ceil(double x)</code> ，分别为向上取整和向下取整，返回double型</p>
+<p><code>pow(double r,double p)</code> 用于返回r^p</p>
+<p><code>sqrt(double x)</code> ,返回算数平方根</p>
+<p><code>log(double x)</code> ,返回以自然对数为底的对数，用换底公式求具体对数</p>
+<p><code>sin(double x)</code> <code>cos(double x)</code> <code>tan(double x)</code></p>
+<p><code>asin(double x)</code> <code>acos(double x)</code> <code>atan(double x)</code></p>
+<p><code>round(double x)</code> 将x四舍五入，返回为double型</p>
+</li>
+<li>
+<p><code>algorithm</code>头文件下的函数，加<code>using namespace std;</code></p>
+<p><code>max(x,y)</code> <code>min(x,y)</code>  <code>abs(x)</code> 返回x的绝对值，x必须为整数</p>
+<p><code>swap(x,y)</code></p>
+<p><code>reverse(it,it2)</code> <code>reverse(a,a+4)</code>  ,将数组元素反转</p>
+<p><code>next_permutation(a,a+...)</code> ,给出一个序列在全排列中的下一个序列，该函数在到达全排列的最后一个时会返回false</p>
+<p><code>fill(a,a+4,233)</code> ,赋相同值，对于<code>G[maxn] [maxn]</code>二维数组<code>fill(G[0],G[0]+maxn*maxn,INF);</code></p>
+<p><code>sort(首元素地址，尾元素地址的下一个地址，比较函数（非必填)）</code>,无比较函数，默认递增排序。</p>
+<p><code>sort(a, a+n, greater());</code>  从大到小排序(要用<code>iostream</code>头文件)</p>
+<p><code>lower_bound(first,last,val)</code>  <code>upper_bound(first,last,val)</code> ,用于有序数组或容器，前者用来寻找[first,last)范围内第一个值大于等于val的元素的位置，后者寻找第一个值大于val的元素位置.若是数组，这两个函数返回的是地址，如<code>int* right=upper_bound(num, num+n, k)</code>，返回num数组中第一个大于k的元素所在地址，其下标=<code>right-num</code></p>
+<p><code>max_element(a, a+len)</code>返回序列中最大元素地址（迭代器）,可用其减去数组首地址(即数组名)获取其下标,若要获取该元素值，直接在前面加一个*,表示取地址即可</p>
+<p><code>min_element(begin, end)</code> 返回序列中最小元素地址</p>
+</li>
+<li>
+<p><code>string.h</code> 头文件(<code>cstring</code>头文件)</p>
+<p><code>memset(数组名,-1或0,sizeof(数组名))</code></p>
+<p><code>strlen(字符数组)</code> 得到字符数组中第一个\0前的字符个数</p>
+<p><code>strcmp(字符数组1，字符数组2)</code>返回两个字符串大小比较结果，按字典序。字符数组1&lt;2 ,返回负整数;1=2，返回0;1&gt;2，返回正整数</p>
+<p><code>strcpy(字符数组1，字符数组2)</code>，把字符数组2复制给字符数组1，包括\0</p>
+<p><code>strcat(字符数组1，字符数组2)</code> ,把2接在1后面</p>
+</li>
+<li>
+<p><code>cctype</code>头文件</p>
+<p>1.不仅仅能判断字⺟，还能判断数字、⼩写字⺟、⼤写字⺟等</p>
+<p><code>isalpha</code>字⺟（包括⼤写、⼩写）</p>
+<p><code>islower</code> （⼩写字⺟）</p>
+<p><code>isupper</code>（⼤写字⺟）</p>
+<p><code>isalnum</code> （字⺟⼤写⼩写+数字）</p>
+<p><code>isblank</code>（space和 \t ）</p>
+<p><code>isspace</code>（ space 、 \t 、 \r 、 \n ）</p>
+<p><code>isdigit</code>(数字)</p>
+<p>2 .<code>tolower (char c)</code>和 <code>toupper(char c)</code> 将某个字符转为⼩写或⼤写</p>
+<ul>
+<li>使⽤ <code>stoi()</code> 、 <code>stod()</code>  可以将字符串 string 转化为对应的 int 型、 double 型变量</li>
+</ul>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;string&gt;
+using namespace std;
+int main() {
+ string str = &quot;123&quot;;
+ int a = stoi(str);
+ cout &lt;&lt; a;//输出123
+ str = &quot;123.44&quot;;
+ double b = stod(str);
+ cout &lt;&lt; b;//输出123.44
+ return 0;
+}
+</code></pre>
+</li>
+</ul>
+<p>3.<code>stoi</code>如果遇到的是⾮法输⼊（⽐如<code>stoi(&quot;123.4&quot;)</code>，123.4不是⼀个int型变量）： 1.会⾃动截取最前⾯的     数字，直到遇到不是数字为⽌ (所以说如果是浮点型，会截取前⾯的整数部分) 2.如果最前⾯不是数字，会运⾏时发⽣错误</p>
+<p><code>stod</code>如果是⾮法输⼊： 1.会⾃动截取最前⾯的浮点数，直到遇到不满⾜浮点数为⽌ 2.如果最前⾯不是数字或者⼩数点，会运⾏时发⽣错误 3.如果最前⾯是⼩数点，会⾃动转化后在前⾯补0</p>
+<p>不仅有<code>stoi</code>、<code>stod</code>两种，相应的还有：</p>
+<p><code>stof (string to float)</code></p>
+<p><code>stold (string to long double)</code></p>
+<p><code>stol (string to long)</code></p>
+<p><code>stoll (string to long long)</code></p>
+<p><code>stoul (string to unsigned long)</code></p>
+<p><code>stoull (string to unsigned long long)</code></p>
+<ul>
+<li>
+<p><code>to_string()</code>将数值转化为字符串。返回对应的字符串。头文件同样为<code>include&lt;string&gt;</code></p>
+</li>
+<li>
+<p><code>printf(&quot;%s\n&quot;, (s1 + s2).c_str());</code>  如果想⽤<code>printf</code>输出string，需要加⼀ 个<code>.c_str()</code></p>
+</li>
+</ul>
 
               </div>
               <div class="post-footer">
@@ -329,7 +375,7 @@
     </li>
     <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="https://liuxbo.github.io/post/pat-kao-shi-da-gang/" title="PAT考试大纲">PAT考试大纲</a>
+      <a href="https://liuxbo.github.io/post/cshua-ti-chang-yong-han-shu/" title="c++刷题常用函数">c++刷题常用函数</a>
     </li>
     <li class="post-copyright-license">
       <strong>版权声明： </strong>
@@ -338,21 +384,15 @@
   </ul>
   <div class="tags">
     
-      <a href="https://liuxbo.github.io/tag/a8Kpb5X9y/"># PAT</a>
-    
   </div>
   <div class="nav">
     <div class="nav-prev">
       
-        <i class="fa fa-chevron-left"></i>
-        <a class="nav-pc-next" title="疫情" href="https://liuxbo.github.io/post/yi-qing/">疫情</a class="nav-pc-next">
-        <a class="nav-mobile-prev" title="疫情" href="https://liuxbo.github.io/post/yi-qing/">上一篇</a>
-      
     </div>
     <div class="nav-next">
       
-        <a class="nav-pc-next" title="IDEA的使用" href="https://liuxbo.github.io/post/idea-de-shi-yong/">IDEA的使用</a>
-        <a class="nav-mobile-next" title="IDEA的使用" href="https://liuxbo.github.io/post/idea-de-shi-yong/">下一篇</a>
+        <a class="nav-pc-next" title="字符串相关" href="https://liuxbo.github.io/post/zi-fu-chuan-xiang-guan/">字符串相关</a>
+        <a class="nav-mobile-next" title="字符串相关" href="https://liuxbo.github.io/post/zi-fu-chuan-xiang-guan/">下一篇</a>
         <i class="fa fa-chevron-right"></i>
       
     </div>
