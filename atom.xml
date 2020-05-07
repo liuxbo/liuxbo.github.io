@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://liuxbo.github.io</id>
     <title>lxb&apos;blog</title>
-    <updated>2020-05-07T13:15:44.540Z</updated>
+    <updated>2020-05-07T13:16:48.375Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://liuxbo.github.io"/>
     <link rel="self" href="https://liuxbo.github.io/atom.xml"/>
@@ -10,6 +10,125 @@
     <logo>https://liuxbo.github.io/images/avatar.png</logo>
     <icon>https://liuxbo.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, lxb&apos;blog</rights>
+    <entry>
+        <title type="html"><![CDATA[数学问题]]></title>
+        <id>https://liuxbo.github.io/post/shu-xue-wen-ti/</id>
+        <link href="https://liuxbo.github.io/post/shu-xue-wen-ti/">
+        </link>
+        <updated>2020-05-07T13:15:56.000Z</updated>
+        <content type="html"><![CDATA[<ul>
+<li>
+<p>求最大公约数,(最小公倍数：a和b的最大公约数为d，则a和b的最小公倍数为ab/d)</p>
+<pre><code>long long gcd(long long a, long long b) {
+     return b == 0 ? abs(a) : gcd(b, a %b);
+ }
+</code></pre>
+</li>
+<li>
+<p>分数化简</p>
+<pre><code>struct fraction {
+	ll up, down;
+}a, b;
+fraction reduction(fraction result) {
+	if (result.down &lt; 0) {
+		result.up = -result.up;
+		result.down = -result.down;
+	}
+	if (result.up == 0) result.down = 1;
+	else {
+		ll gcdvalue = gcd(abs(result.up), abs(result.down));
+		result.up /= gcdvalue;
+		result.down /= gcdvalue;
+	}
+	return result;
+}
+</code></pre>
+</li>
+<li>
+<p>四则运算</p>
+<pre><code>fraction add(fraction f1, fraction f2) {
+	fraction result;
+	result.up = f1.up * f2.down + f1.down * f2.up;
+	result.down = f1.down * f2.down;
+	return reduction(result);
+}
+</code></pre>
+</li>
+<li>
+<p>分数输出</p>
+<pre><code>void showresult(fraction r) {
+	r = reduction(r);
+	if (r.up &lt; 0) printf(&quot;(&quot;);
+	if (r.down == 1) printf(&quot;%lld&quot;, r.up);
+	else if (abs(r.up) &lt; r.down) printf(&quot;%lld/%lld&quot;, r.up, r.down);
+	else if (abs(r.up) &gt; r.down) printf(&quot;%lld %lld/%lld&quot;, r.up / r.down, abs(r.up) % r.down, r.down);
+	if (r.up &lt; 0) printf(&quot;)&quot;);
+}
+</code></pre>
+</li>
+<li>
+<p>判断是否为素数</p>
+<pre><code>bool isprime(int n) {
+	if (n &lt;= 1) return false;
+    int sqr = sqrt(1.0 * n);
+	for (int i = 2; i &lt;= sqr; i++) {
+		if (n % i == 0) return false;
+	}
+	return true;
+}
+
+</code></pre>
+</li>
+<li>
+<p>建立素数表</p>
+<pre><code>
+int prime[maxn], pnum=0;
+void find_prime() {
+	for (int i = 1; i &lt; maxn; i++) {
+		if (isprime(i)) {
+			prime[pnum++] = i;
+		}
+	}
+}
+</code></pre>
+</li>
+<li>
+<p>大整数运算</p>
+<pre><code>struct bign {
+	int d[1000];
+	int len;
+	bign() {
+		len = 0;
+		memset(d, 0, sizeof(d));
+	}
+};
+bign change(string str) {
+	bign a;
+	a.len = str.length();
+	for (int i = 0; i &lt; a.len; i++) {
+		a.d[i] = str[a.len - 1 - i]-'0';
+	}
+	return a;
+}
+bign multi(bign a, int b) {
+	bign c;
+	int carry=0;
+	for (int i = 0; i &lt; a.len; i++) {
+		int temp = a.d[i] * b + carry;
+		c.d[c.len++] = temp % 10;
+		carry = temp / 10;
+	}
+	while (carry != 0) {
+		c.d[c.len++] = carry % 10;
+		carry /= 10;
+	}
+	return c;
+}
+</code></pre>
+</li>
+</ul>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[c++刷题常用函数]]></title>
         <id>https://liuxbo.github.io/post/cshua-ti-chang-yong-han-shu/</id>

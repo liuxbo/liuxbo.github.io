@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
   <head>
-      <meta charset="UTF-8"/>
+    <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <meta name="keywords" content="Gridea静态个人博客">
 <meta name="description" content="菜鸡成长之路">
 <meta name="theme-color" content="#000">
-<title>lxb&#39;blog</title>
+<title>数学问题 | lxb&#39;blog</title>
 <link rel="shortcut icon" href="https://liuxbo.github.io/favicon.ico?v=1588857405556">
 <link rel="stylesheet" href="https://liuxbo.github.io/styles/main.css">
 
@@ -25,6 +25,8 @@
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
     onload="renderMathInElement(document.body);"></script>
 
+    <meta name="description" content="数学问题" />
+    <meta name="keywords" content="" />
   </head>
   <body>
     <div class="head-top-line"></div>
@@ -122,10 +124,16 @@
     </div>
     <div class="main-continer">
       
-      <div class="section-layout  gemini">
+      <div class="section-layout gemini ">
         <div class="section-layout-wrapper">
-          <div class="sidebar">
-    
+          
+
+<div class="sidebar">
+    <div class="sidebar-box box-shadow-wrapper bg-color right-motion" id="sidebar">
+      
+      <div class="sidebar-body gemini" id="sidebar_body">
+        
+          
 <div class="sidebar-wrapper box-shadow-wrapper bg-color">
   <div class="sidebar-item">
     <img class="site-author-image right-motion" src="https://liuxbo.github.io/images/avatar.png"/>
@@ -167,79 +175,263 @@
 
 
 </div>
-</div>
-            <div class="section-box tag-line">
-              <div class="box-shadow-wrapper">
-                <div class="bg-color">
-                  <section class="section posts-expand">
-                    <div class="padding-wrapper">
-  <div class="tag-timeline-box">
-    <div class="tag-timeline-wrapper">
-      <div class="tag-timeline-title">
-        <h2>
-          PAT
-          <small>标签</small>
-        </h2>
+        
       </div>
-      
-        
-      
-        
-      
-        
-          
-        
-      
-        
-      
-        
-          
-            <a href="https://liuxbo.github.io/post/pat-kao-shi-da-gang/">
-              <div class="motion-warpper">
-                <div class="tag-post-node">
-                  <h1>
-                    05-06
-                    <small>PAT考试大纲</small>
-                  </h1>
-                </div>  
+    </div>
+</div>
+<script>
+  const SIDEBAR_TITLE_ACTIVE = 'sidebar-title-active';
+  const SIDEBAR_BODY_ACTIVE = 'sidebar-body-active';
+  const SLIDE_UP_IN = 'slide-up-in';
+
+  let sidebar = document.querySelector('#sidebar'),
+  tocSideBar = document.querySelector('#tocSideBar'),
+  metaSideBar = document.querySelector('#metaSideBar'),
+  postToc = document.querySelector('#post_toc'),
+  postSiteMeta = document.querySelector('#post_side_meta'),
+  sidebarTitle = document.querySelector('.sidebar-title'),
+  sidebarBody = document.querySelector('#sidebar_body');
+
+  tocSideBar && tocSideBar.addEventListener('click', (e) => {
+    toggleSidebar(e);
+  });
+
+  metaSideBar && metaSideBar.addEventListener('click', (e) => {
+    toggleSidebar(e);
+  });
+
+  function toggleSidebar(e) {
+    let currentTitle = document.querySelector("."+SIDEBAR_TITLE_ACTIVE);
+    if (currentTitle == e.srcElement) {
+      return ;
+    }
+    let current, showElement, hideElement;
+    if (e.srcElement == metaSideBar) {
+      showElement = postSiteMeta;
+      hideElement = postToc;
+    } else if (e.srcElement == tocSideBar){
+      showElement = postToc;
+      hideElement = postSiteMeta;
+    }
+    currentTitle.classList.remove(SIDEBAR_TITLE_ACTIVE);
+    e.srcElement.classList.add(SIDEBAR_TITLE_ACTIVE);
+
+    window.Velocity(hideElement, 'stop');
+    window.Velocity(hideElement, 'transition.slideUpOut', {
+      display: 'none',
+      duration: 200,
+      complete: function () {
+        window.Velocity(showElement, 'transition.slideDownIn', {
+          duration: 200
+        });
+      }
+    })
+    hideElement.classList.remove(SIDEBAR_BODY_ACTIVE);
+    showElement.classList.add(SIDEBAR_BODY_ACTIVE);
+  }
+
+  postToc.addEventListener('transitionend', function() {
+    this.classList.remove(SLIDE_UP_IN);
+  });
+
+
+  if (sidebarBody.classList.contains('pisces') || sidebarBody.classList.contains('gemini')) {
+    let hasFix = false;
+    let scrollEl = document.querySelector('.main-continer');
+    let limitTop = document.querySelector('#nav_ul').children.length * 42 + 162;
+    window.addEventListener('scroll', function(e) {
+    if (document.scrollingElement.scrollTop >= limitTop) {
+      if (!hasFix) {
+        sidebar.classList.add('sidebar-fixed');
+        hasFix = true;
+      }
+    } else {
+      if (hasFix) {
+        sidebar.classList.remove('sidebar-fixed');
+        hasFix = false;
+      }
+    }
+  });
+  }
+  
+</script>
+          <div class="section-box box-shadow-wrapper">
+            <div class="section bg-color post post-page">
+              <div class="article-box">
+    <header class="post-header">
+  <h1 class="post-title">
+    <a class="post-title-link" href="https://liuxbo.github.io/post/shu-xue-wen-ti/">
+      数学问题
+    </a>
+  </h1>
+  <div class="post-meta">
+    
+    <span class="meta-item pc-show">
+      <i class="fa fa-calendar-o"></i>
+      <span>发布于</span>
+      <span>2020-05-07</span>
+      <span class="post-meta-divider pc-show">|</span>
+    </span>
+    
+    <span class="meta-item">
+      <i class="fa fa-clock-o"></i>
+      <span>3分钟</span>
+    </span>
+    <span class="meta-item">
+      <span class="post-meta-divider">|</span>
+      <i class="fa fa-file-word-o"></i>
+      <span>376<span class="pc-show">字数</span></span>
+    </span>
+  </div>
+</header>
+</div>
+              <div class="post-body next-md-body" id="post_body">
+                <ul>
+<li>
+<p>求最大公约数,(最小公倍数：a和b的最大公约数为d，则a和b的最小公倍数为ab/d)</p>
+<pre><code>long long gcd(long long a, long long b) {
+     return b == 0 ? abs(a) : gcd(b, a %b);
+ }
+</code></pre>
+</li>
+<li>
+<p>分数化简</p>
+<pre><code>struct fraction {
+	ll up, down;
+}a, b;
+fraction reduction(fraction result) {
+	if (result.down &lt; 0) {
+		result.up = -result.up;
+		result.down = -result.down;
+	}
+	if (result.up == 0) result.down = 1;
+	else {
+		ll gcdvalue = gcd(abs(result.up), abs(result.down));
+		result.up /= gcdvalue;
+		result.down /= gcdvalue;
+	}
+	return result;
+}
+</code></pre>
+</li>
+<li>
+<p>四则运算</p>
+<pre><code>fraction add(fraction f1, fraction f2) {
+	fraction result;
+	result.up = f1.up * f2.down + f1.down * f2.up;
+	result.down = f1.down * f2.down;
+	return reduction(result);
+}
+</code></pre>
+</li>
+<li>
+<p>分数输出</p>
+<pre><code>void showresult(fraction r) {
+	r = reduction(r);
+	if (r.up &lt; 0) printf(&quot;(&quot;);
+	if (r.down == 1) printf(&quot;%lld&quot;, r.up);
+	else if (abs(r.up) &lt; r.down) printf(&quot;%lld/%lld&quot;, r.up, r.down);
+	else if (abs(r.up) &gt; r.down) printf(&quot;%lld %lld/%lld&quot;, r.up / r.down, abs(r.up) % r.down, r.down);
+	if (r.up &lt; 0) printf(&quot;)&quot;);
+}
+</code></pre>
+</li>
+<li>
+<p>判断是否为素数</p>
+<pre><code>bool isprime(int n) {
+	if (n &lt;= 1) return false;
+    int sqr = sqrt(1.0 * n);
+	for (int i = 2; i &lt;= sqr; i++) {
+		if (n % i == 0) return false;
+	}
+	return true;
+}
+
+</code></pre>
+</li>
+<li>
+<p>建立素数表</p>
+<pre><code>
+int prime[maxn], pnum=0;
+void find_prime() {
+	for (int i = 1; i &lt; maxn; i++) {
+		if (isprime(i)) {
+			prime[pnum++] = i;
+		}
+	}
+}
+</code></pre>
+</li>
+<li>
+<p>大整数运算</p>
+<pre><code>struct bign {
+	int d[1000];
+	int len;
+	bign() {
+		len = 0;
+		memset(d, 0, sizeof(d));
+	}
+};
+bign change(string str) {
+	bign a;
+	a.len = str.length();
+	for (int i = 0; i &lt; a.len; i++) {
+		a.d[i] = str[a.len - 1 - i]-'0';
+	}
+	return a;
+}
+bign multi(bign a, int b) {
+	bign c;
+	int carry=0;
+	for (int i = 0; i &lt; a.len; i++) {
+		int temp = a.d[i] * b + carry;
+		c.d[c.len++] = temp % 10;
+		carry = temp / 10;
+	}
+	while (carry != 0) {
+		c.d[c.len++] = carry % 10;
+		carry /= 10;
+	}
+	return c;
+}
+</code></pre>
+</li>
+</ul>
+
               </div>
-            </a>
-          
-        
+              <div class="post-footer">
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong>本文作者：</strong>
+      lxb&#39;blog
+    </li>
+    <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://liuxbo.github.io/post/shu-xue-wen-ti/" title="数学问题">数学问题</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong>
+      本博客所有文章除特别声明外，转载请注明出处！
+    </li>
+  </ul>
+  <div class="tags">
+    
+  </div>
+  <div class="nav">
+    <div class="nav-prev">
       
-        
+    </div>
+    <div class="nav-next">
       
-        
-          
-            <a href="https://liuxbo.github.io/post/pat-ti-jie/">
-              <div class="motion-warpper">
-                <div class="tag-post-node">
-                  <h1>
-                    05-06
-                    <small>PAT题解</small>
-                  </h1>
-                </div>  
-              </div>
-            </a>
-          
-        
-      
-        
-          
-        
-      
-        
-      
-        
-          
-        
+        <a class="nav-pc-next" title="c++刷题常用函数" href="https://liuxbo.github.io/post/cshua-ti-chang-yong-han-shu/">c++刷题常用函数</a>
+        <a class="nav-mobile-next" title="c++刷题常用函数" href="https://liuxbo.github.io/post/cshua-ti-chang-yong-han-shu/">下一篇</a>
+        <i class="fa fa-chevron-right"></i>
       
     </div>
   </div>
 </div>
-                  </section>
-                </div>
-              </div>
+              
+            </div>
           </div>
         </div>
       </div>
