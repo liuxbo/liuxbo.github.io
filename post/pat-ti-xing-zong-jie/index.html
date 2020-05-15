@@ -6,7 +6,7 @@
 <meta name="keywords" content="Gridea静态个人博客">
 <meta name="description" content="菜鸡成长之路">
 <meta name="theme-color" content="#000">
-<title>PAT考试大纲 | lxb&#39;blog</title>
+<title>PAT题型总结 | lxb&#39;blog</title>
 <link rel="shortcut icon" href="https://liuxbo.github.io/favicon.ico?v=1589506154935">
 <link rel="stylesheet" href="https://liuxbo.github.io/styles/main.css">
 
@@ -25,7 +25,7 @@
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
     onload="renderMathInElement(document.body);"></script>
 
-    <meta name="description" content="PAT考试大纲" />
+    <meta name="description" content="PAT题型总结" />
     <meta name="keywords" content="PAT" />
   </head>
   <body>
@@ -131,9 +131,17 @@
 <div class="sidebar">
     <div class="sidebar-box box-shadow-wrapper bg-color right-motion" id="sidebar">
       
+        <div class="post-list-sidebar">
+          <div class="sidebar-title">
+            <span id="tocSideBar" class="sidebar-title-item sidebar-title-active">文章目录</span>
+            <span id="metaSideBar" class="sidebar-title-item">站点概览</span>
+          </div>
+        </div>
+      
       <div class="sidebar-body gemini" id="sidebar_body">
         
-          
+          <div class="post-side-meta" id="post_side_meta">
+            
 <div class="sidebar-wrapper box-shadow-wrapper bg-color">
   <div class="sidebar-item">
     <img class="site-author-image right-motion" src="https://liuxbo.github.io/images/avatar.png"/>
@@ -175,6 +183,190 @@
 
 
 </div>
+          </div>
+          <div class="post-toc sidebar-body-active" id="post_toc" style="opacity: 1;">
+            <div class="toc-box right-motion">
+  <div class="toc-wrapper auto-number auto" id="toc_wrapper">
+    <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#1%E6%A8%A1%E6%8B%9F">1.模拟</a></li>
+<li><a href="#2%E6%B0%B4%E9%A2%98">2.水题</a></li>
+<li><a href="#3-%E6%95%B0%E5%AD%97-%E6%95%B0%E5%AD%A6%E9%97%AE%E9%A2%98">3. 数字、数学问题</a></li>
+<li><a href="#4%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%97%AE%E9%A2%98">4.字符串问题</a></li>
+<li><a href="#5%E6%8E%92%E5%BA%8F">5.排序</a></li>
+<li><a href="#%E5%8D%95%E8%AF%8D">单词</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+</div>
+
+<script>
+
+let lastTop = 0, lList = [], hList = [], postBody, lastIndex = -1; 
+let active = 'active-show', activeClass = 'active-current';
+let tocWrapper = document.querySelector('#toc_wrapper');
+let tocContent = tocWrapper.children[0];
+let autoNumber = tocWrapper&&tocWrapper.classList.contains('auto-number');
+
+function addTocNumber(elem, deep) {
+  if (!elem) {
+    return;
+  }
+  let prop = elem.__proto__;
+
+  if (prop === HTMLUListElement.prototype) {
+    for (let i = 0; i < elem.children.length; i++) {
+      addTocNumber(elem.children[i], deep + (i + 1) + '.');
+    }
+  } else if (prop === HTMLLIElement.prototype) {
+    // 保存li元素
+    lList.push(elem);
+    for (let i = 0; i < elem.children.length; i++) {
+      let cur = elem.children[i];
+      if (cur.__proto__ === HTMLAnchorElement.prototype) {
+        if (autoNumber) {
+          cur.text =  deep + ' ' + cur.text;
+        }
+      } else if (cur.__proto__ === HTMLUListElement.prototype) {
+        addTocNumber(cur, deep);
+      }
+    }
+  }
+}
+
+
+document.addEventListener('scroll', function(e) {
+  if (lList.length <= 0) {
+    return;
+  }
+  let scrollTop = document.scrollingElement.scrollTop;
+  let dir;
+
+  if (lastTop - scrollTop > 0) {
+    dir = 'up';
+  } else {
+    dir = 'down';
+  }
+
+  lastTop = scrollTop;
+  if (scrollTop <= 0) {
+    if (lastIndex >= 0 && lastIndex < hList.length) {
+      lList[lastIndex].classList.remove(activeClass);
+    }
+    return;
+  }
+
+  let current = 0, hasFind = false;
+  for (let i = 0; i < hList.length; i++) {
+    if (hList[i].offsetTop > scrollTop) {
+      current = i;
+      hasFind = true;
+      break;
+    }
+  }
+  if (!hasFind && scrollTop > lList[lList.length - 1].offsetTop) {
+    current = hList.length - 1;
+  } else {
+    current--;
+  }
+  if (dir === 'down') {
+    if (current > lastIndex) {
+      addActiveClass(current);
+      removeActiveClass(lastIndex) 
+      lastIndex = current;
+      removeParentActiveClass();
+      lList[current] && addActiveLiElemment(lList[current].parentElement,tocContent);
+    }
+  } else {
+    if (current < lastIndex) {
+      addActiveClass(current);
+      removeActiveClass(lastIndex);
+      lastIndex = current;
+      removeParentActiveClass();
+      lList[current] && addActiveLiElemment(lList[current].parentElement,tocContent);
+    }
+  }
+});
+
+function removeParentActiveClass() {
+  let parents = tocContent.querySelectorAll('.'+active)
+  parents.forEach(function(elem) {
+    elem.classList.remove(active);
+  });
+}
+
+function addActiveClass(index) {
+  if (index >= 0 && index < hList.length) {
+    lList[index].classList.add(activeClass);
+  }
+}
+
+function removeActiveClass(index) {
+  if (index >= 0 && index < hList.length) {
+    lList[index].classList.remove(activeClass);
+  }
+}
+
+function addActiveLiElemment(elem, parent) {
+  if (!elem || elem === parent) {
+    return;
+  } else {
+    if (elem.__proto__ === HTMLLIElement.prototype) {
+      elem.classList.add(active);
+    }
+    addActiveLiElemment(elem.parentElement, parent);
+  }
+}
+
+function showToc() {
+  if (tocWrapper) {
+    postBody = document.querySelector('#post_body');
+    for (let i = 0; i < postBody.children.length; i++) {
+      if (postBody.children[i].__proto__ === HTMLHeadingElement.prototype) {
+        hList.push(postBody.children[i]);
+      }
+    }
+    if (tocWrapper.classList.contains('compress')) {
+        tocContent.classList.add('closed');
+    } else if (tocWrapper.classList.contains('no_compress')){
+      tocContent.classList.add('expanded');
+    } else {
+      if (hList.length > 10) {
+        active = 'active-hidden'
+        tocContent.classList.add('closed');
+      } else {
+        tocContent.classList.add('expanded');
+      }
+    }
+  }
+}
+addTocNumber(tocContent, '');
+
+window.addEventListener('load', function() {
+  showToc();
+  document.querySelector('#sidebar').style='display: block;';
+  tocWrapper.classList.add('toc-active');
+  setTimeout(function() {
+    if ("createEvent" in document) {
+      let evt = document.createEvent("HTMLEvents");
+      evt.initEvent("scroll", false, true);
+      document.dispatchEvent(evt);
+    }
+    else {
+      document.fireEvent("scroll");
+    }
+  }, 500)
+})
+
+</script>
+          </div>
         
       </div>
     </div>
@@ -260,8 +452,8 @@
               <div class="article-box">
     <header class="post-header">
   <h1 class="post-title">
-    <a class="post-title-link" href="https://liuxbo.github.io/post/pat-kao-shi-da-gang/">
-      PAT考试大纲
+    <a class="post-title-link" href="https://liuxbo.github.io/post/pat-ti-xing-zong-jie/">
+      PAT题型总结
     </a>
   </h1>
   <div class="post-meta">
@@ -269,7 +461,7 @@
     <span class="meta-item pc-show">
       <i class="fa fa-calendar-o"></i>
       <span>发布于</span>
-      <span>2020-05-06</span>
+      <span>2020-05-15</span>
       <span class="post-meta-divider pc-show">|</span>
     </span>
     
@@ -288,37 +480,46 @@
     
     <span class="meta-item">
       <i class="fa fa-clock-o"></i>
-      <span>2分钟</span>
+      <span>1分钟</span>
     </span>
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>473<span class="pc-show">字数</span></span>
+      <span>190<span class="pc-show">字数</span></span>
     </span>
   </div>
 </header>
 </div>
               <div class="post-body next-md-body" id="post_body">
-                <p>考试大纲<br>
-乙级（Basic Level）</p>
-<p>考生应具备以下基本能力：<br>
-1· 基本的C/C++的代码设计能力，以及相关开发环境的基本调试技巧；<br>
-2· 理解并掌握最基本的数据存储结构，即：数组、链表；<br>
-3· 理解并熟练编程实现与基本数据结构相关的基础算法，包括递归、排序、查找等；<br>
-4· 能够分析算法的时间复杂度、空间复杂度和算法稳定性；<br>
-5· 具备问题抽象和建模的初步能力，并能够用所学方法解决实际问题。</p>
-<p>甲级（Advanced Level）</p>
-<p>在达到乙级要求的基础上，还要求：<br>
-1· 具有充分的英文阅读理解能力；<br>
-2· 理解并掌握基础数据结构，包括：线性表、树、图；<br>
-3· 理解并熟练编程实现经典高级算法，包括哈希映射、并查集、最短路径、拓扑排序、关键路径、贪心、深度优先搜索、广度优先搜索、回溯剪枝等；<br>
-4· 具备较强的问题抽象和建模能力，能实现对复杂实际问题的模拟求解。</p>
-<p>顶级（Top Level）</p>
-<p>在达到甲级要求的基础上，还要求：<br>
-1· 对高级、复杂数据结构掌握其用法并能够熟练使用，如后缀数组、树状数组、线段树、Treap、静态KDTree等；<br>
-2· 能够利用经典算法思想解决较难的算法问题，如动态规划、计算几何、图论高级应用（包括最大流/最小割，强连通分支、最近公共祖先、最小生成树、欧拉序列）等，并灵活运用；<br>
-3· 能够解决复杂的模拟问题，编写并调试代码量较大的程序；<br>
-4· 具有缜密的科学思维，考虑问题周全，能够正确应对复杂问题的边界情况。</p>
+                <p>书上做标记   二刷文件做标记并加黑重要的题   更新PAT题解</p>
+<h3 id="1模拟">1.模拟</h3>
+<p>1042(洗牌器)</p>
+<p>1046(最短路径)</p>
+<p>1002(多项式相加)</p>
+<p>1009(多项式相乘)</p>
+<h3 id="2水题">2.水题</h3>
+<p>1006</p>
+<p>1036</p>
+<h3 id="3-数字-数学问题">3. 数字、数学问题</h3>
+<p>1019(判断回文串 十进制转化为其他进制)</p>
+<p>1027(20 进制转换)</p>
+<p>1058(20 水题)</p>
+<h3 id="4字符串问题">4.字符串问题</h3>
+<p>1061(20 一对字符串相同的元素)</p>
+<p><strong>1073(20 科学计数法)</strong></p>
+<p>1001(20 两数相加)</p>
+<p>1005(20 字符串)</p>
+<p>1035(20 字符串)</p>
+<p><strong>1077(20  多个字符串找公共后缀)</strong></p>
+<p><strong>1082(25 分段处理字符串)</strong></p>
+<h3 id="5排序">5.排序</h3>
+<p>1062(25 按条件排序)</p>
+<p><strong>1012(25 条件排序)</strong></p>
+<p><strong>1016(25 排序 处理多条通话时间记录)</strong></p>
+<h3 id="单词">单词</h3>
+<p>coefficients 系数</p>
+<p>Palindromic 回文的</p>
+<p>suffix 后缀</p>
 
               </div>
               <div class="post-footer">
@@ -329,7 +530,7 @@
     </li>
     <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="https://liuxbo.github.io/post/pat-kao-shi-da-gang/" title="PAT考试大纲">PAT考试大纲</a>
+      <a href="https://liuxbo.github.io/post/pat-ti-xing-zong-jie/" title="PAT题型总结">PAT题型总结</a>
     </li>
     <li class="post-copyright-license">
       <strong>版权声明： </strong>
@@ -344,15 +545,11 @@
   <div class="nav">
     <div class="nav-prev">
       
-        <i class="fa fa-chevron-left"></i>
-        <a class="nav-pc-next" title="疫情" href="https://liuxbo.github.io/post/yi-qing/">疫情</a class="nav-pc-next">
-        <a class="nav-mobile-prev" title="疫情" href="https://liuxbo.github.io/post/yi-qing/">上一篇</a>
-      
     </div>
     <div class="nav-next">
       
-        <a class="nav-pc-next" title="IDEA的使用" href="https://liuxbo.github.io/post/idea-de-shi-yong/">IDEA的使用</a>
-        <a class="nav-mobile-next" title="IDEA的使用" href="https://liuxbo.github.io/post/idea-de-shi-yong/">下一篇</a>
+        <a class="nav-pc-next" title="数学问题" href="https://liuxbo.github.io/post/shu-xue-wen-ti/">数学问题</a>
+        <a class="nav-mobile-next" title="数学问题" href="https://liuxbo.github.io/post/shu-xue-wen-ti/">下一篇</a>
         <i class="fa fa-chevron-right"></i>
       
     </div>

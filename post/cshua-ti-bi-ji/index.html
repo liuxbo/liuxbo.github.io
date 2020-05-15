@@ -7,7 +7,7 @@
 <meta name="description" content="菜鸡成长之路">
 <meta name="theme-color" content="#000">
 <title>c++(PAT)刷题笔记汇总 | lxb&#39;blog</title>
-<link rel="shortcut icon" href="https://liuxbo.github.io/favicon.ico?v=1588857596612">
+<link rel="shortcut icon" href="https://liuxbo.github.io/favicon.ico?v=1589506154935">
 <link rel="stylesheet" href="https://liuxbo.github.io/styles/main.css">
 
 <link rel="stylesheet" href="/media/css/gemini.css">
@@ -152,7 +152,7 @@
     <div class="sidebar-item-box">
       <a href="/archives/">
         
-        <span class="site-item-stat-count">9</span>
+        <span class="site-item-stat-count">10</span>
         <span class="site-item-stat-name">文章</span>
       </a>
     </div>
@@ -518,7 +518,7 @@ window.addEventListener('load', function() {
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>10805<span class="pc-show">字数</span></span>
+      <span>10912<span class="pc-show">字数</span></span>
     </span>
   </div>
 </header>
@@ -655,7 +655,8 @@ int main() {
 </code></pre>
 </li>
 <li>
-<p>涉及到的题目:A1035，A1077,A1082,A1093,A1061，<strong>A1073</strong>(科学计数法)，A1077(公共后缀)，<strong>A1082</strong>,</p>
+<p>涉及到的题目:</p>
+<p>A1035，A1077,A1082,A1093,A1061，<strong>A1073</strong>(科学计数法)，A1077(公共后缀)，<strong>A1082</strong>,</p>
 <p>A1112, A1152, A1140  A1136(回文串、字符串) 、 A1132(20 水题)</p>
 </li>
 </ul>
@@ -731,6 +732,7 @@ vector&lt;int&gt; vec1{ 1, 2, 3, 4, 5, 6 };       //vec1内容1,2，3,4,5,6
 <li>
 <p><code>map</code></p>
 <p>使用count，返回的是被查找元素的个数。如果有，返回1；否则，返回0。注意，map中不存在相同元素，所以返回值只能是1或0。count(key值)</p>
+<p>遍历map中所有的元素<code>for (auto it : mp)</code>,mp为map容器变量名，用<code>it.first</code>和<code>it.second</code>访问每个key和相应的value</p>
 <p>find() erase() size() clear()</p>
 </li>
 </ul>
@@ -751,7 +753,7 @@ vector&lt;int&gt; vec1{ 1, 2, 3, 4, 5, 6 };       //vec1内容1,2，3,4,5,6
 <h3 id="7-输入输出问题">7. 输入输出问题</h3>
 <p><code>scanf</code>中 ，<code>long long</code>型 ：<code>scanf(&quot;%lld&quot;,&amp;n)</code> , <code>double</code>型：<code>scanf(&quot;lf&quot;,&amp;n)</code></p>
 <p><code>printf</code>中，<code>long long</code> 型：<code>printf(&quot;%lld&quot;,n)</code>   , <code>double</code> 型：<code>printf(&quot;%f&quot;,n)</code></p>
-<p>若<code>getline(cin, str);</code>前有<code>scanf(&quot;%d%*c&quot;, &amp;n);</code>输入，可以用%*c忽略一个字符型(比如换行),或者%*d忽略一个数字型。也可以用getchar()吸收掉字符</p>
+<p>若<code>getline(cin, str);</code>前有<code>scanf(&quot;%d%*c&quot;, &amp;n);</code>输入，可以用%*<em>c忽略一个字符型(比如换行),或者%</em> *d忽略一个数字型。也可以用getchar()吸收掉字符</p>
 <p><code>scanf(&quot;%*c%d&quot;,&amp;n);可以吸收掉上一行末尾的的换行符</code></p>
 <p>若输入格式为数字<code>空格</code> 字符<code>空格</code> 数字，可以写成<code>scanf(&quot;%d %c %d&quot;)</code> ,因为空格也算字符。</p>
 <p>注意string类型用printf输出时一定要用c_str()转化一下</p>
@@ -815,12 +817,18 @@ vector&lt;int&gt; vec1{ 1, 2, 3, 4, 5, 6 };       //vec1内容1,2，3,4,5,6
 <ul>
 <li>十进制转化为其他进制</li>
 </ul>
-<pre><code>int z[maxn],num=0;
+<pre><code>1.数组形式
+int z[maxn],num=0;
 do{
 z[num++]=n%b;
 n/=b;
 }while(n!=0);
-或者
+2.数字形式(将十进制数a转化为任意b进制数，将结果存在数组中)
+while(a != 0) {
+   arr[index++] = a % b;
+   a = a / b;
+}//注意在数组中存储的顺序(下标从0开始)是反的
+3.
 void change(int n,int b){
 	if(n&gt;0){
 		int i=0;
@@ -849,7 +857,7 @@ void change(int n,int b){
 <p>A-Z对应十进制65-90</p>
 <p>a-z对应十进制97-122</p>
 <h3 id="12回文串">12.回文串</h3>
-<pre><code>bool judge(int arr[],int index){
+<pre><code>bool judge(int arr[],int index){//index为数组元素个数
     for(int i = 0; i &lt;index / 2; i++) {
        if(arr[i] != arr[index-i-1]) {
            return false;
@@ -2305,7 +2313,7 @@ int main(){
 <p>26.不要忘了一些算法的初始化，比如使用并查集千万不要忘了初始化<code>father[i]=i</code></p>
 <p>27一些题目处理的是五位数的格式，(比如id号)，所以输出时注意<code>printf(&quot;%05d&quot;)</code></p>
 <p>28.四舍五入为整数<code>int(v[temp].gm * 0.4 + v[temp].gf * 0.6 + 0.5);</code></p>
-<p>​      在最后加上0.5并强制转换为int型</p>
+<p>​      <strong>在最后加上0.5并强制转换为int型即为四舍五入</strong></p>
 <p>29.A1139邻接矩阵的巧妙写法</p>
 <pre><code>unordered_map&lt;int ,bool&gt; isfri;
 isfri[abs(stoi(a))*10000+abs(stoi(b))]=isfri[abs(stoi(b))*10000+abs(stoi(a))]=true;

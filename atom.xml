@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://liuxbo.github.io</id>
     <title>lxb&apos;blog</title>
-    <updated>2020-05-07T13:19:59.007Z</updated>
+    <updated>2020-05-15T01:29:17.460Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://liuxbo.github.io"/>
     <link rel="self" href="https://liuxbo.github.io/atom.xml"/>
@@ -10,6 +10,43 @@
     <logo>https://liuxbo.github.io/images/avatar.png</logo>
     <icon>https://liuxbo.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, lxb&apos;blog</rights>
+    <entry>
+        <title type="html"><![CDATA[PAT题型总结]]></title>
+        <id>https://liuxbo.github.io/post/pat-ti-xing-zong-jie/</id>
+        <link href="https://liuxbo.github.io/post/pat-ti-xing-zong-jie/">
+        </link>
+        <updated>2020-05-15T01:27:45.000Z</updated>
+        <content type="html"><![CDATA[<p>书上做标记   二刷文件做标记并加黑重要的题   更新PAT题解</p>
+<h3 id="1模拟">1.模拟</h3>
+<p>1042(洗牌器)</p>
+<p>1046(最短路径)</p>
+<p>1002(多项式相加)</p>
+<p>1009(多项式相乘)</p>
+<h3 id="2水题">2.水题</h3>
+<p>1006</p>
+<p>1036</p>
+<h3 id="3-数字-数学问题">3. 数字、数学问题</h3>
+<p>1019(判断回文串 十进制转化为其他进制)</p>
+<p>1027(20 进制转换)</p>
+<p>1058(20 水题)</p>
+<h3 id="4字符串问题">4.字符串问题</h3>
+<p>1061(20 一对字符串相同的元素)</p>
+<p><strong>1073(20 科学计数法)</strong></p>
+<p>1001(20 两数相加)</p>
+<p>1005(20 字符串)</p>
+<p>1035(20 字符串)</p>
+<p><strong>1077(20  多个字符串找公共后缀)</strong></p>
+<p><strong>1082(25 分段处理字符串)</strong></p>
+<h3 id="5排序">5.排序</h3>
+<p>1062(25 按条件排序)</p>
+<p><strong>1012(25 条件排序)</strong></p>
+<p><strong>1016(25 排序 处理多条通话时间记录)</strong></p>
+<h3 id="单词">单词</h3>
+<p>coefficients 系数</p>
+<p>Palindromic 回文的</p>
+<p>suffix 后缀</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[数学问题]]></title>
         <id>https://liuxbo.github.io/post/shu-xue-wen-ti/</id>
@@ -363,26 +400,19 @@ int main() {
         <link href="https://liuxbo.github.io/post/pat-ti-jie/">
         </link>
         <updated>2020-05-06T13:21:28.000Z</updated>
-        <content type="html"><![CDATA[<h3 id="a-1001">A 1001</h3>
-<pre><code>#include&lt;cstdio&gt;
+        <content type="html"><![CDATA[<h3 id="a-100120-两数相加">A 1001(20  两数相加)</h3>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;string&gt;
+using namespace std;
 int main(){
-	int a,b,res[10];
-	long long sum;
-	scanf(&quot;%d%d&quot;,&amp;a,&amp;b);
-	sum=a+b;
-	if(sum&lt;0){
-		sum=-sum;
-		printf(&quot;-&quot;);
-	}
-	int i=0;
-	if(sum==0) printf(&quot;0&quot;);
-	while(sum&gt;0){
-		res[i++]=sum%10;
-		sum=sum/10;
-	}
-	for(int j=i-1;j&gt;=0;j--){
-		printf(&quot;%d&quot;,res[j]);
-		if(j%3==0&amp;&amp;j!=0) printf(&quot;,&quot;);
+	int a,b;
+	cin&gt;&gt;a&gt;&gt;b;
+	string s=to_string(a+b);
+	int len=s.length();
+	for(int i=0;i&lt;len;i++){
+		cout&lt;&lt;s[i];
+		if(s[i]=='-') continue;
+		if((i+1)%3==len%3&amp;&amp;i!=len-1) cout&lt;&lt;&quot;,&quot;;
 	}
 	return 0;
 }
@@ -558,31 +588,18 @@ int main() {
 	return 0;
 }
 </code></pre>
-<h3 id="a1005">A1005</h3>
-<pre><code>#include&lt;cstdio&gt;
+<h3 id="a100520-字符串">A1005(20 字符串)</h3>
+<pre><code>#include&lt;iostream&gt;
 #include&lt;string&gt;
-#include&lt;cstring&gt;
 using namespace std;
 int main(){
-	int res[3],sum[110],i,result=0;
-	char number[110];
-	string english[10]={&quot;zero&quot;,&quot;one&quot;,&quot;two&quot;,&quot;three&quot;,&quot;four&quot;,&quot;five&quot;,&quot;six&quot;,&quot;seven&quot;,&quot;eight&quot;,&quot;nine&quot;};
-	scanf(&quot;%s&quot;,number);
-	int len=strlen(number);
-	for(i=0;i&lt;len;i++){
-		sum[i]=number[i]-'0';
-		result+=sum[i];
-	}
-	int j=0;
-	if(result==0) printf(&quot;zero&quot;);
-	while(result){
-		res[j++]=result%10;
-		result/=10;
-	}
-	for(int x=j-1;x&gt;=0;x--){
-		printf(&quot;%s&quot;,english[res[x]].c_str());
-		if(x!=0) printf(&quot; &quot;);
-	}
+	string n,spell[10]={&quot;zero&quot;,&quot;one&quot;,&quot;two&quot;,&quot;three&quot;,&quot;four&quot;,&quot;five&quot;,&quot;six&quot;,&quot;seven&quot;,&quot;eight&quot;,&quot;nine&quot;};
+	cin&gt;&gt;n;
+	int sum=0;
+	for(int i=0;i&lt;n.size();i++) sum+=(n[i]-'0');
+	string ans=to_string(sum);
+	cout&lt;&lt;spell[ans[0]-'0'];
+	for(int i=1;i&lt;ans.size();i++) cout&lt;&lt;&quot; &quot;&lt;&lt;spell[ans[i]-'0'];
 	return 0;
 }
 </code></pre>
@@ -772,42 +789,48 @@ int main() {
 <h3 id="a1012">A1012</h3>
 <pre><code>#include&lt;cstdio&gt;
 #include&lt;algorithm&gt;
+#include&lt;map&gt;
 using namespace std;
-struct node {
+struct node{
 	int id;
-	int grade[4];
-}stu[2100];
-int now;
-bool cmp(node a, node b) {return a.grade[now] &gt; b.grade[now];}
-int rank_stu[1000000][4] = { 0 };
-char course[4] = { 'A','C','M','E' };
-int main() {
-	int n, m;
-	scanf(&quot;%d%d&quot;, &amp;n, &amp;m);
-	for (int i = 0; i &lt; n; i++) {
-		scanf(&quot;%d%d%d%d&quot;, &amp;stu[i].id, &amp;stu[i].grade[1], &amp;stu[i].grade[2], &amp;stu[i].grade[3]);
-		stu[i].grade[0] = stu[i].grade[1] + stu[i].grade[2] + stu[i].grade[3];
+	int score[4];
+}stu[2000];
+int now,rk[1000000][4];
+bool cmp(node a,node b){
+	return a.score[now]&gt;b.score[now];
+}
+int main(){
+	int n,m;
+	scanf(&quot;%d%d&quot;,&amp;n,&amp;m);
+	map&lt;int,bool&gt; mp;
+	for(int i=0;i&lt;n;i++){
+		scanf(&quot;%d%d%d%d&quot;,&amp;stu[i].id,&amp;stu[i].score[1],&amp;stu[i].score[2],&amp;stu[i].score[3]);
+		stu[i].score[0]=(int)((stu[i].score[1]+stu[i].score[2]+stu[i].score[3])*1.0/3+0.5);
+		mp[stu[i].id]=true;
 	}
-	for (now = 0; now &lt; 4; now++) {
-		sort(stu, stu + n, cmp);
-		rank_stu[stu[0].id][now] = 1;
-		for (int i = 1; i &lt; n; i++) {
-			if (stu[i].grade[now] == stu[i - 1].grade[now]) rank_stu[stu[i].id][now] = rank_stu[stu[i - 1].id][now];
-			else rank_stu[stu[i].id][now] = i+1;
+	for(now=0;now&lt;=3;now++){
+		sort(stu,stu+n,cmp);
+		rk[stu[0].id][now]=1;
+		for(int i=1;i&lt;n;i++){
+			if(stu[i].score[now]==stu[i-1].score[now]) rk[stu[i].id][now]=rk[stu[i-1].id][now];
+			else rk[stu[i].id][now]=i+1;
 		}
 	}
-	int query;
-	for (int i = 0; i &lt; m; i++) {
-		scanf(&quot;%d&quot;, &amp;query);
-		if (rank_stu[query][0] == 0) printf(&quot;N/A\n&quot;);
-		else {
-			int best=0;
-			for (int j = 0; j &lt; 4; j++) {
-				if (rank_stu[query][j] &lt; rank_stu[query][best])
-					best = j;
+	char course[4]={'A','C','M','E'};
+	for(int i=0;i&lt;m;i++){
+		int query,bestrank=9999,index=0;
+		scanf(&quot;%d&quot;,&amp;query);
+		if(mp.count(query)==0){
+			printf(&quot;N/A\n&quot;);
+			continue;
+		}
+		for(int j=0;j&lt;4;j++){
+			if(rk[query][j]&lt;bestrank){
+				bestrank=rk[query][j];
+				index=j;
 			}
-			printf(&quot;%d %c\n&quot;, rank_stu[query][best], course[best]);
 		}
+		printf(&quot;%d %c\n&quot;,rk[query][index],course[index]);
 	}
 	return 0;
 }
@@ -948,86 +971,64 @@ int main() {
 }
 </code></pre>
 <h3 id="a1016">A1016</h3>
-<pre><code>#include&lt;cstdio&gt;
-#include&lt;cstring&gt;
+<pre><code>#include&lt;iostream&gt;
 #include&lt;algorithm&gt;
+#include&lt;map&gt;
+#include&lt;vector&gt;
+#include&lt;string&gt; 
 using namespace std;
-const int maxn = 1010;
-int toll[24];
-struct Record {
-	char name[21];
-	int mon, dd, hh, mm;
-	bool status;
-}rec[maxn],temp;
-bool cmp(Record a, Record b) {
-	if (strcmp(a.name, b.name) != 0) return strcmp(a.name, b.name) &lt; 0;
-	else if (a.mon != b.mon) return a.mon &lt; b.mon;
-	else if (a.dd != b.dd) return a.dd &lt; b.dd;
-	else if (a.hh != b.hh) return a.hh &lt; b.hh;
-	else return a.mm &lt; b.mm;
+struct node{
+	string name;
+	int status,time,month,day,hour,minute;
+};
+bool cmp(node a,node b){
+	return a.name!=b.name? a.name&lt;b.name : a.time&lt;b.time;
 }
-void get_ans(int on, int off, int&amp; time, int&amp; money) {
-	temp = rec[on];
-	while (temp.dd &lt; rec[off].dd || temp.hh &lt; rec[off].hh || temp.mm &lt; rec[off].mm) {
-		time++;
-		money += toll[temp.hh];
-		temp.mm++;
-		if (temp.mm &gt;= 60) {
-			temp.mm = 0;
-			temp.hh++;
-		}
-		if (temp.hh &gt;= 24) {
-			temp.hh = 0;
-			temp.dd++;
-		}
-	}
+double billfromzero(node a,int *rate){
+	double total=a.minute*rate[a.hour]+a.day*60*rate[24];
+	for(int i=0;i&lt;a.hour;i++) total+=60*rate[i];
+	return total/100.0;
 }
-int main() {
-	char line_status[10];
-	int n;
-	for (int i = 0; i &lt; 24; i++) scanf(&quot;%d&quot;, &amp;toll[i]);
-	scanf(&quot;%d&quot;, &amp;n);
-	for (int i = 0; i &lt; n; i++) {
-		scanf(&quot;%s %d:%d:%d:%d %s&quot;, rec[i].name, &amp;rec[i].mon, &amp;rec[i].dd, &amp;rec[i].hh, &amp;rec[i].mm,line_status);
-		if (strcmp(line_status, &quot;on-line&quot;) == 0) rec[i].status = true;
-		if (strcmp(line_status, &quot;off-line&quot;) == 0) rec[i].status = false;
-	}
-	sort(rec, rec + n, cmp);
-	int on = 0, off, next;
-	while (on &lt; n) {//每次处理一个用户的所有记录
-		int needprint = 0;
-		next = on;
-		while (next &lt; n &amp;&amp; strcmp(rec[next].name, rec[on].name) == 0) {//判断是否有配对项
-			if (rec[next].status == true &amp;&amp; needprint == 0) needprint = 1;
-			else if (rec[next].status == false &amp;&amp; needprint == 1) needprint = 2;
-			next++;
-		}
-		if (needprint &lt; 2) {
-			on = next;
-			continue;
-		}
-		int allmoney = 0;
-		printf(&quot;%s %02d\n&quot;, rec[on].name, rec[on].mon);
-		while (on &lt; next) {
-			while (on &lt; next - 1 &amp;&amp; !(rec[on].status == true &amp;&amp; rec[on + 1].status == false)) on++;
-			off = on + 1;
-			if (off == next) {
-				on = next;
-				break;
-			}
-			int time = 0;
-			int  money = 0;
-			get_ans(on, off, time, money);
-			allmoney += money;
-			printf(&quot;%02d:%02d:%02d &quot;, rec[on].dd, rec[on].hh, rec[on].mm);
-			printf(&quot;%02d:%02d:%02d &quot;, rec[off].dd, rec[off].hh, rec[off].mm);
-			printf(&quot;%d $%.2f\n&quot;, time, money / 100.0);
-			on=off+1;
-		}
-		printf(&quot;Total amount:$%.2f\n&quot;, double(allmoney) / 100);
-	}
-	return 0;
-}
+ int main(){
+ 	int n,rate[25]={0};
+ 	for(int i=0;i&lt;24;i++){
+ 		scanf(&quot;%d&quot;,&amp;rate[i]);
+ 		rate[24]+=rate[i];
+	 }
+	 cin&gt;&gt;n;
+	 vector&lt;node&gt; v(n);
+	 for(int i=0;i&lt;n;i++){
+	 	cin&gt;&gt;v[i].name;
+	 	scanf(&quot;%d:%d:%d:%d&quot;,&amp;v[i].month,&amp;v[i].day,&amp;v[i].hour,&amp;v[i].minute);
+	 	v[i].time=v[i].day*24*60+v[i].hour*60+v[i].minute;
+	 	string temp;
+	 	cin&gt;&gt;temp;
+	 	v[i].status=(temp==&quot;on-line&quot;)? 1 : 0 ;
+	 } 
+	 sort(v.begin(),v.end(),cmp);
+	 map&lt;string,vector&lt;node&gt; &gt;mp;
+	 for(int i=1;i&lt;n;i++){
+	 	if(v[i].name==v[i-1].name&amp;&amp;v[i-1].status==1&amp;&amp;v[i].status==0){
+	 		mp[v[i-1].name].push_back(v[i-1]);
+	 		mp[v[i].name].push_back(v[i]);
+		 }
+	 }
+	 for(auto it:mp){
+	 	cout&lt;&lt; it.first;
+	 	vector&lt;node&gt; temp=it.second;
+	 	printf(&quot; %02d\n&quot;,temp[0].month);
+	 	double total=0.0;
+	 	for(int i=1;i&lt;temp.size();i+=2){
+	 		double t=billfromzero(temp[i],rate)-billfromzero(temp[i-1],rate);
+	 		printf(&quot;%02d:%02d:%02d&quot;,temp[i-1].day,temp[i-1].hour,temp[i-1].minute);
+			printf(&quot; %02d:%02d:%02d %d&quot;,temp[i].day,temp[i].hour,temp[i].minute,temp[i].time-temp[i-1].time);
+			printf(&quot; $%.2f\n&quot;,t);
+			total+=t;
+		 }
+		 printf(&quot;Total amount: $%.2f\n&quot;,total);
+	 } 
+	 return 0;
+ }
 </code></pre>
 <h3 id="a1017-25-模拟-时间处理-排序">A1017 （25 模拟 ，时间处理、排序、）</h3>
 <pre><code>#include&lt;cstdio&gt;
@@ -1179,52 +1180,25 @@ int main(){
 </code></pre>
 <h3 id="a1019">A1019</h3>
 <pre><code>#include&lt;cstdio&gt;
-#include&lt;vector&gt;
-using namespace std;
-vector&lt;int&gt; a,c;
-void change(int n,int b){
-	if(n&gt;0){
-		int i=0;
-		change(n/b,b);
-		a.push_back(n%b);
-	}
-	else return;
-}
-bool judge(vector&lt;int&gt; a,vector&lt;int&gt; b){
-	for(int i=0;i&lt;a.size();i++){
-		if (a[i]==b[i]) continue;
-		else return false;
-	}
-	return true;
-}
-int main(){
-	int n,b;
-	scanf(&quot;%d %d&quot;,&amp;n,&amp;b);
-	change(n,b);
-	for(int i=0;i&lt;a.size();i++){
-		c.push_back(a[i]);
-	}
-	for (int min = 0, max = a.size()-1; min &lt;= max; min++, max--) {
-		int temp = a[min];
-		a[min] = a[max];
-		a[max] = temp;
-	}
-	if(judge(a,c)==true){
-		printf(&quot;Yes\n&quot;);
-		for(int i=0;i&lt;c.size();i++){
-			printf(&quot;%d&quot;,c[i]);
-			if(i!=c.size()-1) printf(&quot; &quot;);
-		}
-	}
-	if(judge(a,c)==false) {
-		printf(&quot;No\n&quot;);
-		for(int i=0;i&lt;c.size();i++){
-			printf(&quot;%d&quot;,c[i]);
-			if(i!=c.size()-1) printf(&quot; &quot;);
-		}
-	}
-	return 0;
-}
+ int main(){
+ 	int n,b,ans[50],index=0;
+ 	scanf(&quot;%d%d&quot;,&amp;n,&amp;b);
+ 	while(n!=0){
+ 		ans[index++]=n%b;
+ 		n/=b;
+	 }
+	 bool flag=true;
+	 for(int i=0;i&lt;=index/2;i++){
+	 	if(ans[i]!=ans[index-i-1]) flag=false;
+	 }
+	 if(flag==false) printf(&quot;No\n&quot;);
+	 else printf(&quot;Yes\n&quot;);
+	 for(int i=index-1;i&gt;=0;i--){
+	 	if(i!=index-1) printf(&quot; &quot;);
+	 	printf(&quot;%d&quot;,ans[i]);
+	 }
+	 return 0; 
+ }
 </code></pre>
 <h3 id="a1020">A1020</h3>
 <pre><code>#include&lt;cstdio&gt;
@@ -1588,30 +1562,16 @@ int main(){
 </code></pre>
 <h3 id="a1027">A1027</h3>
 <pre><code>#include&lt;cstdio&gt;
-int a[2],b[2],c[2];
-	void change(int x,int a[]){
-		if(x==0) {
-			a[0]=0;
-			a[1]=0;
-		}
-		else{
-			a[0]=x%13;
-			if((x/13)==0) a[1]=0;
-			else a[1]=(x/13)%13;
-		}
-	}
 int main(){
-	int red,green,blue;
-	scanf(&quot;%d %d %d&quot;,&amp;red,&amp;green,&amp;blue);
-	char str[15]={'0','1','2','3','4','5','6','7','8','9','A','B','C'};
-    change(red,a);
-	printf(&quot;#%c%c&quot;,str[a[1]],str[a[0]]);
-	change(green,b);
-	printf(&quot;%c%c&quot;,str[b[1]],str[b[0]]);
-	change(blue,c);
-	printf(&quot;%c%c&quot;,str[c[1]],str[c[0]]);
+	char c[14]={&quot;0123456789ABC&quot;};
+	printf(&quot;#&quot;);
+	for(int i=0;i&lt;3;i++){
+		int n;
+		scanf(&quot;%d&quot;,&amp;n);
+		printf(&quot;%c%c&quot;,c[n/13],c[n%13]);
+	}
 	return 0;
-} 
+}
 </code></pre>
 <h3 id="a1028">A1028</h3>
 <pre><code>#include&lt;iostream&gt;
@@ -1961,50 +1921,34 @@ int main() {
 	return 0;
 }
 </code></pre>
-<h3 id="a1035">A1035</h3>
-<pre><code>#include&lt;cstdio&gt;
-#include&lt;cstring&gt;
-struct node {
-	char name[11];
-	char password[11];
-	bool flag;
-}user[1010];
-int main() {
-	int n, change = 0;;
-	scanf(&quot;%d&quot;, &amp;n);
-	for (int i = 0; i &lt; n; i++) {
-		scanf(&quot;%s%s&quot;, user[i].name, user[i].password);
-		user[i].flag = false;
-		int len1 = strlen(user[i].password);
-		for (int j = 0; j &lt; len1; j++) {
-			if (user[i].password[j] == '1') {
-				user[i].password[j] = '@';
-				user[i].flag = true;
-			}
-			else if (user[i].password[j] == '0') {
-				user[i].password[j] = '%';
-				user[i].flag = true;
-			}
-			else if (user[i].password[j] == 'l') {
-				user[i].password[j] = 'L';
-				user[i].flag = true;
-			}
-			else if (user[i].password[j] == 'O') {
-				user[i].password[j] = 'o';
-				user[i].flag = true;
+<h3 id="a103520-字符串">A1035(20 字符串)</h3>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;string&gt;
+#include&lt;vector&gt;
+using namespace std;
+int main(){
+	int n;
+	cin&gt;&gt;n;
+	vector&lt;string&gt; v;
+	for(int j=0;j&lt;n;j++){
+		bool flag=false;
+		string name,password,ans;
+		cin&gt;&gt;name&gt;&gt;password;
+		for(int i=0;i&lt;password.length();i++){
+			switch(password[i]){
+				case '1':password[i]='@';flag=true;break;
+				case '0':password[i]='%';flag=true;break;
+				case 'l':password[i]='L';flag=true;break;
+				case 'O':password[i]='o';flag=true;break;
 			}
 		}
-		if (user[i].flag == true) change++;
+		if(flag==true) v.push_back(name+&quot; &quot;+password);
 	}
-	if (n == 1) printf(&quot;There is 1 account and no account is modified&quot;);
-	else if (n &gt; 1 &amp;&amp; change == 0) printf(&quot;There are %d accounts and no account is modified&quot;, n);
-	else if (n &gt; 1 &amp;&amp; change &gt; 0) {
-		printf(&quot;%d\n&quot;, change);
-		for (int i = 0; i &lt; n; i++) {
-			if (user[i].flag == true) {
-				printf(&quot;%s %s\n&quot;, user[i].name, user[i].password);
-			}
-		}
+	if(n==1) printf(&quot;There is 1 account and no account is modified\n&quot;);
+	else if(v.size()==0) printf(&quot;There are %d accounts and no account is modified\n&quot;,n);
+	else{
+		printf(&quot;%d\n&quot;,v.size());
+		for(int i=0;i&lt;v.size();i++) cout&lt;&lt;v[i]&lt;&lt;endl;
 	}
 	return 0;
 }
@@ -2912,19 +2856,18 @@ int main() {
 2.树状数组
 
 </code></pre>
-<h3 id="a1058">A1058</h3>
+<h3 id="a105820-水题">A1058(20 水题)</h3>
 <pre><code>#include&lt;cstdio&gt;
-int main() {
-	int sum[3], m1[3], m2[3];
-	int  temp_sick, temp_knut;
-	scanf(&quot;%d.%d.%d&quot;, &amp;m1[0], &amp;m1[1], &amp;m1[2]);
-	scanf(&quot;%d.%d.%d&quot;, &amp;m2[0], &amp;m2[1], &amp;m2[2]);
-	sum[2] = (m1[2] + m2[2]) % 29;
-	temp_knut = (m1[2] + m2[2])/ 29;
-	sum[1] = (m1[1] + m2[1] + temp_knut)%17;
-	temp_sick = (m1[1] + m2[1] + temp_knut) / 17;
-	sum[0] = m1[0] + m2[0] + temp_sick;
-	printf(&quot;%d.%d.%d&quot;, sum[0], sum[1], sum[2]);
+int main(){
+	int a,b,c,d,e,f,ans[3];
+	scanf(&quot;%d.%d.%d %d.%d.%d&quot;,&amp;a,&amp;b,&amp;c,&amp;d,&amp;e,&amp;f);
+	ans[2]=(c+f)%29;
+	ans[1]=(b+e+(c+f)/29)%17;
+	ans[0]=a+d+(b+e+(c+f)/29)/17;
+	for(int i=0;i&lt;3;i++){
+		if(i!=0) printf(&quot;.&quot;);
+		printf(&quot;%d&quot;,ans[i]);
+	}
 	return 0;
 }
 </code></pre>
@@ -3033,88 +2976,74 @@ int main() {
 	return 0;
 }
 </code></pre>
-<h3 id="a1061">A1061</h3>
-<pre><code>#include&lt;cstdio&gt;
+<h3 id="a106120-字符串">A1061(20 字符串)</h3>
+<pre><code>#include&lt;iostream&gt;
 #include&lt;string&gt;
-#include&lt;cstring&gt;
+#include&lt;cctype&gt;
 using namespace std;
-int main() {
-	char s1[70], s2[70], s3[70], s4[70];
-	string days[7] = { &quot;MON&quot;,&quot;TUE&quot;,&quot;WED&quot;,&quot;THU&quot;,&quot;FRI&quot;,&quot;SAT&quot;,&quot;SUN&quot; };
-	scanf(&quot;%s%s%s%s&quot;, s1, s2, s3, s4);
-	int len1 = strlen(s1);
-	int len2 = strlen(s2);
-	int len3 = strlen(s3);
-	int len4 = strlen(s4);
-	int i;
-	for (i = 0; i &lt; len1 &amp;&amp; i &lt; len2; i++) {
-		if (s1[i] == s2[i] &amp;&amp; s1[i] &gt;= 'A' &amp;&amp; s1[i] &lt;= 'G') {
-			printf(&quot;%s &quot;, days[s1[i] - 'A'].c_str());
+int main(){
+	int i=0,pos=0;
+	char ans[2];
+	string a,b,c,d;
+	cin&gt;&gt;a&gt;&gt;b&gt;&gt;c&gt;&gt;d;
+	while(i&lt;a.length()&amp;&amp;i&lt;b.length()){
+		if(a[i]==b[i]&amp;&amp;(a[i]&gt;='A'&amp;&amp;a[i]&lt;='G')){
+			ans[0]=a[i];
 			break;
 		}
+		i++;
 	}
-	for (i++; i &lt; len2 &amp;&amp; i &lt; len1; i++) {
-		if (s1[i] == s2[i]) {
-			if (s1[i] &gt;= '0' &amp;&amp; s1[i] &lt;= '9') {
-				printf(&quot;%02d:&quot;, s1[i] - '0');
-				break;
-			}
-			else if (s1[i] &gt;= 'A' &amp;&amp; s1[i] &lt;= 'N') {
-				printf(&quot;%02d:&quot;, s1[i] - 'A' + 10);
-				break;
-			}
+	++i;
+	while(i&lt;a.length()&amp;&amp;i&lt;b.length()){
+		if(a[i]==b[i]&amp;&amp;((a[i]&gt;='A'&amp;&amp;a[i]&lt;='N')||isdigit(a[i]))){
+			ans[1]=a[i];
+			break;
 		}
+		i++;
 	}
-	for (int j = 0; j &lt; len3 &amp;&amp; j &lt; len4; j++) {
-		if (s3[j] == s4[j]) {
-			if ((s3[j] &gt;= 'a' &amp;&amp; s3[j] &lt;= 'z') || (s3[j] &gt;= 'A' &amp;&amp; s3[j] &lt;= 'Z')) {
-				printf(&quot;%02d&quot;, j);
-				break;
-			}
-		}
+	while(pos&lt;c.length()&amp;&amp;pos&lt;d.length()){
+		if(c[pos]==d[pos]&amp;&amp;isalpha(c[pos])) break;
+		pos++;
 	}
+	string weekday[7]={&quot;MON&quot;,&quot;TUE&quot;,&quot;WED&quot;,&quot;THU&quot;,&quot;FRI&quot;,&quot;SAT&quot;,&quot;SUN&quot;};
+	printf(&quot;%s %02d:%02d&quot;,weekday[ans[0]-'A'].c_str(),isdigit(ans[1])?ans[1]-'0':ans[1]-'A'+10,pos);
 	return 0;
-}
+} 
 </code></pre>
 <h3 id="a1062">A1062</h3>
 <pre><code>#include&lt;cstdio&gt;
-#include&lt;cstring&gt;
 #include&lt;algorithm&gt;
+#include&lt;vector&gt; 
 using namespace std;
-struct test {
-	char id[20];
-	int de, cai, sum;
-	int flag;
-}student[100010];
-bool cmp(test a, test b) {
-	if (a.flag != b.flag) return a.flag &lt; b.flag;
-	else if (a.sum != b.sum) return a.sum &gt; b.sum;
-	else if (a.de != b.de) return a.de &gt; b.de;
-	else return strcmp(a.id, b.id) &lt; 0;
+struct node{
+	int num;
+	int de,cai,rank;
+}temp;
+bool cmp( node a,node b){
+	if(a.rank!=b.rank) return a.rank&lt;b.rank;
+	else if((a.de+a.cai)!=(b.de+b.cai)) return (a.de+a.cai)&gt;(b.de+b.cai);
+	else if(a.de!=b.de) return a.de&gt;b.de;
+	else return a.num&lt;b.num;
 }
-int main() {
-	int total, low, high;
-	scanf(&quot;%d%d%d&quot;, &amp;total, &amp;low, &amp;high);
-	int pass = total;
-	for (int i = 0; i &lt; total; i++) {
-		scanf(&quot;%s%d%d&quot;, student[i].id, &amp;student[i].de, &amp;student[i].cai);
-		student[i].sum = student[i].de + student[i].cai;
-		if (student[i].de &lt; low || student[i].cai &lt; low) {
-			student[i].flag = 5;
-			pass--;
-		}
-		else if (student[i].cai &gt;= high &amp;&amp; student[i].de &gt;= high) student[i].flag = 1;
-		else if (student[i].cai &gt;= low &amp;&amp; student[i].cai &lt; high &amp;&amp; student[i].de &gt;= high) student[i].flag = 2;
-		else if (student[i].cai &gt;= low &amp;&amp; student[i].cai &lt;= student[i].de &amp;&amp; student[i].de&lt;high) student[i].flag = 3;
-		else  student[i].flag = 4;
+int main(){
+	int n,L,H;
+	scanf(&quot;%d%d%d&quot;,&amp;n,&amp;L,&amp;H);
+	vector&lt;node&gt; v;
+	for(int i=0;i&lt;n;i++){
+		int id,a,b,rank;
+		scanf(&quot;%d%d%d&quot;,&amp;id,&amp;a,&amp;b);
+		if(a&lt;L||b&lt;L) continue;
+		if(a&gt;=H&amp;&amp;b&gt;=H) rank=1;
+		else if(a&gt;=H&amp;&amp;b&lt;H) rank=2;
+		else if(a&lt;H&amp;&amp;b&lt;H&amp;&amp;a&gt;=b) rank=3;
+		else rank=4;
+		v.push_back(node{id,a,b,rank});
 	}
-	sort(student, student + total, cmp);
-	printf(&quot;%d\n&quot;, pass);
-	for (int i = 0; i &lt; pass; i++) {
-		printf(&quot;%s %d %d\n&quot;, student[i].id, student[i].de, student[i].cai);
-	}
+	sort(v.begin(),v.end(),cmp);
+	printf(&quot;%d\n&quot;,v.size());
+	for(int i=0;i&lt;v.size();i++) printf(&quot;%08d %d %d\n&quot;,v[i].num,v[i].de,v[i].cai);
 	return 0;
-}
+} 
 </code></pre>
 <h3 id="a1063">A1063</h3>
 <pre><code>#include&lt;cstdio&gt;
@@ -3583,42 +3512,34 @@ int main(){
 }
 </code></pre>
 <h3 id="a1073-科学计数法">A1073 科学计数法</h3>
-<pre><code>#include&lt;cstdio&gt; 
-#include&lt;cstring&gt;
+<pre><code>#include&lt;iostream&gt;
+#include&lt;string&gt;
+#include&lt;algorithm&gt;
+using namespace std;
 int main(){
-	char str[10010];
-	scanf(&quot;%s&quot;,str);
-	int len=strlen(str);
-	int pos=0;
-	while(str[pos]!='E') pos++;
-	if(str[0]=='-') printf(&quot;-&quot;);
-	int exp=0;
-	for(int i=pos+2;i&lt;len;i++){
-		exp=exp*10+str[i]-'0';
-	}
-	if(exp==0){
-		for(int i=1;i&lt;pos;i++){
-			printf(&quot;%c&quot;,str[i]);
+	string s,t;
+	int n,i=0;
+	cin&gt;&gt;s;
+	while(s[i]!='E') i++;
+	t=s.substr(1,i-1);
+	n=stoi(s.substr(i+1,s.length()-i-1));
+	if(s[0]=='-') cout&lt;&lt;&quot;-&quot;;
+	if(n&lt;0){
+		cout&lt;&lt;&quot;0.&quot;;
+		for(int j=0;j&lt;abs(n)-1;j++) cout&lt;&lt;&quot;0&quot;;
+		for(int j=0;j&lt;t.size();j++) 
+		    if(t[j]!='.') cout&lt;&lt;t[j];
+	}else{
+		cout&lt;&lt;t[0];
+		int cnt,j;
+		for(j=2,cnt=0;j&lt;t.length()&amp;&amp;cnt&lt;n;j++,cnt++) cout&lt;&lt;t[j];
+		if(j==t.length()) {
+			for(int k=0;k&lt;n-cnt;k++) cout&lt;&lt;&quot;0&quot;;
+		} else{
+			cout&lt;&lt;&quot;.&quot;;
+			for(int k=j;k&lt;t.size();k++) cout&lt;&lt;t[k];
 		}
 	}
-	if(str[pos+1]=='-'){
-		printf(&quot;0.&quot;);
-		for(int t=0;t&lt;exp-1;t++) printf(&quot;0&quot;);
-		for(int j=1;j&lt;pos;j++){
-			if(str[j]=='.') continue;
-			printf(&quot;%c&quot;,str[j]);
-		}
-	}
-	else{
-		for(int i=1;i&lt;pos;i++){
-			if(str[i]=='.') continue;
-			printf(&quot;%c&quot;,str[i]);
-			if(i==exp+2&amp;&amp;(pos-3)!=exp){
-				printf(&quot;.&quot;);
-			}
-		}
-		for(int k=0;k&lt;exp-(pos-3);k++) printf(&quot;0&quot;);
-	} 
 	return 0;
 }
 </code></pre>
@@ -3810,6 +3731,40 @@ int main(){
 		numforward=BFS(userid,L);
 		printf(&quot;%d\n&quot;,numforward);
 	}
+	return 0;
+}
+</code></pre>
+<h3 id="a107720-多个字符串找公共后缀">A1077(20  多个字符串找公共后缀)</h3>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;string&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+int main(){
+	int n;
+	scanf(&quot;%d\n&quot;,&amp;n);
+	string ans;
+	int minlen;
+	for(int i=0;i&lt;n;i++){
+		string s;
+		getline(cin,s);
+		reverse(s.begin(),s.end());
+		if(i==0){
+			ans=s;
+			minlen=ans.length();
+		}else{
+			int len=s.length();
+			minlen=min(minlen,len);
+			for(int j=0;j&lt;minlen;j++){
+				if(s[j]!=ans[j]) {
+					ans=s.substr(0,j);
+					break;
+				}
+			}
+		}
+	}
+	reverse(ans.begin(),ans.end());
+	if(ans.size()==0) cout&lt;&lt;&quot;nai&quot;;
+	else cout&lt;&lt;ans;
 	return 0;
 }
 </code></pre>
@@ -4010,50 +3965,46 @@ int main() {
 	return 0;
 }
 </code></pre>
-<h3 id="a1082">A1082</h3>
+<h3 id="a108225-分段处理字符串">A1082(25 分段处理字符串)</h3>
 <pre><code>#include&lt;iostream&gt;
 #include&lt;string&gt;
 using namespace std;
-string num[10] = { &quot;ling&quot;,&quot;yi&quot;,&quot;er&quot;,&quot;san&quot;,&quot;si&quot;,&quot;wu&quot;,&quot;liu&quot;,&quot;qi&quot;,&quot;ba&quot;,&quot;jiu&quot; };
-string wei[5] = { &quot;Shi&quot;,&quot;Bai&quot;,&quot;Qian&quot;,&quot;Wan&quot;,&quot;Yi&quot; };
-int main() {
-	string str;
-	getline(cin, str);
-	int len = str.length();
-	int left = 0, right = len - 1;
-	if (str[0] == '-') {
-		cout &lt;&lt; &quot;Fu&quot;;
+int main(){
+	string n;
+	cin&gt;&gt;n;
+	int len=n.length();
+	int left=0,right=len-1;
+	string num[10]={&quot;ling&quot;,&quot;yi&quot;,&quot;er&quot;,&quot;san&quot;,&quot;si&quot;,&quot;wu&quot;,&quot;liu&quot;,&quot;qi&quot;,&quot;ba&quot;,&quot;jiu&quot;};
+	string wei[5]={&quot;Shi&quot;,&quot;Bai&quot;,&quot;Qian&quot;,&quot;Wan&quot;,&quot;Yi&quot;};
+	if(n[0]=='-') {
+		cout&lt;&lt;&quot;Fu&quot;;
 		left++;
 	}
-	while (left + 4 &lt;= right) {
-		right -= 4;
+	while(left+4&lt;=right){
+		right-=4;
 	}
-	while (left &lt; len) {
-		bool flag = false;
-		bool hasprint = false;
-		while (left &lt;= right) {
-			if (str[left] == '0' &amp;&amp; left &gt; 0) {
-				flag = true;
-			}
-			else {
-				if (flag == true) {
-					cout &lt;&lt; &quot; ling&quot;;
-					flag = false;
+	while(left&lt;len){
+		bool flag=false;
+		bool hasprint=false;
+		while(left&lt;=right){
+			if(left&gt;0&amp;&amp;n[left]=='0') flag=true;
+			else{
+				if(flag==true){
+					cout&lt;&lt;&quot; &quot;&lt;&lt;&quot;ling&quot;;
+					flag=false;
 				}
-				if (left&gt;=1) cout &lt;&lt; &quot; &quot;;
-				cout &lt;&lt; num[str[left] - '0'];
-				hasprint = true;
-				if(left!=right) cout&lt;&lt;&quot; &quot;&lt;&lt; wei[right - left - 1];
+				if(left&gt;0) cout&lt;&lt;&quot; &quot;;
+				cout&lt;&lt;num[n[left]-'0'];
+				hasprint=true;
+				if(left!=right) cout&lt;&lt;&quot; &quot;&lt;&lt;wei[right-left-1];
 			}
 			left++;
 		}
-		if (hasprint == true &amp;&amp; left &lt;len ) {
-			cout &lt;&lt; &quot; &quot; &lt;&lt; wei[(len - left) / 4 + 2];
-		}
-		right += 4;
+		if(right!=len-1&amp;&amp;hasprint==true)	cout&lt;&lt;&quot; &quot;&lt;&lt;wei[(len-1-right)/4+2]; 
+		right+=4; 
 	}
 	return 0;
-}
+} 
 </code></pre>
 <h3 id="a1083">A1083</h3>
 <pre><code>#include&lt;cstdio&gt;
@@ -7134,7 +7085,8 @@ int main() {
 </code></pre>
 </li>
 <li>
-<p>涉及到的题目:A1035，A1077,A1082,A1093,A1061，<strong>A1073</strong>(科学计数法)，A1077(公共后缀)，<strong>A1082</strong>,</p>
+<p>涉及到的题目:</p>
+<p>A1035，A1077,A1082,A1093,A1061，<strong>A1073</strong>(科学计数法)，A1077(公共后缀)，<strong>A1082</strong>,</p>
 <p>A1112, A1152, A1140  A1136(回文串、字符串) 、 A1132(20 水题)</p>
 </li>
 </ul>
@@ -7210,6 +7162,7 @@ vector&lt;int&gt; vec1{ 1, 2, 3, 4, 5, 6 };       //vec1内容1,2，3,4,5,6
 <li>
 <p><code>map</code></p>
 <p>使用count，返回的是被查找元素的个数。如果有，返回1；否则，返回0。注意，map中不存在相同元素，所以返回值只能是1或0。count(key值)</p>
+<p>遍历map中所有的元素<code>for (auto it : mp)</code>,mp为map容器变量名，用<code>it.first</code>和<code>it.second</code>访问每个key和相应的value</p>
 <p>find() erase() size() clear()</p>
 </li>
 </ul>
@@ -7230,7 +7183,7 @@ vector&lt;int&gt; vec1{ 1, 2, 3, 4, 5, 6 };       //vec1内容1,2，3,4,5,6
 <h3 id="7-输入输出问题">7. 输入输出问题</h3>
 <p><code>scanf</code>中 ，<code>long long</code>型 ：<code>scanf(&quot;%lld&quot;,&amp;n)</code> , <code>double</code>型：<code>scanf(&quot;lf&quot;,&amp;n)</code></p>
 <p><code>printf</code>中，<code>long long</code> 型：<code>printf(&quot;%lld&quot;,n)</code>   , <code>double</code> 型：<code>printf(&quot;%f&quot;,n)</code></p>
-<p>若<code>getline(cin, str);</code>前有<code>scanf(&quot;%d%*c&quot;, &amp;n);</code>输入，可以用%*c忽略一个字符型(比如换行),或者%*d忽略一个数字型。也可以用getchar()吸收掉字符</p>
+<p>若<code>getline(cin, str);</code>前有<code>scanf(&quot;%d%*c&quot;, &amp;n);</code>输入，可以用%*<em>c忽略一个字符型(比如换行),或者%</em> *d忽略一个数字型。也可以用getchar()吸收掉字符</p>
 <p><code>scanf(&quot;%*c%d&quot;,&amp;n);可以吸收掉上一行末尾的的换行符</code></p>
 <p>若输入格式为数字<code>空格</code> 字符<code>空格</code> 数字，可以写成<code>scanf(&quot;%d %c %d&quot;)</code> ,因为空格也算字符。</p>
 <p>注意string类型用printf输出时一定要用c_str()转化一下</p>
@@ -7294,12 +7247,18 @@ vector&lt;int&gt; vec1{ 1, 2, 3, 4, 5, 6 };       //vec1内容1,2，3,4,5,6
 <ul>
 <li>十进制转化为其他进制</li>
 </ul>
-<pre><code>int z[maxn],num=0;
+<pre><code>1.数组形式
+int z[maxn],num=0;
 do{
 z[num++]=n%b;
 n/=b;
 }while(n!=0);
-或者
+2.数字形式(将十进制数a转化为任意b进制数，将结果存在数组中)
+while(a != 0) {
+   arr[index++] = a % b;
+   a = a / b;
+}//注意在数组中存储的顺序(下标从0开始)是反的
+3.
 void change(int n,int b){
 	if(n&gt;0){
 		int i=0;
@@ -7328,7 +7287,7 @@ void change(int n,int b){
 <p>A-Z对应十进制65-90</p>
 <p>a-z对应十进制97-122</p>
 <h3 id="12回文串">12.回文串</h3>
-<pre><code>bool judge(int arr[],int index){
+<pre><code>bool judge(int arr[],int index){//index为数组元素个数
     for(int i = 0; i &lt;index / 2; i++) {
        if(arr[i] != arr[index-i-1]) {
            return false;
@@ -8784,7 +8743,7 @@ int main(){
 <p>26.不要忘了一些算法的初始化，比如使用并查集千万不要忘了初始化<code>father[i]=i</code></p>
 <p>27一些题目处理的是五位数的格式，(比如id号)，所以输出时注意<code>printf(&quot;%05d&quot;)</code></p>
 <p>28.四舍五入为整数<code>int(v[temp].gm * 0.4 + v[temp].gf * 0.6 + 0.5);</code></p>
-<p>​      在最后加上0.5并强制转换为int型</p>
+<p>​      <strong>在最后加上0.5并强制转换为int型即为四舍五入</strong></p>
 <p>29.A1139邻接矩阵的巧妙写法</p>
 <pre><code>unordered_map&lt;int ,bool&gt; isfri;
 isfri[abs(stoi(a))*10000+abs(stoi(b))]=isfri[abs(stoi(b))*10000+abs(stoi(a))]=true;
