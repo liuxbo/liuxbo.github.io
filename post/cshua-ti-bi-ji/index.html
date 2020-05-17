@@ -7,7 +7,7 @@
 <meta name="description" content="菜鸡成长之路">
 <meta name="theme-color" content="#000">
 <title>c++(PAT)刷题笔记汇总 | lxb&#39;blog</title>
-<link rel="shortcut icon" href="https://liuxbo.github.io/favicon.ico?v=1589506154935">
+<link rel="shortcut icon" href="https://liuxbo.github.io/favicon.ico?v=1589676695227">
 <link rel="stylesheet" href="https://liuxbo.github.io/styles/main.css">
 
 <link rel="stylesheet" href="/media/css/gemini.css">
@@ -513,12 +513,12 @@ window.addEventListener('load', function() {
     
     <span class="meta-item">
       <i class="fa fa-clock-o"></i>
-      <span>52分钟</span>
+      <span>53分钟</span>
     </span>
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>10912<span class="pc-show">字数</span></span>
+      <span>11145<span class="pc-show">字数</span></span>
     </span>
   </div>
 </header>
@@ -811,6 +811,17 @@ vector&lt;int&gt; vec1{ 1, 2, 3, 4, 5, 6 };       //vec1内容1,2，3,4,5,6
 <p><code>isspace</code>（ space 、 \t 、 \r 、 \n ）</p>
 <p><code>isdigit</code>(数字)</p>
 <p>2 .<code>tolower (char c)</code>和 <code>toupper(char c)</code> 将某个字符转为⼩写或⼤写</p>
+</li>
+<li>
+<p><code>string</code></p>
+<p><code>str.insert(pos,str1)</code> 在原字符串的pos号位插入一个新的字符串str1</p>
+<p><code>str.erase(first,last)</code> first为需要删除的区间的起始迭代器，last是区间末尾迭代器的下一个地址</p>
+<p><code>str.erase(pos,length)</code> pos为需要开始删除的起始位置，length是删除的字符个数</p>
+<p><code>str.clear()</code> 清空string中的数据</p>
+<p><code>str.substr(pos,len)</code> 返回从pos号开始，长度是len 的子串</p>
+<p><code>string::npos</code>是一个常数，可以作为find函数匹配失败的返回值</p>
+<p><code>str.find(str1,pos)</code>  从str的pos号位开始匹配str1，返回str1第一次出现的位置</p>
+<p><code>str.find(str1)</code>  从str的pos号位开始匹配str1，返回str1第一次出现的位置</p>
 </li>
 </ul>
 <h3 id="10进制转换">10.进制转换</h3>
@@ -2318,6 +2329,13 @@ int main(){
 <pre><code>unordered_map&lt;int ,bool&gt; isfri;
 isfri[abs(stoi(a))*10000+abs(stoi(b))]=isfri[abs(stoi(b))*10000+abs(stoi(a))]=true;
 10000为超过最大范围的整数
+</code></pre>
+<p>30.题目中数据量大的时候最好不用<code>cin</code>和<code>cout</code></p>
+<p>31.数据量大时sort的cmp函数可以用引用传值，以防超时</p>
+<p>比如</p>
+<pre><code>bool cmp2(node&amp; a,node&amp; b){
+	return a.id&lt;b.id;
+}
 </code></pre>
 
               </div>

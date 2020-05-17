@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://liuxbo.github.io</id>
     <title>lxb&apos;blog</title>
-    <updated>2020-05-15T01:29:17.460Z</updated>
+    <updated>2020-05-17T00:51:38.642Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://liuxbo.github.io"/>
     <link rel="self" href="https://liuxbo.github.io/atom.xml"/>
@@ -37,14 +37,23 @@
 <p>1035(20 字符串)</p>
 <p><strong>1077(20  多个字符串找公共后缀)</strong></p>
 <p><strong>1082(25 分段处理字符串)</strong></p>
+<p>1084(20 字符串)</p>
 <h3 id="5排序">5.排序</h3>
 <p>1062(25 按条件排序)</p>
 <p><strong>1012(25 条件排序)</strong></p>
 <p><strong>1016(25 排序 处理多条通话时间记录)</strong></p>
+<p>1025(25 条件排序)</p>
+<p>1028(25  排序)</p>
+<p><strong>1055(25 按条件查找并排序输出)</strong></p>
+<p><strong>1075(25 排序)</strong></p>
+<p>1083(25 排序)</p>
+<p><strong>1080(30 排序  按排名依次录取报考志愿)</strong></p>
 <h3 id="单词">单词</h3>
 <p>coefficients 系数</p>
 <p>Palindromic 回文的</p>
 <p>suffix 后缀</p>
+<p>simultaneously 同时地</p>
+<p>simulate 模仿</p>
 ]]></content>
     </entry>
     <entry>
@@ -786,7 +795,7 @@ int main() {
 	return 0;
 }
 </code></pre>
-<h3 id="a1012">A1012</h3>
+<h3 id="a101225-条件排序">A1012(25 条件排序)</h3>
 <pre><code>#include&lt;cstdio&gt;
 #include&lt;algorithm&gt;
 #include&lt;map&gt;
@@ -970,7 +979,7 @@ int main() {
 	return 0;
 }
 </code></pre>
-<h3 id="a1016">A1016</h3>
+<h3 id="a101625-排序-处理多条通话时间记录">A1016(25 排序 处理多条通话时间记录)</h3>
 <pre><code>#include&lt;iostream&gt;
 #include&lt;algorithm&gt;
 #include&lt;map&gt;
@@ -1503,59 +1512,47 @@ int main() {
 	return 0;
 }
 </code></pre>
-<h3 id="a1025">A1025</h3>
-<pre><code>#include&lt;cstdio&gt;
-#include&lt;cstring&gt;
+<h3 id="a102525-条件排序">A1025(25 条件排序)</h3>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;string&gt;
+#include&lt;vector&gt;
 #include&lt;algorithm&gt;
 using namespace std;
-struct student{
-	char id[15];
-	int grade;
-	int lrank,frank;
-	int local_num;
-}testee[30010];
-bool cmp1(student a,student b){ 
-     return a.grade&gt;b.grade;
-}
-bool cmp2(student a,student b){
-	if(a.frank!=b.frank) return a.frank&lt;b.frank;
-	else if(strcmp(a.id,b.id)!=0) return strcmp(a.id,b.id)&lt;0;
+struct node{
+	string id;
+	int localid,score,frank,lrank;
+};
+bool cmp(node a,node b){
+	return a.score!=b.score? a.score&gt;b.score : a.id&lt;b.id;
 }
 int main(){
-	int n;
-	int total=0;
-	int localnum=0;
-	scanf(&quot;%d&quot;,&amp;n);
-	for(int i=0;i&lt;n;i++){
-		int temp;
-		localnum++;
-		int on,off;
-		on=total;
-		off=on;
-		scanf(&quot;%d&quot;,&amp;temp);
-		for(int j=0;j&lt;temp;j++){
-			scanf(&quot;%s%d&quot;,testee[total].id,&amp;testee[total].grade);
-			testee[total].local_num=localnum;
-			total++;
-			off++;
+	int n,k;
+	cin&gt;&gt;n;
+	vector&lt;node&gt; total;
+	for(int j=1;j&lt;=n;j++){
+		scanf(&quot;%d&quot;,&amp;k);
+		vector&lt;node&gt; v(k);
+		for(int i=0;i&lt;k;i++) {
+			cin&gt;&gt;v[i].id&gt;&gt;v[i].score;
+			v[i].localid=j;
 		}
-		sort(testee+on,testee+off,cmp1);
-		testee[on].lrank=1;
-		for(int k=on+1;k&lt;off;k++){
-			if(testee[k].grade==testee[k-1].grade) testee[k].lrank=testee[k-1].lrank;
-			else testee[k].lrank=k-on+1;
+		sort(v.begin(),v.end(),cmp);
+		v[0].lrank=1;
+		for(int i=1;i&lt;k;i++) {
+			if(v[i].score==v[i-1].score) v[i].lrank=v[i-1].lrank;
+			else v[i].lrank=i+1;
 		}
+		for(int i=0;i&lt;k;i++) total.push_back(v[i]);
 	}
-	sort(testee,testee+total,cmp1);
-	testee[0].frank=1;
-	for(int k=1;k&lt;total;k++){
-		if(testee[k].grade==testee[k-1].grade) testee[k].frank=testee[k-1].frank;
-		else testee[k].frank=k+1;
+	sort(total.begin(),total.end(),cmp);
+	total[0].frank=1;
+	for(int i=1;i&lt;total.size();i++) {
+		if(total[i].score==total[i-1].score) total[i].frank=total[i-1].frank;
+		else total[i].frank=i+1;
 	}
-	sort(testee,testee+total,cmp2);
-	printf(&quot;%d\n&quot;,total);
-	for(int i=0;i&lt;total;i++){
-		printf(&quot;%s %d %d %d\n&quot;,testee[i].id,testee[i].frank,testee[i].local_num,testee[i].lrank);
+	cout&lt;&lt;total.size()&lt;&lt;endl;
+	for(int i=0;i&lt;total.size();i++){
+		printf(&quot;%s %d %d %d\n&quot;,total[i].id.c_str(),total[i].frank,total[i].localid,total[i].lrank);
 	}
 	return 0;
 }
@@ -1573,37 +1570,35 @@ int main(){
 	return 0;
 }
 </code></pre>
-<h3 id="a1028">A1028</h3>
-<pre><code>#include&lt;iostream&gt;
-#include&lt;cstring&gt;
-#include&lt;algorithm&gt;
+<h3 id="a102825-排序">A1028(25  排序)</h3>
+<pre><code>#include&lt;algorithm&gt;
+#include&lt;vector&gt;
+#include&lt;string&gt;
+#include&lt;iostream&gt;
 using namespace std;
-const int maxn = 100010;
-struct node {
-	char id[10];
-	char name[10];
-	int grade;
-}student[100010];
-int c;
-bool cmp(node a, node b) {
-	if (c == 1) return strcmp(a.id, b.id) &lt; 0;
-	if (c == 2) {
-		if (strcmp(a.name, b.name) != 0) return strcmp(a.name, b.name) &lt; 0;
-		else return strcmp(a.id, b.id) &lt; 0;
-	}
-	if (c == 3) {
-		if (a.grade != b.grade) return a.grade &lt; b.grade;
-		else return strcmp(a.id, b.id) &lt; 0;
-	}
+struct node{
+	int id,grade;
+	string name;
+};
+bool cmp1(node a,node b){
+	return a.id&lt;b.id;
 }
-int main() {
-		int n;
-		scanf(&quot;%d&quot;, &amp;n);
-		scanf(&quot;%d&quot;, &amp;c);
-		for (int i = 0; i &lt; n; i++) scanf(&quot;%s%s%d&quot;, student[i].id, student[i].name, &amp;student[i].grade);
-		sort(student, student + n, cmp);
-		for (int i = 0; i &lt; n; i++) printf(&quot;%s%s%d\n&quot;, student[i].id, student[i].name, student[i].grade);
-		return 0;
+bool cmp2(node a,node b){
+	return a.name!=b.name? a.name&lt;b.name :a.id&lt;b.id;
+}
+bool cmp3(node a,node b){
+	return a.grade!=b.grade? a.grade&lt;b.grade : a.id&lt;b.id;
+}
+int main(){
+	int n,c;
+	cin&gt;&gt;n&gt;&gt;c;
+	vector&lt;node&gt; v(n);
+	for(int i=0;i&lt;n;i++) cin&gt;&gt;v[i].id&gt;&gt;v[i].name&gt;&gt;v[i].grade;
+	if(c==1) sort(v.begin(),v.end(),cmp1);
+	else if(c==2) sort(v.begin(),v.end(),cmp2);
+	else if(c==3)sort(v.begin(),v.end(),cmp3);
+	for(int i=0;i&lt;n;i++) printf(&quot;%06d %s %d\n&quot;,v[i].id,v[i].name.c_str(),v[i].grade);
+	return 0;
 }
 </code></pre>
 <h3 id="a1029">A1029</h3>
@@ -2701,52 +2696,50 @@ int main() {
 	return 0;
 }
 </code></pre>
-<h3 id="a1055">A1055</h3>
-<pre><code>#include&lt;iostream&gt;
-#include&lt;algorithm&gt;
-#include&lt;cstring&gt;
+<h3 id="a105525-按条件查找并排序输出">A1055(25 按条件查找并排序输出)</h3>
+<pre><code>#include&lt;algorithm&gt;
 #include&lt;vector&gt;
+#include&lt;cstring&gt;
+#include&lt;iostream&gt;
 using namespace std;
 struct node{
 	char name[10];
-	int age,money;
-}; 
+	int age,worth;
+};
 bool cmp(node a,node b){
-	if(a.money!=b.money) return a.money&gt;b.money;
+	if(a.worth!=b.worth) return a.worth&gt;b.worth;
 	else if(a.age!=b.age) return a.age&lt;b.age;
 	else return strcmp(a.name,b.name)&lt;0;
 }
 int main(){
-	int n,m;
+	int n,m,k,amin,amax;
 	scanf(&quot;%d%d&quot;,&amp;n,&amp;m);
-	vector&lt;node&gt; total(n),elect;
-	vector&lt;int&gt; mark(210,0);
-	for(int i=0;i&lt;n;i++) scanf(&quot;%s%d%d&quot;,total[i].name,&amp;total[i].age,&amp;total[i].money);
-	sort(total.begin(),total.end(),cmp);
-	for(int i=0;i&lt;n;i++){
-		if(mark[total[i].age]&lt;=100){
-			mark[total[i].age]++;
-			elect.push_back(total[i]);
+	vector&lt;node&gt; t(n),v;
+    vector&lt;int&gt; book(201,0);
+	for(int i=0;i&lt;n;i++)  scanf(&quot;%s%d%d&quot;,t[i].name,&amp;t[i].age,&amp;t[i].worth);
+    sort(t.begin(),t.end(),cmp);   
+    for(int i=0;i&lt;n;i++){
+        if(book[t[i].age]&lt;100){
+            v.push_back(t[i]);
+            book[t[i].age]++;
+        }
+    }
+	for(int i=1;i&lt;=m;i++) {
+		printf(&quot;Case #%d:\n&quot;,i);
+		vector&lt;node&gt; ans;
+        scanf(&quot;%d%d%d&quot;,&amp;k,&amp;amin,&amp;amax);
+		for(int j=0;j&lt;v.size();j++) {
+			if(v[j].age&gt;=amin&amp;&amp;v[j].age&lt;=amax) ans.push_back(v[j]);
 		}
+		if(ans.size()==0) printf(&quot;None\n&quot;);
+		else if(k&gt;=ans.size()){
+			for(int j=0;j&lt;ans.size();j++) printf(&quot;%s %d %d\n&quot;,ans[j].name,ans[j].age,ans[j].worth);
+		}else if(k&lt;ans.size())  {
+			for(int j=0;j&lt;k;j++) printf(&quot;%s %d %d\n&quot;,ans[j].name,ans[j].age,ans[j].worth);
+		}   
 	}
-	int query,minage,maxage;
-	for(int i=0;i&lt;m;i++){
-		scanf(&quot;%d%d%d&quot;,&amp;query,&amp;minage,&amp;maxage);
-		vector&lt;node&gt; t;
-		for(int j=0;j&lt;elect.size();j++){
-			if(elect[j].age&lt;=maxage&amp;&amp;elect[j].age&gt;=minage)
-				t.push_back(elect[j]);
-		}
-		printf(&quot;Case #%d:\n&quot;,i+1);
-		int needprintf=0;
-		for(int k=0;k&lt;query&amp;&amp;k&lt;t.size();k++){
-			needprintf++;
-		    printf(&quot;%s %d %d\n&quot;,t[k].name,t[k].age,t[k].money);
-		}
-		if(needprintf==0) printf(&quot;None\n&quot;);
-	} 
 	return 0;
-}
+} 
 </code></pre>
 <h3 id="a1056队列">A1056(队列)</h3>
 <pre><code>#include&lt;queue&gt;
@@ -3603,76 +3596,61 @@ int main() {
 	return 0;
 }
 </code></pre>
-<h3 id="a1075">A1075</h3>
-<pre><code>#include&lt;cstdio&gt;
+<h3 id="a107525-排序">A1075(25 排序)</h3>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;vector&gt;
 #include&lt;algorithm&gt;
-#include&lt;cstring&gt;
 using namespace std;
-const int maxn = 10010;
-struct node {
-	int rank;
-	int id;
-	int score[6];
-	int total;
-	int perfect;
-	bool canprint;
-}user[maxn];
-bool cmp(node a, node b) {
-	if (a.canprint == false || b.canprint == false) return a.canprint &gt; b.canprint;
-	else if (a.total != b.total) return a.total &gt; b.total;
-	else if (a.perfect != b.perfect) return a.perfect &gt; b.perfect;
-	else return a.id &lt; b.id;
+struct node{
+	int rank,id,total=0;
+	vector&lt;int&gt; score;
+	int passnum=0;
+	bool isshown=false;
+}; 
+bool cmp(node a,node b){
+	if(a.total!=b.total) return a.total&gt;b.total;
+	else if(a.passnum!=b.passnum) return a.passnum&gt;b.passnum;
+	else return a.id&lt;b.id;
 }
-int main() {
-	int n, k, m, question[6] = { 0 };
-	scanf_s(&quot;%d%d%d&quot;, &amp;n, &amp;k, &amp;m);
-	for (int i = 1; i &lt;= k; i++) scanf_s(&quot;%d&quot;, &amp;question[i]);
-	for (int i = 0; i &lt; maxn; i++) {
-		memset(user[i].score, -1, sizeof(user[i].score));
-		user[i].total = 0;
-		user[i].perfect = 0;
-		user[i].canprint = false;
+int main(){
+	int n,k,m,id,index,grade;
+	scanf(&quot;%d%d%d&quot;,&amp;n,&amp;k,&amp;m);
+	vector&lt;node&gt; v(n+1);
+	for(int i=1;i&lt;=n;i++) v[i].score.resize(k+1,-1);
+	vector&lt;int&gt; p(k+1);
+	for(int i=1;i&lt;=k;i++) scanf(&quot;%d&quot;,&amp;p[i]);
+	for(int i=0;i&lt;m;i++){
+	    scanf(&quot;%d%d%d&quot;,&amp;id,&amp;index,&amp;grade);
+	    v[id].id=id;
+	    v[id].score[index]=max(grade, v[id].score[index]);
+	    if(grade!=-1) v[id].isshown=true;
+	    else if(v[id].score[index]==-1) v[id].score[index]=-2;
 	}
-	for (int i = 0; i &lt; m; i++) {
-		int id,problem_id,score;
-		scanf_s(&quot;%d %d %d&quot;, &amp;id,&amp;problem_id,&amp;score);
-		user[id].id = id;
-		if (score == -1&amp;&amp;user[id].score[problem_id]==-1) user[id].score[problem_id] = 0;//第一次未能编译通过
-		if (score != -1) {
-			user[id].canprint = true;
-			if (score == question[problem_id]&amp;&amp;user[id].score[problem_id]&lt;question[problem_id]) user[id].perfect++;
-		}
-		if (score &gt;= user[id].score[problem_id]) user[id].score[problem_id] = score;//第一次满分
-	}
-	for (int i = 0; i &lt; maxn; i++) {
-		for (int j = 1; j &lt;= k; j++) {
-			if (user[i].score[j] != -1) {
-				user[i].total += user[i].score[j];
-			}
+	for(int i=1;i&lt;=n;i++){
+		for(int j=1;j&lt;=k;j++){
+			if(v[i].score[j]!=-1&amp;&amp;v[i].score[j]!=-2) v[i].total+=v[i].score[j];
+			if(v[i].score[j]==p[j]) v[i].passnum++;
 		}
 	}
-	sort(user, user + maxn, cmp);
-	user[0].rank = 1;
-	for (int j = 1; j &lt; n; j++) {
-		if (user[j].total == user[j - 1].total) {
-			user[j].rank = user[j - 1].rank;
-		}
-		else user[j].rank = j + 1;
+	sort(v.begin()+1,v.end(),cmp);
+	v[1].rank=1;
+	for(int i=2;i&lt;=n;i++){
+		if(v[i].total==v[i-1].total) v[i].rank=v[i-1].rank;
+		else v[i].rank=i;
 	}
-	for (int i = 0; i &lt; n; i++) {
-		if (user[i].canprint == true) {
-			printf(&quot;%d %05d %d&quot;, user[i].rank, user[i].id, user[i].total);
-			for (int j = 1; j &lt;= k; j++) {
-				if (user[i].score[j] == -1) printf(&quot; -&quot;);
-				else {
-					printf(&quot; %d&quot;, user[i].score[j]);
-				}
+	for(int i=1;i&lt;=n;i++){
+		if(v[i].isshown==true){
+			printf(&quot;%d %05d %d&quot;,v[i].rank,v[i].id,v[i].total);
+			for(int j=1;j&lt;=k;j++) {
+				if(v[i].score[j]==-1) printf(&quot; -&quot;);
+				else if(v[i].score[j]==-2) printf(&quot; 0&quot;);
+				else printf(&quot; %d&quot;,v[i].score[j]);
 			}
 			printf(&quot;\n&quot;);
 		}
 	}
 	return 0;
-}
+} 
 </code></pre>
 <h3 id="a1076">A1076</h3>
 <pre><code>#include&lt;cstdio&gt;
@@ -3854,80 +3832,54 @@ int main(){
 	return 0;
 }
 </code></pre>
-<h3 id="a1080">A1080</h3>
-<pre><code>#include&lt;cstdio&gt;
-#include&lt;algorithm&gt;
+<h3 id="a108030-排序">A1080(30 排序)</h3>
+<pre><code>#include&lt;iostream&gt;
 #include&lt;vector&gt;
+#include&lt;algorithm&gt;
 using namespace std;
-const int maxn = 40010;
-struct node {
-	int rank;
-	int GE, GI,fgrade;
-	int id;
-	int choice[6];
-}app[maxn];
-struct node1 {
-	int num;
-	int quota;
-	int id[maxn];
-	int lastadmit;
-}sch[110];
-bool cmpapp(node a, node b) {
-	if (a.fgrade != b.fgrade) return a.fgrade &gt; b.fgrade;
-	else return a.GE &gt; b.GE;
+struct node{
+	int ge,gi,sum,rank,id;
+	vector&lt;int&gt; choice;
+};
+bool cmp1(node&amp; a,node&amp; b){
+	if(a.sum!=b.sum) return a.sum&gt;b.sum;
+	else return a.ge&gt;b.ge;
 }
-bool cmpstu(int a,int b) {
-	return app[a].id &lt; app[b].id;
+bool cmp2(node&amp; a,node&amp; b){
+	return a.id&lt;b.id;
 }
-int main() {
-	int n, m, k;
-	scanf(&quot;%d%d%d&quot;, &amp;n, &amp;m, &amp;k);
-	for (int i = 0; i &lt; m; i++) {
-		scanf(&quot;%d&quot;, &amp;sch[i].quota);
-		sch[i].num = 0;
-		sch[i].lastadmit = -1;
+int main(){
+	int n,m,k;
+	scanf(&quot;%d%d%d&quot;,&amp;n,&amp;m,&amp;k);
+	vector&lt;int&gt; sch_need(m);
+	vector&lt;node&gt; stu(n);
+	for(int i=0;i&lt;m;i++) scanf(&quot;%d&quot;,&amp;sch_need[i]);
+	for(int i=0;i&lt;n;i++){
+		scanf(&quot;%d%d&quot;,&amp;stu[i].ge,&amp;stu[i].gi);
+		stu[i].sum=stu[i].ge+stu[i].gi;
+		stu[i].id=i;
+		stu[i].choice.resize(k);
+		for(int j=0;j&lt;k;j++) scanf(&quot;%d&quot;,&amp;stu[i].choice[j]);
 	}
-	for (int i = 0; i &lt; n; i++) {
-		scanf(&quot;%d%d&quot;, &amp;app[i].GE, &amp;app[i].GI);
-		app[i].id = i;
-		for (int j = 0; j &lt; k; j++) {
-			scanf(&quot;%d&quot;, &amp;app[i].choice[j]);
-		}
-		app[i].fgrade = app[i].GE + app[i].GI;
-	}
-	sort(app, app + n, cmpapp);
-	for (int i = 0; i &lt; n; i++) {
-		if (i &gt; 0 &amp;&amp; (app[i].fgrade == app[i - 1].fgrade) &amp;&amp; (app[i].GE == app[i - 1].GE)) {
-			app[i].rank = app[i - 1].rank;
-		}
-		else {
-			app[i].rank = i;
-		}
-	}
-	for (int i = 0; i &lt; n; i++) {
-		for (int j = 0; j &lt; k; j++) {
-			int choice = app[i].choice[j];
-			int num = sch[choice].num;
-			int last = sch[choice].lastadmit;
-			if (sch[choice].quota &gt; num || (last != -1 &amp;&amp; app[i].rank == app[last].rank)) {
-				sch[choice].id[num] = i;
-				sch[choice].num++;
-				sch[choice].lastadmit = i;
+	sort(stu.begin(),stu.end(),cmp1);
+	vector&lt;node&gt; ans[m];
+	for(int i=0;i&lt;n;i++){
+		for(int j=0;j&lt;k;j++){
+			int temp=stu[i].choice[j];
+			if(ans[temp].size()&lt;sch_need[temp]||
+			(ans[temp][ans[temp].size()-1].sum==stu[i].sum&amp;&amp;ans[temp][ans[temp].size()-1].ge==stu[i].ge)) {
+				ans[temp].push_back(stu[i]);
 				break;
 			}
 		}
 	}
-	for (int i = 0; i &lt; m; i++) {
-		if (sch[i].num &gt; 0) {
-			sort(sch[i].id, sch[i].id + sch[i].num, cmpstu);
-			for (int j = 0; j &lt; sch[i].num; j++) {
-				printf(&quot;%d&quot;, app[sch[i].id[j]].id);
-				if (j &lt; sch[i].num - 1) {
-					printf(&quot; &quot;);
-				}
-			}
+	for(int i=0;i&lt;m;i++){
+		sort(ans[i].begin(),ans[i].end(),cmp2);
+		for(int j=0;j&lt;ans[i].size();j++){
+			if(j!=0) printf(&quot; &quot;);
+			printf(&quot;%d&quot;,ans[i][j].id);
 		}
-		printf(&quot;\n&quot;);
+		printf(&quot;\n&quot;);	
 	}
 	return 0;
 }
@@ -4006,69 +3958,51 @@ int main(){
 	return 0;
 } 
 </code></pre>
-<h3 id="a1083">A1083</h3>
-<pre><code>#include&lt;cstdio&gt;
+<h3 id="a108325-排序">A1083(25 排序)</h3>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;vector&gt;
+#include&lt;string&gt;
 #include&lt;algorithm&gt;
 using namespace std;
-const int maxn = 100010;
-struct node {
-	char name[12];
-	char id[12];
-	int score;
-}stu[maxn];
-bool cmp(node a, node b) {
-	return a.score &gt; b.score;
-}
-int main() {
-	int n,grade1,grade2;
-	scanf(&quot;%d&quot;, &amp;n);
-	for (int i = 0; i &lt; n; i++) {
-		scanf(&quot;%s%s%d&quot;, stu[i].name, stu[i].id, &amp;stu[i].score);
-	}
-	scanf(&quot;%d%d&quot;, &amp;grade1, &amp;grade2);
-	sort(stu, stu + n, cmp);
-	bool canprint = false;
-	for (int i = 0; i &lt; n; i++) {
-		if (stu[i].score &gt;= grade1 &amp;&amp; stu[i].score &lt;= grade2) {
-			canprint = true;
-			printf(&quot;%s %s\n&quot;, stu[i].name, stu[i].id);
+struct node{
+	string name,id;
+	int grade;
+}stu[1000];
+bool cmp(node a,node b){return a.grade&gt;b.grade;}
+int main(){
+	int n,score,g1,g2;
+	string name,id;
+	vector&lt;node&gt; ans;
+	cin&gt;&gt;n;
+	for(int i=0;i&lt;n;i++) cin&gt;&gt;stu[i].name&gt;&gt;stu[i].id&gt;&gt;stu[i].grade;
+	cin&gt;&gt;g1&gt;&gt;g2;
+	for(int i=0;i&lt;n;i++) {
+		if(stu[i].grade&gt;=g1&amp;&amp;stu[i].grade&lt;=g2){
+			ans.push_back(stu[i]);
 		}
 	}
-	if (canprint == false) printf(&quot;NONE&quot;);
+	if(ans.size()==0) cout&lt;&lt;&quot;NONE&quot;;
+	else{
+		sort(ans.begin(),ans.end(),cmp);
+		for(int i=0;i&lt;ans.size();i++) printf(&quot;%s %s\n&quot;,ans[i].name.c_str(),ans[i].id.c_str());
+	} 
 	return 0;
 }
 </code></pre>
-<h3 id="a1084">A1084</h3>
+<h3 id="a108420-字符串">A1084(20 字符串)</h3>
 <pre><code>#include&lt;iostream&gt;
 #include&lt;string&gt;
+#include&lt;cctype&gt;
 using namespace std;
-bool hashtable[128] = { false };
-int main() {
-	string str1,str2;
-	getline(cin, str1);
-	getline(cin, str2);
-	int len1 = str1.length();
-	int len2 = str2.length();
-	for (int i = 0; i &lt; len1; i++) {
-		int j;
-		if (str1[i] &gt;= 'a' &amp;&amp; str1[i] &lt;= 'z') str1[i] -= 32;
-		for (j = 0; j &lt; len2; j++) {
-			if ((str1[i] &gt;= '0' &amp;&amp; str1[i] &lt;= '9') || str1[i] == '_') {
-				if (str2[j] == str1[i]){
-					break;
-				}
-			}
-			else {
-				if (str2[j] &gt;= 'a' &amp;&amp; str2[j] &lt;= 'z') str2[j] -= 32;
-				if (str1[i] == str2[j]) break;
-			}
-		}
-		if (j == len2 &amp;&amp; hashtable[str1[i]] == false) {
-			hashtable[str1[i]] = true;
-			printf(&quot;%c&quot;, str1[i]);
-		}
+int main(){
+	string s1,s2,ans;
+	cin&gt;&gt;s1&gt;&gt;s2;
+	for(int i=0;i&lt;s1.length();i++){
+		if(s2.find(s1[i])==string::npos&amp;&amp;ans.find(toupper(s1[i]))==string::npos)
+		  ans+=toupper(s1[i]); 
 	}
-	return 0;
+	cout&lt;&lt;ans;
+	return 0; 
 }
 </code></pre>
 <h3 id="a1085">A1085</h3>
@@ -7242,6 +7176,17 @@ vector&lt;int&gt; vec1{ 1, 2, 3, 4, 5, 6 };       //vec1内容1,2，3,4,5,6
 <p><code>isdigit</code>(数字)</p>
 <p>2 .<code>tolower (char c)</code>和 <code>toupper(char c)</code> 将某个字符转为⼩写或⼤写</p>
 </li>
+<li>
+<p><code>string</code></p>
+<p><code>str.insert(pos,str1)</code> 在原字符串的pos号位插入一个新的字符串str1</p>
+<p><code>str.erase(first,last)</code> first为需要删除的区间的起始迭代器，last是区间末尾迭代器的下一个地址</p>
+<p><code>str.erase(pos,length)</code> pos为需要开始删除的起始位置，length是删除的字符个数</p>
+<p><code>str.clear()</code> 清空string中的数据</p>
+<p><code>str.substr(pos,len)</code> 返回从pos号开始，长度是len 的子串</p>
+<p><code>string::npos</code>是一个常数，可以作为find函数匹配失败的返回值</p>
+<p><code>str.find(str1,pos)</code>  从str的pos号位开始匹配str1，返回str1第一次出现的位置</p>
+<p><code>str.find(str1)</code>  从str的pos号位开始匹配str1，返回str1第一次出现的位置</p>
+</li>
 </ul>
 <h3 id="10进制转换">10.进制转换</h3>
 <ul>
@@ -8748,6 +8693,13 @@ int main(){
 <pre><code>unordered_map&lt;int ,bool&gt; isfri;
 isfri[abs(stoi(a))*10000+abs(stoi(b))]=isfri[abs(stoi(b))*10000+abs(stoi(a))]=true;
 10000为超过最大范围的整数
+</code></pre>
+<p>30.题目中数据量大的时候最好不用<code>cin</code>和<code>cout</code></p>
+<p>31.数据量大时sort的cmp函数可以用引用传值，以防超时</p>
+<p>比如</p>
+<pre><code>bool cmp2(node&amp; a,node&amp; b){
+	return a.id&lt;b.id;
+}
 </code></pre>
 ]]></content>
     </entry>
