@@ -7,7 +7,7 @@
 <meta name="description" content="菜鸡成长之路">
 <meta name="theme-color" content="#000">
 <title>c++(PAT)刷题笔记汇总 | lxb&#39;blog</title>
-<link rel="shortcut icon" href="https://liuxbo.github.io/favicon.ico?v=1589676695227">
+<link rel="shortcut icon" href="https://liuxbo.github.io/favicon.ico?v=1589982422923">
 <link rel="stylesheet" href="https://liuxbo.github.io/styles/main.css">
 
 <link rel="stylesheet" href="/media/css/gemini.css">
@@ -513,12 +513,12 @@ window.addEventListener('load', function() {
     
     <span class="meta-item">
       <i class="fa fa-clock-o"></i>
-      <span>53分钟</span>
+      <span>54分钟</span>
     </span>
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>11145<span class="pc-show">字数</span></span>
+      <span>11369<span class="pc-show">字数</span></span>
     </span>
   </div>
 </header>
@@ -789,7 +789,7 @@ vector&lt;int&gt; vec1{ 1, 2, 3, 4, 5, 6 };       //vec1内容1,2，3,4,5,6
 <p><code>sort(首元素地址，尾元素地址的下一个地址，比较函数（非必填)）</code>,无比较函数，默认递增排序。</p>
 <p><code>sort(a, a+n, greater());</code>  从大到小排序(要用<code>iostream</code>头文件)</p>
 <p><code>lower_bound(first,last,val)</code>  <code>upper_bound(first,last,val)</code> ,用于有序数组或容器，前者用来寻找[first,last)范围内第一个值大于等于val的元素的位置，后者寻找第一个值大于val的元素位置.若是数组，这两个函数返回的是地址，如<code>int* right=upper_bound(num, num+n, k)</code>，返回num数组中第一个大于k的元素所在地址，其下标=<code>right-num</code></p>
-<p><code>max_element(a, a+len)</code>返回序列中最大元素地址（迭代器）,可用其减去数组首地址(即数组名)获取其下标,若要获取该元素值，直接在前面加一个*,表示取地址即可</p>
+<p><code>max_element(a, a+len)</code>返回序列中最大元素地址（迭代器）,可用其减去数组首地址(即数组名)获取其下标,若要获取该元素值，<em><em>直接在前面加一个</em>,表示取地址即可</em>*</p>
 <p><code>min_element(begin, end)</code> 返回序列中最小元素地址</p>
 </li>
 <li>
@@ -856,8 +856,8 @@ void change(int n,int b){
  long long sum = 0;
  int index = 0, temp = 0;
  for (auto it = n.rbegin(); it != n.rend(); it++) {
- temp = isdigit(*it) ? *it - '0' : *it - 'a' + 10;
- sum += temp * pow(radix, index++);
+   temp = isdigit(*it) ? *it - '0' : *it - 'a' + 10;
+   sum += temp * pow(radix, index++);
  }
  return sum;
 }
@@ -1167,6 +1167,48 @@ bool flag3 = 0; // flag3为false
 <h3 id="19-二分">19 二分</h3>
 <p>A1085,A1010,A1044 A1048</p>
 <p>注意二分法的几种写法,以及非严格递增序列的处理,可以使用<code>lower_bound</code>和<code>upper_bouned</code></p>
+<ul>
+<li>
+<p>查找给定的数x</p>
+<pre><code>int binarySearch(int A[],int left,int right,int x){
+    int mid;
+    while(left&lt;=right){
+        mid=(left+right)/2;
+        if(A[mid]==x) return mid;
+        else if(A[mid]&gt;x) right=mid-1;
+        else left=mid+1;
+    }
+    return -1;//查找失败，返回-1
+}
+</code></pre>
+</li>
+<li>
+<p>求第一个大于等于x的元素的位置</p>
+<pre><code>int lower_bound(int A[],int left,int right,int x){
+    int mid;
+    while(left&lt;right){
+        mid=(left+right)/2;
+        if(A[mid]&gt;=x) right=mid;
+        else left=mid+1;
+    }
+    return left;
+}
+</code></pre>
+</li>
+<li>
+<p>求第一个大于x的元素的位置</p>
+<pre><code>int upper_bound(int A[],int left,int right,int x){
+    int mid;
+    while(left&lt;right){
+        mid=(left+right)/2;
+        if(A[mid]&gt;x) right=mid;
+        else left=mid+1;
+    }
+    return left;
+}
+</code></pre>
+</li>
+</ul>
 <h3 id="20-two-points">20 two points</h3>
 <p>A1085,A1089,A1029</p>
 <h3 id="21-数学问题">21 数学问题</h3>
@@ -2337,6 +2379,10 @@ isfri[abs(stoi(a))*10000+abs(stoi(b))]=isfri[abs(stoi(b))*10000+abs(stoi(a))]=tr
 	return a.id&lt;b.id;
 }
 </code></pre>
+<p>32.题目中同时有int型和浮点型格式的数据，最好统一定义成浮点型</p>
+<ol start="33">
+<li>某个测试点不过有可能是数据类型有问题，比如需要强制类型转换等等，换成数据表示范围更大的64位数据类型</li>
+</ol>
 
               </div>
               <div class="post-footer">
