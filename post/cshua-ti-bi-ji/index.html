@@ -7,7 +7,7 @@
 <meta name="description" content="菜鸡成长之路">
 <meta name="theme-color" content="#000">
 <title>c++(PAT)刷题笔记汇总 | lxb&#39;blog</title>
-<link rel="shortcut icon" href="https://liuxbo.github.io/favicon.ico?v=1590031106099">
+<link rel="shortcut icon" href="https://liuxbo.github.io/favicon.ico?v=1590414065909">
 <link rel="stylesheet" href="https://liuxbo.github.io/styles/main.css">
 
 <link rel="stylesheet" href="/media/css/gemini.css">
@@ -513,12 +513,12 @@ window.addEventListener('load', function() {
     
     <span class="meta-item">
       <i class="fa fa-clock-o"></i>
-      <span>54分钟</span>
+      <span>55分钟</span>
     </span>
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>11369<span class="pc-show">字数</span></span>
+      <span>11472<span class="pc-show">字数</span></span>
     </span>
   </div>
 </header>
@@ -601,7 +601,6 @@ int Z[6]={1,-1,0,0,0,0};
 <li>
 <p><code>scanf (&quot;%s&quot;)</code>识别空格作为字符串结尾</p>
 <p><code>getchar</code>  <code>putchar</code> 用来输入输出单个字符</p>
-<p><code>gets</code> <code>puts</code> 用来输入输出一行字符串，<code>gets</code> 识别换行符\n作为输入结束  ，gets现在已经不支持了</p>
 </li>
 <li>
 <p><code>cin</code> 读入字符串时，以空格为分隔符，如果想读入一整行字符串，用<code>getline(cin,s)</code>，注意前面如果输入数字n，一定要注意<code>scanf(&quot;%d\n&quot;,&amp;n);</code> 这样写，防止getline读入错误</p>
@@ -1005,8 +1004,26 @@ int main() {
 </code></pre>
 </li>
 <li>
-<p>归并排序  (合并两个有序序列时，注意其中一个数列先扫描完的情况)</p>
-<pre><code>
+<p>归并排序 (此处为2路归并) (合并两个有序序列时，注意其中一个数列先扫描完的情况)</p>
+<pre><code>void merge(int A[],int L1,int R1,int L2,int R2){
+//将数组A的[L1,R1]与[L2,R2]区间合并为有序区间(此处L2=R1+1)
+    int i=L1,j=L2,temp[maxn],index=0;
+    while(i&lt;=R1&amp;&amp;j&lt;=R2){
+    if(A[i]&lt;=A[j]) temp[index++]=A[i++];
+    else temp[index++]=A[j++];
+    }
+    while(i&lt;=R1) temp[index++]=A[i++];
+    while(j&lt;=R2) temp[index++]=A[j++];
+    for(i=0;i&lt;index;i++) A[L1+i]=temp[i];
+}
+void mergeSort(int A[],int left,int right){
+    if(left&lt;right){
+        int mid=(left+right)/2;
+        mergeSort(A,left,mid);
+        mergeSort(A,mid+1,right);
+        merge(A,left,mid,mid+1,right);
+    }
+}
 </code></pre>
 </li>
 <li>
@@ -1033,7 +1050,7 @@ void quicksort(int A[],int left,int right){
 <p>快排(改进后)</p>
 <p>生成随机数需要添加stdlib.h与time.h头文件，mian函数内开头加上srand((unsigned)time(NULL));</p>
 <pre><code>int partition(int A[],int left,int right){//只改进该函数
-    int p=(round(1.0*rand()/RAND_MAX*(right-left)+left);
+    int p=(int)(round(1.0*rand()/RAND_MAX*(right-left)+left));
     //生成[left,right]范围内的随机数
     swap(A[left],A[p]);
     int temp=A[left];
