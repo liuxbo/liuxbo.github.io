@@ -7,7 +7,7 @@
 <meta name="description" content="菜鸡成长之路">
 <meta name="theme-color" content="#000">
 <title>c++(PAT)刷题笔记汇总 | lxb&#39;blog</title>
-<link rel="shortcut icon" href="https://liuxbo.github.io/favicon.ico?v=1590414065909">
+<link rel="shortcut icon" href="https://liuxbo.github.io/favicon.ico?v=1591025183839">
 <link rel="stylesheet" href="https://liuxbo.github.io/styles/main.css">
 
 <link rel="stylesheet" href="/media/css/gemini.css">
@@ -518,7 +518,7 @@ window.addEventListener('load', function() {
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>11472<span class="pc-show">字数</span></span>
+      <span>11542<span class="pc-show">字数</span></span>
     </span>
   </div>
 </header>
@@ -1428,36 +1428,49 @@ bign multi(bign a, int b) {
     typename data;
     node* lchild;
     node* rchild;
-}
+}//动态
+struct node{
+  typename data;
+    int left,right;
+</code></pre>
+</li>
+</ul>
+<p>}//静态</p>
+<p>//对于不是二叉树的树<br>
+struct node{<br>
+typename data;<br>
+vector<int> child;<br>
+}</p>
+<pre><code>
 </code></pre>
 </li>
 <li>
 <p>新建结点</p>
-<pre><code>node* newNode(int v){
-    node* root=new node;
-    Node-&gt;data=v;
-    Node-&gt;lchild=Node-&gt;rchild=NULL;
-    return Node;
-}
+<pre><code>  node* newNode(int v){
+      node* root=new node;
+      Node-&gt;data=v;
+      Node-&gt;lchild=Node-&gt;rchild=NULL;
+      return Node;
+  }
 </code></pre>
 </li>
 <li>
 <p>中序遍历</p>
-<pre><code>void inorder(node* root){
-    if(root==NULL) return;
-    inorder(root-&gt;lchild);
-    printf(&quot;%d&quot;,root-&gt;data);
-    inorder(root-&gt;rchild);
-}
+<pre><code>  void inorder(node* root){
+      if(root==NULL) return;
+      inorder(root-&gt;lchild);
+      printf(&quot;%d&quot;,root-&gt;data);
+      inorder(root-&gt;rchild);
+  }
 </code></pre>
-</li>
+<ul>
 <li>
 <p>二叉树的层序遍历(BFS)</p>
 <pre><code>void layerorder(node* root) {
 	queue&lt;node*&gt; q;
-	q.push(root);
+q.push(root);
 	while (!q.empty()) {
-		node* now = q.front();
+	node* now = q.front();
 		q.pop();
 		printf(&quot;%d&quot;, now-&gt;data);
 		if (now-&gt;lchild != NULL) q.push(now-&gt;lchild);
@@ -1476,7 +1489,7 @@ bign multi(bign a, int b) {
 	for (int i = inL; i &lt;= inR; i++) {
 		if (inorder[i] == root-&gt;data) {
 			k = i;
-			break;
+		break;
 		}
 	}
 	int leafnum = k - inL;
@@ -1536,9 +1549,9 @@ int main(void){
 	for(int i=0;i&lt;n;i++){			//读入中序序列并完成映射 
 		cin&gt;&gt;inor[i];
 		inmp[inor[i]]=i;
-	} 
+} 
 	for(int i=0;i&lt;n;i++){			//读入层序序列并完成映射 
-		cin&gt;&gt;layor[i];
+	cin&gt;&gt;layor[i];
 		laymp[layor[i]]=i;
 	} 
 	Node *root=creat(0,n-1);		//建树 
@@ -1558,12 +1571,14 @@ int main(void){
 		int i = prel + 1;
 	while (i &lt;= prer &amp;&amp; pre[i] != post[postr - 1]) i++;
 		if (i - prel &gt; 1) getin(prel + 1, i - 1, postl, postl + (i - prel - 1) - 1);
-		else unique = false;
+	else unique = false;
 		in.push_back(post[postr]);
 		getin(i, prer, postl + (i - prel - 1), postr - 1);
 	}
 }
 </code></pre>
+</li>
+</ul>
 </li>
 <li>
 <p>静态二叉树(如果题目中直接给出结点序号之间的父子关系，可以用静态)</p>
@@ -1576,14 +1591,14 @@ int main(void){
 </li>
 <li>
 <p>二叉树反转(静态)</p>
-<pre><code>void postorder(int root) {
+<pre><code>  void postorder(int root) {//注意是后序遍历
 	if (root == -1) return;
-	postorder(Node[root].lchild);
+  	postorder(Node[root].lchild);
 	postorder(Node[root].rchild);
-	swap(Node[root].lchild, Node[root].rchild);
-}
+  	swap(Node[root].lchild, Node[root].rchild);
+  }
 </code></pre>
-</li>
+<ul>
 <li>
 <p>完全二叉树</p>
 <p>1.判断是否是完全二叉树</p>
@@ -1600,29 +1615,33 @@ vector&lt;int&gt; levelorder(node* root) {//层序遍历中
 			if (after) iscomplete = 0;
 			q.push(temp-&gt;lchild);
 		}
-		else after = 1;
+	else after = 1;
 		if (temp-&gt;rchild != NULL) {
-			if (after) iscomplete = 0;
+		if (after) iscomplete = 0;
 			q.push(temp-&gt;rchild);
-		}
-		else after = 1;
 	}
-	return v;
+		else after = 1;
 }
+	return v;
 </code></pre>
-<p>2.给出⼀个n表示有n个结点，这n个结点为0~n-1，给出这n个结点的左右孩⼦，求问这棵树是 不是完全⼆叉树</p>
-<p>分析：递归出最⼤的下标值，完全⼆叉树⼀定把前⾯的下标充满： 最⼤的下标值 == 最⼤的节点数； 不完全⼆叉树前满⼀定有位置是空，会往后挤： 最⼤的下标值 &gt; 最⼤的节点数</p>
-</li>
-<li>
-<p>注意点</p>
-<ul>
-<li>完全二叉树的存储中，如果根节点下标为1，则该树中任何一个结点i，其左孩子编号为2i，右孩子编号为2i+1，父亲节点为下取整(i/2);如果根节点下标为0，对树中某结点i,父亲结点为下取整((i-1)/2);左孩子为2i+1，右孩子为2i+2</li>
-<li>函数参数中，对指针指向的结点内容进行修改是不需要加引用的，。如果函数中需要新建结点，即对二叉树的结构做出修改，就需要加引用(如insert，)，如果是修改当前已有结点的内容，或者是遍历树，就不需要加引用。</li>
-<li>无论是先序还是后序，都必须知道中序序列才能唯一确定一棵树</li>
-<li>对于题目中给出左右孩子结点编号的情况，没有被当做孩子结点的结点编号即为根结点，可以用一个数组来判断</li>
-</ul>
 </li>
 </ul>
+<p>}</p>
+<pre><code>
+
+
+2.给出⼀个n表示有n个结点，这n个结点为0~n-1，给出这n个结点的左右孩⼦，求问这棵树是 不是完全⼆叉树
+
+ 分析：递归出最⼤的下标值，完全⼆叉树⼀定把前⾯的下标充满： 最⼤的下标值 == 最⼤的节点数； 不完全⼆叉树前满⼀定有位置是空，会往后挤： 最⼤的下标值 &gt; 最⼤的节点数
+
+* 注意点
+
+* 完全二叉树的存储中，如果根节点下标为1，则该树中任何一个结点i，其左孩子编号为2i，右孩子编号为2i+1，父亲节点为下取整(i/2);如果根节点下标为0，对树中某结点i,父亲结点为下取整((i-1)/2);左孩子为2i+1，右孩子为2i+2
+* 函数参数中，对指针指向的结点内容进行修改是不需要加引用的，。如果函数中需要新建结点，即对二叉树的结构做出修改，就需要加引用(如insert，)，如果是修改当前已有结点的内容，或者是遍历树，就不需要加引用。
+* 无论是先序还是后序，都必须知道中序序列才能唯一确定一棵树
+* 对于题目中给出左右孩子结点编号的情况，没有被当做孩子结点的结点编号即为根结点，可以用一个数组来判断
+
+</code></pre>
 </li>
 <li>
 <p>普通树</p>
@@ -2400,6 +2419,9 @@ isfri[abs(stoi(a))*10000+abs(stoi(b))]=isfri[abs(stoi(b))*10000+abs(stoi(a))]=tr
 <ol start="33">
 <li>某个测试点不过有可能是数据类型有问题，比如需要强制类型转换等等，换成数据表示范围更大的64位数据类型</li>
 </ol>
+<ul>
+<li>层序遍历中队列里存放的是结点的地址，动态的就是node*类型，静态的就是root(int型)结点编号</li>
+</ul>
 
               </div>
               <div class="post-footer">

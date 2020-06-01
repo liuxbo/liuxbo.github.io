@@ -7,7 +7,7 @@
 <meta name="description" content="菜鸡成长之路">
 <meta name="theme-color" content="#000">
 <title>PAT题解 | lxb&#39;blog</title>
-<link rel="shortcut icon" href="https://liuxbo.github.io/favicon.ico?v=1590414065909">
+<link rel="shortcut icon" href="https://liuxbo.github.io/favicon.ico?v=1591025183839">
 <link rel="stylesheet" href="https://liuxbo.github.io/styles/main.css">
 
 <link rel="stylesheet" href="/media/css/gemini.css">
@@ -211,7 +211,7 @@
 <li><a href="#a1017-25-%E6%A8%A1%E6%8B%9F-%E6%97%B6%E9%97%B4%E5%A4%84%E7%90%86-%E6%8E%92%E5%BA%8F">A1017 （25 模拟 ，时间处理、排序、）</a></li>
 <li><a href="#a1018">A1018</a></li>
 <li><a href="#a1019">A1019</a></li>
-<li><a href="#a1020">A1020</a></li>
+<li><a href="#a102025-%E5%90%8E%E5%BA%8F%E4%B8%AD%E5%BA%8F%E5%BB%BA%E6%A0%91%E8%BE%93%E5%87%BA%E5%B1%82%E5%BA%8F">A1020(25 后序+中序建树，输出层序)</a></li>
 <li><a href="#a1021">A1021</a></li>
 <li><a href="#a1022">A1022</a></li>
 <li><a href="#a1023">A1023</a></li>
@@ -222,7 +222,7 @@
 <li><a href="#a102925-%E6%B1%82%E4%B8%AD%E4%BD%8D%E6%95%B0-twopoints">A1029(25 求中位数 twopoints)</a></li>
 <li><a href="#a1030">A1030</a></li>
 <li><a href="#a1031">A1031</a></li>
-<li><a href="#a1032%E9%93%BE%E8%A1%A8">A1032(链表)</a></li>
+<li><a href="#a103225-%E9%93%BE%E8%A1%A8-%E6%89%BE%E5%85%AC%E5%85%B1%E5%90%8E%E7%BC%80">A1032(25 链表  找公共后缀)</a></li>
 <li><a href="#a1033">A1033</a></li>
 <li><a href="#a1034">A1034</a></li>
 <li><a href="#a103520-%E5%AD%97%E7%AC%A6%E4%B8%B2">A1035(20 字符串)</a></li>
@@ -242,7 +242,7 @@
 <li><a href="#a1049">A1049</a></li>
 <li><a href="#a105020-hash">A1050(20 hash)</a></li>
 <li><a href="#a105125-%E6%A0%88">A1051(25 栈)</a></li>
-<li><a href="#a1052%E9%93%BE%E8%A1%A8">A1052(链表)</a></li>
+<li><a href="#a105225-%E9%93%BE%E8%A1%A8%E6%8C%89key%E6%8E%92%E5%BA%8F">A1052(25 链表按key排序)</a></li>
 <li><a href="#a1053">A1053</a></li>
 <li><a href="#a105420-map">A1054(20 map)</a></li>
 <li><a href="#a105525-%E6%8C%89%E6%9D%A1%E4%BB%B6%E6%9F%A5%E6%89%BE%E5%B9%B6%E6%8E%92%E5%BA%8F%E8%BE%93%E5%87%BA">A1055(25 按条件查找并排序输出)</a></li>
@@ -264,39 +264,39 @@
 <li><a href="#a107125-map-%E5%AD%97%E7%AC%A6%E4%B8%B2">A1071(25 map  字符串)</a></li>
 <li><a href="#a1072">A1072</a></li>
 <li><a href="#a1073-%E7%A7%91%E5%AD%A6%E8%AE%A1%E6%95%B0%E6%B3%95">A1073 科学计数法</a></li>
-<li><a href="#a1074%E9%93%BE%E8%A1%A8">A1074(链表)</a></li>
+<li><a href="#a107425-%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8">A1074(25 反转链表)</a></li>
 <li><a href="#a107525-%E6%8E%92%E5%BA%8F">A1075(25 排序)</a></li>
 <li><a href="#a1076">A1076</a></li>
 <li><a href="#a107720-%E5%A4%9A%E4%B8%AA%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%89%BE%E5%85%AC%E5%85%B1%E5%90%8E%E7%BC%80">A1077(20  多个字符串找公共后缀)</a></li>
 <li><a href="#a1078">A1078</a></li>
-<li><a href="#a1079">A1079</a></li>
+<li><a href="#a107925-%E6%A0%91%E7%9A%84dfs">A1079(25 树的dfs)</a></li>
 <li><a href="#a108030-%E6%8E%92%E5%BA%8F">A1080(30 排序)</a></li>
 <li><a href="#a1081">A1081</a></li>
 <li><a href="#a108225-%E5%88%86%E6%AE%B5%E5%A4%84%E7%90%86%E5%AD%97%E7%AC%A6%E4%B8%B2">A1082(25 分段处理字符串)</a></li>
 <li><a href="#a108325-%E6%8E%92%E5%BA%8F">A1083(25 排序)</a></li>
 <li><a href="#a108420-%E5%AD%97%E7%AC%A6%E4%B8%B2">A1084(20 字符串)</a></li>
 <li><a href="#a108525-%E4%BA%8C%E5%88%86-twopoints-%E5%A4%9A%E8%A7%A3%E6%B3%95">A1085(25 二分 twopoints 多解法)</a></li>
-<li><a href="#a1086">A1086</a></li>
+<li><a href="#a108625-%E6%A0%88%E6%A8%A1%E6%8B%9F%E4%B8%AD%E5%BA%8F%E5%92%8C%E5%85%88%E5%BA%8F%E5%BB%BA%E6%A0%91%E8%BE%93%E5%87%BA%E5%90%8E%E5%BA%8F">A1086(25 栈模拟中序和先序建树，输出后序)</a></li>
 <li><a href="#a1087">A1087</a></li>
 <li><a href="#a1088">A1088</a></li>
 <li><a href="#a1089-25-%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F%E5%92%8C%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F">A1089  (25 插入排序和归并排序)</a></li>
-<li><a href="#a1090">A1090</a></li>
-<li><a href="#a1091">A1091</a></li>
+<li><a href="#a109025-%E6%A0%91%E7%9A%84dfs%E6%B1%82%E6%B7%B1%E5%BA%A6">A1090(25 树的dfs求深度)</a></li>
+<li><a href="#a109130-%E7%BB%8F%E5%85%B8bfs%E6%B1%82%E7%9F%A9%E9%98%B5%E4%B8%AD%E5%9D%97%E7%9A%84%E4%B8%AA%E6%95%B0">A1091(30 经典BFS求矩阵中块的个数)</a></li>
 <li><a href="#a1092%E5%AD%97%E7%AC%A6%E4%B8%B2-hash">A1092(字符串 hash)</a></li>
 <li><a href="#a109325-%E9%80%BB%E8%BE%91%E9%A2%98">A1093(25 逻辑题)</a></li>
-<li><a href="#a1094">A1094</a></li>
+<li><a href="#a109425-%E6%A0%91%E7%9A%84dfs">A1094(25 树的dfs)</a></li>
 <li><a href="#a109530-%E6%A0%A1%E5%9B%AD%E5%81%9C%E8%BD%A6-%E6%8E%92%E5%BA%8F-%E4%B8%A4%E8%BE%86%E9%85%8D%E5%AF%B9-%E6%97%B6%E9%97%B4%E6%9F%A5%E8%AF%A2%E8%BE%93%E5%87%BA">A1095(30 校园停车 排序  两辆配对  时间查询输出)</a></li>
 <li><a href="#a1096">A1096</a></li>
-<li><a href="#a1097">A1097</a></li>
+<li><a href="#a109725-%E9%93%BE%E8%A1%A8%E5%88%86%E7%A6%BB">A1097(25 链表分离)</a></li>
 <li><a href="#a1098">A1098</a></li>
 <li><a href="#a1099">A1099</a></li>
 <li><a href="#a110020-%E5%AD%97%E7%AC%A6%E4%B8%B2-string-map">A1100(20 字符串 string map)</a></li>
 <li><a href="#a110125-%E9%80%BB%E8%BE%91%E9%A2%98">A1101(25 逻辑题)</a></li>
-<li><a href="#a1102">A1102</a></li>
-<li><a href="#a1103">A1103</a></li>
+<li><a href="#a110225-%E4%BA%8C%E5%8F%89%E6%A0%91%E5%8F%8D%E8%BD%AC">A1102(25 二叉树反转)</a></li>
+<li><a href="#a110330-dfs-%E5%88%86%E8%A7%A3%E5%9B%A0%E5%BC%8F">A1103(30 DFS 分解因式)</a></li>
 <li><a href="#a1104">A1104</a></li>
 <li><a href="#a1105">A1105</a></li>
-<li><a href="#a1106">A1106</a></li>
+<li><a href="#a110625-%E6%A0%91%E7%9A%84dfs">A1106(25 树的dfs)</a></li>
 <li><a href="#a1107">A1107</a></li>
 <li><a href="#a1108">A1108</a></li>
 <li><a href="#a1109">A1109</a></li>
@@ -631,12 +631,12 @@ window.addEventListener('load', function() {
     
     <span class="meta-item">
       <i class="fa fa-clock-o"></i>
-      <span>179分钟</span>
+      <span>178分钟</span>
     </span>
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>28792<span class="pc-show">字数</span></span>
+      <span>28773<span class="pc-show">字数</span></span>
     </span>
   </div>
 </header>
@@ -1438,55 +1438,45 @@ int main(){
 	 return 0; 
  }
 </code></pre>
-<h3 id="a1020">A1020</h3>
+<h3 id="a102025-后序中序建树输出层序">A1020(25 后序+中序建树，输出层序)</h3>
 <pre><code>#include&lt;cstdio&gt;
 #include&lt;queue&gt;
 using namespace std;
-int postorder[31], inorder[31], n;
-struct node {
+const int maxn=31;
+struct node{
 	int data;
-	node* lchild;
-	node* rchild;
+	node *left,*right;
 };
-node* create(int postL, int postR, int inL, int inR) {
-	if (postL &gt; postR) return NULL;
-	node* root = new node;
-	root-&gt;data = postorder[postR];
-	int k;
-	for (int i = inL; i &lt;= inR; i++) {
-		if (inorder[i] == root-&gt;data) {
-			k = i;
-			break;
-		}
-	}
-	int leafnum = k - inL;
-	root-&gt;lchild = create(postL, postL + leafnum - 1, inL, k - 1);
-	root-&gt;rchild = create(postL + leafnum, postR - 1, k + 1, inR);
+int post[maxn],in[maxn],n,num=0;
+node * create(int postl,int postr,int inl,int inr){
+	if(postl&gt;postr) return NULL;
+	node *root=new node;
+	root-&gt;data=post[postr];
+	int k=inl;
+	while(in[k]!=root-&gt;data) k++;
+	int leftnum=k-inl;
+	root-&gt;left=create(postl,postl+leftnum-1,inl,k-1);
+	root-&gt;right=create(postl+leftnum,postr-1,k+1,inr);
 	return root;
 }
-int num = 0;
-void layerorder(node* root) {
+void layerorder(node *root){
 	queue&lt;node*&gt; q;
 	q.push(root);
-	while (!q.empty()) {
-		node* now = q.front();
+	while(!q.empty()){
+		node* Top=q.front();
 		q.pop();
-		printf(&quot;%d&quot;, now-&gt;data);
-        num++;
-		if (num &lt; n) printf(&quot; &quot;);
-		if (now-&gt;lchild != NULL) q.push(now-&gt;lchild);
-		if (now-&gt;rchild != NULL) q.push(now-&gt;rchild);
+		printf(&quot;%d&quot;,Top-&gt;data);
+		num++;
+		if(num&lt;n) printf(&quot; &quot;);
+		if(Top-&gt;left!=NULL) q.push(Top-&gt;left);
+		if(Top-&gt;right!=NULL) q.push(Top-&gt;right);
 	}
 }
-int main() {
-	scanf(&quot;%d&quot;, &amp;n);
-	for (int i = 0; i &lt; n; i++) {
-		scanf(&quot;%d&quot;, &amp;postorder[i]);
-	}
-	for (int i = 0; i &lt; n; i++) {
-		scanf(&quot;%d&quot;, &amp;inorder[i]);
-	}
-	node* root = create(0, n - 1, 0, n - 1);
+int main(){
+	scanf(&quot;%d&quot;,&amp;n);
+	for(int i=0;i&lt;n;i++) scanf(&quot;%d&quot;,&amp;post[i]);
+	for(int i=0;i&lt;n;i++) scanf(&quot;%d&quot;,&amp;in[i]);
+	node*root=create(0,n-1,0,n-1);
 	layerorder(root);
 	return 0;
 }
@@ -1978,39 +1968,35 @@ int main() {
 	return 0;
 }
 </code></pre>
-<h3 id="a1032链表">A1032(链表)</h3>
+<h3 id="a103225-链表-找公共后缀">A1032(25 链表  找公共后缀)</h3>
 <pre><code>#include&lt;cstdio&gt;
-const int maxn = 100010;
-struct Node {
-	int data;
-	int next;
+#include&lt;algorithm&gt;
+using namespace std;
+const int maxn=100010;
+struct node{
+	char data;
 	bool flag;
-}node[maxn];
-int main() {
-	int begin1, begin2, n;
-	scanf(&quot;%d%d%d&quot;, &amp;begin1, &amp;begin2, &amp;n);
-	for (int i = 0; i &lt; maxn; i++) {
-		node[i].flag = false;
+	int next;
+}list[maxn];
+int main(){
+	int address,begin1,begin2,n;
+	scanf(&quot;%d%d%d&quot;,&amp;begin1,&amp;begin2,&amp;n);
+	for(int i=0;i&lt;n;i++){
+		scanf(&quot;%d&quot;,&amp;address);
+		scanf(&quot; %c %d&quot;,&amp;list[address].data,&amp;list[address].next);
 	}
-	int address, data, next;
-	for (int i = 0; i &lt; n; i++) {
-		scanf(&quot;%d %c %d&quot;, &amp;address, &amp;data, &amp;next);
-		node[address].data = data;
-		node[address].next = next;
+	while(begin1!=-1){
+		list[begin1].flag=true;
+		begin1=list[begin1].next;
 	}
-	int p;
-	for (p = begin1; p != -1; p = node[p].next) {
-		node[p].flag = true;
-	}
-	for (p = begin2; p != -1; p = node[p].next) {
-		if (node[p].flag == true) {
-			printf(&quot;%05d&quot;, p);
-			break;
+	while(begin2!=-1){
+		if(list[begin2].flag==true) {
+			printf(&quot;%05d&quot;,begin2);
+			return 0;
 		}
+		begin2=list[begin2].next;
 	}
-	if (p == -1) {
-		printf(&quot;-1&quot;);
-	}
+	printf(&quot;-1&quot;);
 	return 0;
 }
 </code></pre>
@@ -2766,48 +2752,37 @@ int main(){
 	return 0;
 }
 </code></pre>
-<h3 id="a1052链表">A1052(链表)</h3>
+<h3 id="a105225-链表按key排序">A1052(25 链表按key排序)</h3>
 <pre><code>#include&lt;cstdio&gt;
 #include&lt;algorithm&gt;
+#include&lt;vector&gt;
 using namespace std;
 const int maxn=100010;
-struct Node{
-	int address,data,next;
-	bool flag;
-}node[maxn];
-bool cmp(Node a,Node b){
-	if(a.flag==false||b.flag==false) return a.flag&gt;b.flag;
-	else return a.data&lt;b.data;
-}
+struct node{
+	int data,address,next;
+}list[maxn]; 
+bool cmp(node a,node b){return a.data&lt;b.data;}
 int main(){
-	int n,begin;
+	int n,begin,address;
+	vector&lt;node&gt; v;
 	scanf(&quot;%d%d&quot;,&amp;n,&amp;begin);
-	for(int i=0;i&lt;maxn;i++){
-		node[i].flag=false;
-	}
-	int address1,data1,next1;
 	for(int i=0;i&lt;n;i++){
-		scanf(&quot;%d%d%d&quot;,&amp;address1,&amp;data1,&amp;next1);
-		node[address1].address=address1;
-		node[address1].data=data1;
-		node[address1].next=next1;
+		scanf(&quot;%d&quot;,&amp;address);
+		scanf(&quot;%d%d&quot;,&amp;list[address].data,&amp;list[address].next);
+		list[address].address=address;
 	}
-	int p=begin,count=0;
-	while(p!=-1){
-		node[p].flag=true;
-		count++;
-		p=node[p].next;
+	while(begin!=-1){
+		v.push_back(list[begin]);
+		begin=list[begin].next;
 	}
-	sort(node,node+maxn,cmp);
-	if(count==0) printf(&quot;0 -1&quot;);
-	else{
-		printf(&quot;%d %05d\n&quot;,count,node[0].address);
-		for(int i=0;i&lt;count-1;i++){
-			printf(&quot;%05d %d %05d\n&quot;,node[i].address,node[i].data,node[i+1].address);
-		}
-		printf(&quot;%05d %d -1&quot;,node[count-1].address,node[count-1].data);
-	}
-	return 0;	
+    if(v.size()==0) printf(&quot;0 -1&quot;);
+    else{
+        sort(v.begin(),v.end(),cmp);
+	    printf(&quot;%d %05d\n&quot;,v.size(),v[0].address);
+	    for(int i=0;i&lt;v.size()-1;i++) printf(&quot;%05d %d %05d\n&quot;,v[i].address,v[i].data,v[i+1].address);
+	    printf(&quot;%05d %d -1\n&quot;,v[v.size()-1].address,v[v.size()-1].data);
+    }
+    return 0;
 }
 </code></pre>
 <h3 id="a1053">A1053</h3>
@@ -3678,60 +3653,47 @@ int main(){
 	return 0;
 }
 </code></pre>
-<h3 id="a1074链表">A1074(链表)</h3>
+<h3 id="a107425-反转链表">A1074(25 反转链表)</h3>
 <pre><code>#include&lt;cstdio&gt;
 #include&lt;algorithm&gt;
 using namespace std;
-const int maxn = 100010;
-struct Node {
-	int address, data, next;
+const int maxn=100010;
+struct node{
+	int address,data,next;
 	int order;
-}node[maxn];
-bool cmp(Node a, Node b) {
-	return a.order &lt; b.order;
+}list[maxn];
+bool cmp(node &amp;a,node &amp;b){
+	return a.order&lt;b.order;
 }
-int main() {
-	for (int i = 0; i &lt; maxn; i++) {
-		node[i].order = maxn;
+int main(){
+	int begin,n,k,address,cnt=0;
+	for(int i=0;i&lt;maxn;i++) list[i].order=maxn;
+	scanf(&quot;%d%d%d&quot;,&amp;begin,&amp;n,&amp;k);
+	for(int i=0;i&lt;n;i++){
+		scanf(&quot;%d&quot;,&amp;address);
+		scanf(&quot;%d%d&quot;,&amp;list[address].data,&amp;list[address].next);
+		list[address].address=address;
 	}
-	int begin, n, k,count=0;
-	scanf(&quot;%d%d%d&quot;, &amp;begin, &amp;n, &amp;k);
-	for (int i = 0; i &lt; n; i++) {
-		int address;
-		scanf(&quot;%d&quot;, &amp;address);
-		scanf(&quot;%d%d&quot;, &amp;node[address].data, &amp;node[address].next);
-		node[address].address = address;
+	int p=begin;
+	while(p!=-1){
+		list[p].order=cnt++;
+		p=list[p].next;
 	}
-	int p = begin;
-	while (p != -1) {
-		node[p].order = count++;
-		p = node[p].next;
-	}
-	sort(node, node + maxn, cmp);
-	for (int i = 0; i &lt; count / k; i++) {
-		for (int j = (i + 1) * k - 1; j &gt; i * k; j--) {
-			printf(&quot;%05d %d %05d\n&quot;, node[j].address, node[j].data, node[j - 1].address);
+	sort(list,list+maxn,cmp);
+	for(int i=0;i&lt;cnt/k;i++){
+		for(int j=(i+1)*k-1;j&gt;i*k;j--){
+			printf(&quot;%05d %d %05d\n&quot;,list[j].address,list[j].data,list[j-1].address);
 		}
-		printf(&quot;%05d %d &quot;, node[i * k].address, node[i * k].data);
-		if (i &lt; count / k - 1) {
-			node[i * k].next = node[(i + 2) * k - 1].address;
-			printf(&quot;%05d\n&quot;, node[i * k].next);
-		}
-		else {
-			if (count % k == 0) {
-				printf(&quot;-1\n&quot;);
-			}
-			else {
-				node[i * k].next = node[(i + 1) * k ].address;
-				printf(&quot;%05d\n&quot;, node[i * k].next);
-				if(count==(i+1)*k+1) printf(&quot;%05d %d -1\n&quot;, node[count - 1].address, node[count - 1].data);
-				else {
-					for (int x = (i + 1) * k; x &lt; count-1; x++) {
-						printf(&quot;%05d %d %05d\n&quot;, node[x].address, node[x].data, node[x + 1].address);
-					}
-					printf(&quot;%05d %d -1\n&quot;, node[count - 1].address, node[count - 1].data);
+		printf(&quot;%05d %d &quot;,list[i*k].address,list[i*k].data);
+		if(i&lt;cnt/k-1) printf(&quot;%05d\n&quot;,list[(i+2)*k-1].address);
+		else{
+			if(cnt%k==0) printf(&quot;-1\n&quot;);
+			else{
+				printf(&quot;%05d\n&quot;,list[(i+1)*k].address);
+				for(int j=(i+1)*k;j&lt;cnt-1;j++){
+				    printf(&quot;%05d %d %05d\n&quot;,list[j].address,list[j].data,list[j+1].address);
 				}
-				
+				printf(&quot;%05d %d -1&quot;,list[cnt-1].address,list[cnt-1].data);
 			}
 		}
 	}
@@ -3932,44 +3894,47 @@ int main() {
 	return 0;
 }
 </code></pre>
-<h3 id="a1079">A1079</h3>
+<h3 id="a107925-树的dfs">A1079(25 树的dfs)</h3>
 <pre><code>#include&lt;cstdio&gt;
-#include&lt;cmath&gt;
 #include&lt;vector&gt;
+#include&lt;cmath&gt;
 using namespace std;
-const int maxn=100010;
+int n;
+double p,r,ans=0.0;
 struct node{
 	int data;
-	vector&lt;int&gt;child;
-}Node[maxn];
-double p,r,ans=0;
-int n;
-void DFS(int index,int depth){
-	if(Node[index].child.size()==0){
-		ans+=Node[index].data*p*pow((1+r/100),depth);
+	vector&lt;int&gt; child;
+}tree[100010]; 
+void dfs(int index,int depth){
+	if(tree[index].child.size()==0){
+		ans+=tree[index].data*p*pow((1+r/100),depth);
 		return;
 	}
-	for(int i=0;i&lt;Node[index].child.size();i++){
-		DFS(Node[index].child[i],depth+1);
-	}
+	for(int i=0;i&lt;tree[index].child.size();i++) dfs(tree[index].child[i],depth+1);
 }
 int main(){
-	int num;
-	scanf(&quot;%d%lf%lf&quot;,&amp;n,&amp;p,&amp;r);
+	scanf(&quot;%d %lf %lf&quot;,&amp;n,&amp;p,&amp;r);
+	int num,root,ischild[100010]={0},temp;
 	for(int i=0;i&lt;n;i++){
-		int temp;
 		scanf(&quot;%d&quot;,&amp;num);
 		if(num==0){
 			scanf(&quot;%d&quot;,&amp;temp);
-			Node[i].data=temp;
+			tree[i].data=temp;
 		}else{
-			for(int j=0;j&lt;num;j++){
+			for(int j=0;j&lt;num;j++) {
 				scanf(&quot;%d&quot;,&amp;temp);
-				Node[i].child.push_back(temp);
-			}
-		}	
+				ischild[temp]=1;
+				tree[i].child.push_back(temp);
+			}	
+		}
 	}
-	DFS(0,0);
+	for(int i=0;i&lt;n;i++){
+		if(ischild[i]==0){
+			root=i;
+			break;
+		}
+	}
+	dfs(root,0);
 	printf(&quot;%.1f&quot;,ans);
 	return 0;
 }
@@ -4196,62 +4161,54 @@ int main() {
     return 0;
 }
 </code></pre>
-<h3 id="a1086">A1086</h3>
+<h3 id="a108625-栈模拟中序和先序建树输出后序">A1086(25 栈模拟中序和先序建树，输出后序)</h3>
 <pre><code>#include&lt;cstdio&gt;
-#include&lt;cstring&gt;
 #include&lt;stack&gt;
-#include&lt;algorithm&gt;
+#include&lt;cstring&gt;
 using namespace std;
-const int maxn = 50;
-struct node {
+const int maxn=31;
+int n,pre[maxn],in[maxn],num=0;
+struct node{
 	int data;
-	node* lchild;
-	node* rchild;
+	node*left,*right;
 };
-int  pre[maxn], in1[maxn];
-int n;
-node* create(int preL, int preR, int inL, int inR) {
-	if (preL &gt; preR) return NULL;
-	node* root = new node;
-	root-&gt;data = pre[preL];
-	int k;
-	for (k = inL; k &lt; inR; k++) {
-		if (in1[k] == pre[preL]) {
-			break;
-		}
-	}
-	int numleft = k - inL;
-	root-&gt;lchild = create(preL + 1, preL + numleft, inL, k - 1);
-	root-&gt;rchild = create(preL + numleft + 1, preR, k + 1, inR);
+node*create(int prel,int prer,int inl,int inr){
+	if(prel&gt;prer) return NULL;
+	node*root=new node;
+	root-&gt;data=pre[prel];
+	int k=inl;
+	while(in[k]!=root-&gt;data) k++;
+	int leftnum=k-inl;
+	root-&gt;left=create(prel+1,prel+leftnum,inl,k-1);
+	root-&gt;right=create(prel+leftnum+1,prer,k+1,inr);
 	return root;
 }
-int num=0;
-void postorder(node* root) {
-	if (root == NULL) return;
-	postorder(root-&gt;lchild);
-	postorder(root-&gt;rchild);
-	printf(&quot;%d&quot;, root-&gt;data);
+void postorder(node*root){
+	if(root==NULL) return;
+	postorder(root-&gt;left);
+	postorder(root-&gt;right);
+	printf(&quot;%d&quot;,root-&gt;data);
 	num++;
-	if (num &lt; n) printf(&quot; &quot;);
+	if(num&lt;n) printf(&quot; &quot;);
 }
-int main() {
-	scanf(&quot;%d&quot;, &amp;n);
-	char str[5];
+int main(){
+	scanf(&quot;%d&quot;,&amp;n);
+	char s[5];
 	stack&lt;int&gt; st;
-	int preindex = 0, inindex = 0, x;
-	for (int i = 0; i &lt;2*n; i++) {
-		scanf(&quot;%s&quot;, str);
-		if (strcmp(str,&quot;Push&quot;)==0) {
-			scanf(&quot;%d&quot;, &amp;x);
-			pre[preindex++] = x;
-			st.push(x);
-		}
-		else {
-			in1[inindex++] = st.top();
+	int temp,preindex=0,inindex=0;
+	for(int i=0;i&lt;2*n;i++){
+		scanf(&quot;%s&quot;,s);
+		if(strcmp(s,&quot;Push&quot;)==0){
+			scanf(&quot;%d&quot;,&amp;temp);
+			st.push(temp);
+			pre[preindex++]=temp;
+		}else{
+			temp=st.top();
 			st.pop();
+			in[inindex++]=temp;
 		}
 	}
-	node* root = create(0, n - 1, 0, n - 1);
+	node*root=create(0,n-1,0,n-1);
 	postorder(root);
 	return 0;
 }
@@ -4468,118 +4425,98 @@ int main(){
 	return 0;
 }
 </code></pre>
-<h3 id="a1090">A1090</h3>
+<h3 id="a109025-树的dfs求深度">A1090(25 树的dfs求深度)</h3>
 <pre><code>#include&lt;cstdio&gt;
 #include&lt;vector&gt;
 #include&lt;cmath&gt;
 using namespace std;
-const int maxn=100010;
-vector&lt;int&gt; children[maxn];
-int maxdepth=0,num=0;
-void DFS(int index,int depth){
-	if(children[index].size()==0){
+int maxdepth=-1,num,n;
+double p,r,ans=0;
+vector&lt;int&gt; tree[100010];
+void dfs(int index,int depth){
+	if(tree[index].size()==0){
 		if(depth&gt;maxdepth){
 			maxdepth=depth;
 			num=1;
 		}
-		else if(depth==maxdepth){
-			num++;
-		}
+		else if(depth==maxdepth) num++;
 		return;
 	}
-	for(int i=0;i&lt;children[index].size();i++){
-		DFS(children[index][i],depth+1);
-	}
+	for(int i=0;i&lt;tree[index].size();i++) dfs(tree[index][i],depth+1);
 }
 int main(){
-	int n,father,root;
-	double p,r;
-	scanf(&quot;%d&quot;,&amp;n);
-	scanf(&quot;%lf%lf&quot;,&amp;p,&amp;r);
-	r/=100;
+	scanf(&quot;%d %lf %lf&quot;,&amp;n,&amp;p,&amp;r);
+	int father,root;
 	for(int i=0;i&lt;n;i++){
 		scanf(&quot;%d&quot;,&amp;father);
-		if(father!=-1){
-			children[father].push_back(i);
-		}
-		else root=i;
+		if(father==-1) root=i;
+	    else tree[father].push_back(i);
 	}
-	DFS(root,0);
-	printf(&quot;%.2f %d&quot;,p*pow((1+r),maxdepth),num);
+	dfs(root,0);
+	ans=p*pow((1+r/100),maxdepth);
+	printf(&quot;%.2f %d&quot;,ans,num);
 	return 0;
 }
 </code></pre>
-<h3 id="a1091">A1091</h3>
+<h3 id="a109130-经典bfs求矩阵中块的个数">A1091(30 经典BFS求矩阵中块的个数)</h3>
 <pre><code>#include&lt;cstdio&gt;
 #include&lt;queue&gt;
 using namespace std;
-int m, n, slice,T;
-struct node {
-	int x, y, z;
+struct node{
+	int x,y,z;
 }Node;
-int pixel[61][1290][128] = { 0 };
-bool inq[61][1290][128] = { false };
-int Y[6] = { 0,0,0,0,-1,1 };
-int X[6] = { 0,0,1,-1,0,0 };
-int Z[6] = { 1,-1,0,0,0,0 };
-bool judge(int z, int x, int y) {
-	if (z &gt;= slice || z &lt; 0 || x &gt;= m || x &lt; 0 || y &gt;= n || y &lt; 0) {
-		return false;
-	}
-	if (inq[z][x][y]==true||pixel[z][x][y]==0) {
-		return false;
-	}
+int m,n,L,t,ans=0;
+bool inq[70][1300][140]={false};
+int pix[70][1300][140]={0};
+int Z[6]={0,0,0,0,1,-1};
+int X[6]={0,0,1,-1,0,0};
+int Y[6]={1,-1,0,0,0,0};
+bool judge(int z,int y,int x){
+	if(x&gt;=n||x&lt;0||y&gt;=m||y&lt;0||z&lt;0||z&gt;=L) return false;
+	if(pix[z][y][x]==0||inq[z][y][x]==true) return false;
 	return true;
 }
-int BFS(int z,int x,int y){
+int bfs(int z,int y,int x){
 	int total=0;
-	Node.x = x;
-	Node.y = y;
-	Node.z = z;
-	inq[z][x][y] = true;
 	queue&lt;node&gt; q;
+	Node.x=x,Node.y=y,Node.z=z;
 	q.push(Node);
-	while (!q.empty()) {
-		node topp = q.front();
+	inq[z][y][x]=true;
+	while(!q.empty()){
+		node Top=q.front();
 		q.pop();
-		total++;
-		int newx, newy, newz;
-		for (int i = 0; i &lt; 6; i++) {
-			newz = topp.z + Z[i];
-			newx = topp.x + X[i];
-			newy = topp.y + Y[i];
-			if (judge(newz, newx, newy)) {
-				Node.x = newx;
-				Node.y = newy;
-				Node.z = newz;
+		total++;//注意在出队的时候计数 
+		for(int i=0;i&lt;6;i++){
+			int newz=Top.z+Z[i];
+			int newx=Top.x+X[i];
+			int newy=Top.y+Y[i];
+			if(judge(newz,newy,newx)){
+				Node.x=newx,Node.y=newy,Node.z=newz;
 				q.push(Node);
-				inq[Node.z][Node.x][Node.y] = true;
+				inq[newz][newy][newx]=true;
 			}
 		}
 	}
-	if (total &gt;= T) return total;
+	if(total&gt;=t) return total;
 	else return 0;
 }
-int main() {
-	int ans = 0;
-	scanf(&quot;%d%d%d%d&quot;, &amp;m, &amp;n, &amp;slice, &amp;T);
-	for (int i = 0; i &lt; slice; i++) {
-		for (int j = 0; j &lt; m; j++) {
-			for (int k = 0; k &lt; n; k++) {
-				scanf(&quot;%d&quot;, &amp;pixel[i][j][k]);
+int main(){
+	scanf(&quot;%d%d%d%d&quot;,&amp;m,&amp;n,&amp;L,&amp;t);
+	for(int i=0;i&lt;L;i++){
+		for(int j=0;j&lt;m;j++){
+			for(int k=0;k&lt;n;k++){
+				scanf(&quot;%d&quot;,&amp;pix[i][j][k]);
 			}
 		}
 	}
-	for (int i = 0; i &lt; slice; i++) {
-		for (int j = 0; j &lt; m; j++) {
-			for (int k = 0; k &lt; n; k++) {
-				if (pixel[i][j][k] == 1 &amp;&amp; inq[i][j][k] == false) {
-					ans += BFS(i, j, k);
-				}
+	for(int i=0;i&lt;L;i++){
+		for(int j=0;j&lt;m;j++){
+			for(int k=0;k&lt;n;k++){
+				if(inq[i][j][k]==false&amp;&amp;pix[i][j][k]==1) ans+=bfs(i,j,k);
 			}
 		}
 	}
-	printf(&quot;%d&quot;, ans);
+	printf(&quot;%d&quot;,ans);
 	return 0;
 }
 </code></pre>
@@ -4631,39 +4568,38 @@ int main(){
 	return 0;
 }
 </code></pre>
-<h3 id="a1094">A1094</h3>
+<h3 id="a109425-树的dfs">A1094(25 树的dfs)</h3>
 <pre><code>#include&lt;cstdio&gt;
 #include&lt;vector&gt;
 using namespace std;
-const int maxn = 110;
-vector&lt;int&gt; child[maxn];
-int hashtable[maxn] = { 0 };
-void DFS(int index, int level) {
-	hashtable[level]++;
-	if (child[index].size() == 0) return;
-	for (int i = 0; i &lt; child[index].size(); i++) {
-		DFS(child[index][i], level + 1);
+int n,m,level[100]={0},maxdepth=-1,ansnum=-1,anslevel;
+vector&lt;int&gt; tree[100];
+void dfs(int index,int depth){
+	level[depth]++;
+	if(tree[index].size()==0){
+		if(maxdepth&lt;depth) maxdepth=depth;
+		return;
 	}
+	for(int i=0;i&lt;tree[index].size();i++) dfs(tree[index][i],depth+1);
 }
 int main(){
-	int n,m,index,k,temp;
-	scanf(&quot;%d%d&quot;, &amp;n, &amp;m);
-	for (int i = 1; i &lt;= m; i++) {
-		scanf(&quot;%d%d&quot;, &amp;index,&amp;k);
-		for (int j = 1; j &lt;= k; j++) {
-			scanf(&quot;%d&quot;, &amp;temp);
-			child[index].push_back(temp);
+	int id,k,temp;
+	scanf(&quot;%d%d&quot;,&amp;n,&amp;m);
+	for(int i=1;i&lt;=m;i++){
+		scanf(&quot;%d%d&quot;,&amp;id,&amp;k);
+		for(int j=0;j&lt;k;j++){
+			scanf(&quot;%d&quot;,&amp;temp);
+			tree[id].push_back(temp);
 		}
 	}
-	DFS(1, 1);
-	int level, maxgeneration = 0;
-	for (int i = 1; i &lt; maxn; i++) {
-		if (hashtable[i] &gt; maxgeneration) {
-			maxgeneration = hashtable[i];
-			level = i;
+	dfs(1,1);
+	for(int i=1;i&lt;=maxdepth;i++){
+		if(level[i]&gt;ansnum){
+			ansnum=level[i];
+			anslevel=i;
 		}
 	}
-	printf(&quot;%d %d&quot;, maxgeneration, level);
+	printf(&quot;%d %d&quot;,ansnum,anslevel);
 	return 0;
 }
 </code></pre>
@@ -4768,50 +4704,36 @@ int main() {
 	return 0;
 }
 </code></pre>
-<h3 id="a1097">A1097</h3>
+<h3 id="a109725-链表分离">A1097(25 链表分离)</h3>
 <pre><code>#include&lt;cstdio&gt;
+#include&lt;vector&gt;
 #include&lt;algorithm&gt;
 using namespace std;
-const int maxn=100010;
-struct Node{
-	int address,key,next;
-	int order;
-}node[maxn];
-bool cmp(Node a,Node b){
-	return a.order&lt;b.order;
-}
-bool judge[maxn]={false};
+struct node{
+	int address,data,next;
+}list[100010];
 int main(){
-	int begin,n,address;;
+	int begin,n,address;
 	scanf(&quot;%d%d&quot;,&amp;begin,&amp;n);
-	for(int i=0;i&lt;maxn;i++){
-		node[i].order=2*maxn;
-	}
+	vector&lt;int&gt; flag(10010,0);
+	vector&lt;node&gt; remain,remov;
 	for(int i=0;i&lt;n;i++){
 		scanf(&quot;%d&quot;,&amp;address);
-		scanf(&quot;%d%d&quot;,&amp;node[address].key,&amp;node[address].next);
-		node[address].address=address;
+		scanf(&quot;%d%d&quot;,&amp;list[address].data,&amp;list[address].next);
+		list[address].address=address;
 	}
-	int p=begin,countvalid=0,countremoved=0;
-	while(p!=-1){
-		if(judge[abs(node[p].key)]==false){
-			judge[abs(node[p].key)]=true;
-			node[p].order=countvalid++;
-		}
-		else{
-			node[p].order=maxn+countremoved++;
-		}
-		p=node[p].next;
+	while(begin!=-1){
+		if(flag[abs(list[begin].data)]==0) {
+			flag[abs(list[begin].data)]=1;
+			remain.push_back(list[begin]);
+		}else remov.push_back(list[begin]);
+		begin=list[begin].next;
 	}
-	sort(node,node+maxn,cmp);
-	int count=countvalid+countremoved;
-	for(int i=0;i&lt;count;i++){
-		if(i!=countvalid-1&amp;&amp;i!=count-1){
-			printf(&quot;%05d %d %05d\n&quot;,node[i].address,node[i].key,node[i+1].address);
-		}
-		else{
-			printf(&quot;%05d %d -1\n&quot;,node[i].address,node[i].key);
-		}
+	for(int i=0;i&lt;remain.size()-1;i++) printf(&quot;%05d %d %05d\n&quot;,remain[i].address,remain[i].data,remain[i+1].address);		
+	printf(&quot;%05d %d -1\n&quot;,remain[remain.size()-1].address,remain[remain.size()-1].data);
+	if(remov.size()!=0){
+		for(int i=0;i&lt;remov.size()-1;i++) printf(&quot;%05d %d %05d\n&quot;,remov[i].address,remov[i].data,remov[i+1].address);		
+     	printf(&quot;%05d %d -1&quot;,remov[remov.size()-1].address,remov[remov.size()-1].data);
 	}
 	return 0;
 }
@@ -4983,120 +4905,112 @@ int main(){
 	 return 0;
 }
 </code></pre>
-<h3 id="a1102">A1102</h3>
-<pre><code>#include&lt;cstdio&gt;
-#include&lt;queue&gt;
-#include&lt;cctype&gt;
+<h3 id="a110225-二叉树反转">A1102(25 二叉树反转)</h3>
+<pre><code>#include&lt;cstdio&gt; 
 #include&lt;algorithm&gt;
+#include&lt;queue&gt;
 using namespace std;
-struct node {
-	int lchild, rchild;
-}Node[11];
-int n;
-void layerorder(int root) {
-	int num = 0;
+struct node{
+	int left,right;
+}tree[11];
+int n,ischild[11]={0},root,num1=0,num2=0;
+void layerorder(int root){
 	queue&lt;int&gt; q;
 	q.push(root);
-	while (!q.empty()) {
-		int now = q.front();
+	while(!q.empty()){
+		int Top=q.front();
 		q.pop();
-		printf(&quot;%d&quot;, now);
-		num++;
-		if (num &lt; n) printf(&quot; &quot;);
-		if (Node[now].lchild != -1) q.push(Node[now].lchild);
-		if (Node[now].rchild != -1) q.push(Node[now].rchild);
+		printf(&quot;%d&quot;,Top);
+		num1++;
+		if(num1&lt;n) printf(&quot; &quot;);
+		if(tree[Top].left!=-1) q.push(tree[Top].left);
+		if(tree[Top].right!=-1) q.push(tree[Top].right); 
 	}
 }
-int num1 = 0; 
-void inorder(int root) {
-	if (root == -1) return;
-    inorder(Node[root].lchild);
-	printf(&quot;%d&quot;, root);
-	num1++;
-	if (num1 &lt; n) printf(&quot; &quot;);
-	inorder(Node[root].rchild);
+void inorder(int root){
+	if(root==-1) return;
+	inorder(tree[root].left);
+	printf(&quot;%d&quot;,root);
+	num2++;
+	if(num2&lt;n) printf(&quot; &quot;);
+	inorder(tree[root].right);
 }
-void postorder(int root) {
-	if (root == -1) return;
-	postorder(Node[root].lchild);
-	postorder(Node[root].rchild);
-	swap(Node[root].lchild, Node[root].rchild);
-}
-int main() {
-	bool notroot[11] = { false };
-	scanf(&quot;%d&quot;, &amp;n);
-	for (int i = 0; i &lt; n; i++) {
-		char a, b;
-		scanf(&quot;%*c%c %c&quot;, &amp;a, &amp;b);
-		if (isdigit(a)) {
-			Node[i].lchild = a - '0';
-			notroot[Node[i].lchild] = true;
-		}
+void invert(int root){
+	if(root==-1) return;
+	invert(tree[root].left);
+	invert(tree[root].right);
+	swap(tree[root].left,tree[root].right);
+} 
+int main(){
+	scanf(&quot;%d&quot;,&amp;n);
+	char c1,c2;
+	for(int i=0;i&lt;n;i++){
+		scanf(&quot;%*c%c %c&quot;,&amp;c1,&amp;c2);
+		if(c1=='-') tree[i].left=-1;
 		else {
-			Node[i].lchild = -1;
+			ischild[c1-'0']=1;
+			tree[i].left=c1-'0';
 		}
-		if (isdigit(b)) {
-			Node[i].rchild = b - '0';
-			notroot[Node[i].rchild] = true;
-		}
+		if(c2=='-') tree[i].right=-1;
 		else {
-			Node[i].rchild = -1;
+			ischild[c2-'0']=1;
+			tree[i].right=c2-'0';
 		}
 	}
-	int root;
-	for (int i = 0; i &lt; n; i++) {
-		if (notroot[i] == false) {
-			root = i;
+	for(int i=0;i&lt;n;i++){
+		if(ischild[i]==0){
+			root=i;
 			break;
-		}
+		} 
 	}
-	postorder(root);
+	invert(root);
 	layerorder(root);
 	printf(&quot;\n&quot;);
 	inorder(root);
 	return 0;
 }
 </code></pre>
-<h3 id="a1103">A1103</h3>
-<pre><code>#include&lt;vector&gt;
-#include&lt;cstdio&gt;
+<h3 id="a110330-dfs-分解因式">A1103(30 DFS 分解因式)</h3>
+<pre><code>#include&lt;cstdio&gt;
 #include&lt;cmath&gt;
+#include&lt;vector&gt;
 using namespace std;
-int n, k, p,maxfacsum=-1;
-vector&lt;int&gt; temp, ans, fac;
-void init() {
-	int i = 0, temp=0;
-	while (temp &lt;= n) {
-		fac.push_back(temp);
-		temp = (int)pow(1.0 * (++i),1.0* p);
-	}
+int n,k,p,maxfac=-1;
+vector&lt;int&gt; fac,temp,ans; 
+void init(){
+	int i=0;
+	while(pow(i,p)&lt;=n){
+		fac.push_back(pow(i,p));
+		i++;
+	} 
 }
-void DFS(int index, int nowk, int sum, int facsum) {
-	if (sum == n &amp;&amp; nowk == k) {
-		if (facsum &gt; maxfacsum) {
-			ans = temp;//更新最优序列
-			maxfacsum = facsum;
+void dfs(int index,int nowk,int sum,int facsum){
+	if(nowk==k&amp;&amp;sum==n){
+		if(facsum&gt;maxfac){
+			maxfac=facsum;
+			ans=temp;
 		}
 		return;
 	}
-	if (nowk &gt; k || sum &gt; n) return;
-	if (index - 1 &gt;= 0) {
+	if(nowk&gt;k||sum&gt;n) return;
+	if(index&gt;=1){
 		temp.push_back(index);
-		DFS(index, nowk + 1, sum + fac[index], facsum + index);
+		dfs(index,nowk+1,sum+fac[index],facsum+index);
 		temp.pop_back();
-		DFS(index - 1, nowk, sum, facsum);
+		dfs(index-1,nowk,sum,facsum);
 	}
 }
-int main() {
-	scanf(&quot;%d%d%d&quot;, &amp;n, &amp;k, &amp;p);
+int main(){
+	scanf(&quot;%d%d%d&quot;,&amp;n,&amp;k,&amp;p);
 	init();
-	DFS(fac.size() - 1, 0, 0, 0);
-	if (maxfacsum == -1) printf(&quot;Impossible&quot;);
-	else {
-		printf(&quot;%d = %d^%d&quot;, n, ans[0], p);
-		for (int i = 1; i &lt; ans.size(); i++) {
-			printf(&quot; + %d^%d&quot;, ans[i], p);
-		}
+	dfs(fac.size()-1,0,0,0);
+	if(maxfac==-1) printf(&quot;Impossible&quot;);
+	else{
+		printf(&quot;%d = &quot;,n);
+		for(int i=0;i&lt;ans.size();i++){
+		   if(i&gt;0) printf(&quot; + &quot;);
+		   printf(&quot;%d^%d&quot;,ans[i],p);
+	   }
 	}
 	return 0;
 }
@@ -5159,47 +5073,37 @@ int main(){
 	return 0;
 }
 </code></pre>
-<h3 id="a1106">A1106</h3>
+<h3 id="a110625-树的dfs">A1106(25 树的dfs)</h3>
 <pre><code>#include&lt;cstdio&gt;
 #include&lt;vector&gt;
 #include&lt;cmath&gt;
 using namespace std;
-const int maxn = 100010;
-const int  INF = 0x7fffffff;
-vector&lt;int&gt; child[maxn];
-double minprice = INF;
-int n,num=0;
-double p, r;
-void DFS(int index, int depth) {
-	if (child[index].size() == 0) {
-		if (p * pow((1 + r/100), depth) &lt; minprice) {
-			minprice = p * pow((1 + r/100), depth);
-			num = 1;
-		}
-		else if (p * pow((1 + r/100), depth) == minprice) {
-			num++;
-		}
+int n,num=0,mindepth=0x7fffffff;
+double p,r,ans=0.0;
+vector&lt;int&gt; tree[100010]; 
+void dfs(int index,int depth){
+	if(tree[index].size()==0){
+		if(mindepth&gt;depth){
+			mindepth=depth;
+			num=1;
+		}else if(mindepth==depth) num++;
 		return;
 	}
-	for (int i = 0; i &lt; child[index].size(); i++) {
-		DFS(child[index][i], depth + 1);
-	}
+	for(int i=0;i&lt;tree[index].size();i++) dfs(tree[index][i],depth+1);
 }
-int main() {
-	scanf(&quot;%d%lf%lf&quot;, &amp;n, &amp;p, &amp;r);
-	int  k,temp;
-	for (int i = 0; i &lt; n; i++) {
-		scanf(&quot;%d&quot;, &amp;k);
-		if (k == 0) continue;
-		else {
-			for (int j = 0; j &lt; k; j++) {
-				scanf(&quot;%d&quot;, &amp;temp);
-				child[i].push_back(temp);
-			}
+int main(){
+	scanf(&quot;%d %lf %lf&quot;,&amp;n,&amp;p,&amp;r);
+	int k,temp;
+	for(int i=0;i&lt;n;i++){
+		scanf(&quot;%d&quot;,&amp;k);
+		for(int j=0;j&lt;k;j++){
+			scanf(&quot;%d&quot;,&amp;temp);
+			tree[i].push_back(temp);
 		}
 	}
-	DFS(0, 0);
-	printf(&quot;%.4f %d&quot;, minprice, num);
+	dfs(0,0);
+	ans=p*pow((1+r/100),mindepth);
+	printf(&quot;%.4f %d&quot;,ans,num);
 	return 0;
 }
 </code></pre>
