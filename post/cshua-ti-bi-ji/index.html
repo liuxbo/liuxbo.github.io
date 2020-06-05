@@ -7,7 +7,7 @@
 <meta name="description" content="菜鸡成长之路">
 <meta name="theme-color" content="#000">
 <title>c++(PAT)刷题笔记汇总 | lxb&#39;blog</title>
-<link rel="shortcut icon" href="https://liuxbo.github.io/favicon.ico?v=1591025183839">
+<link rel="shortcut icon" href="https://liuxbo.github.io/favicon.ico?v=1591366369316">
 <link rel="stylesheet" href="https://liuxbo.github.io/styles/main.css">
 
 <link rel="stylesheet" href="/media/css/gemini.css">
@@ -224,6 +224,7 @@
 <li><a href="#30-%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84bit-%E5%AE%9E%E6%97%B6%E6%9F%A5%E8%AF%A2">30 树状数组(BIT) (实时查询)</a></li>
 <li><a href="#31-%E5%8F%AF%E6%80%95%E6%A8%A1%E6%8B%9F">31 可怕模拟</a></li>
 <li><a href="#32-n%E7%9A%87%E5%90%8E">32 n皇后</a></li>
+<li><a href="#33%E5%A0%86">33.堆</a></li>
 </ul>
 </li>
 </ul>
@@ -513,12 +514,12 @@ window.addEventListener('load', function() {
     
     <span class="meta-item">
       <i class="fa fa-clock-o"></i>
-      <span>55分钟</span>
+      <span>57分钟</span>
     </span>
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>11542<span class="pc-show">字数</span></span>
+      <span>11988<span class="pc-show">字数</span></span>
     </span>
   </div>
 </header>
@@ -715,6 +716,12 @@ vector&lt;int&gt; vec1{ 1, 2, 3, 4, 5, 6 };       //vec1内容1,2，3,4,5,6
 //说明：当然不包括arr[4]元素，末尾指针都是指结束元素的下一个元素，
 //这个主要是为了和vec.end()指针统一。
 </code></pre>
+</li>
+<li>
+<p>priority_queue</p>
+<p><code>priority_queue&lt;int,vector &lt; int &gt; ,greater&lt; int&gt; &gt;</code>表示数字越小的优先级越大，优先放在队首</p>
+<p><code>priority_queue&lt;int,vector &lt; int &gt; ,less&lt; int&gt; &gt;</code>表示数字越大的优先级越大，优先放在队首，</p>
+<p>该容器只能通过top()访问队首元素，push()进队，pop()出队，empty()检空</p>
 </li>
 <li>
 <p>异同</p>
@@ -1623,25 +1630,29 @@ vector&lt;int&gt; levelorder(node* root) {//层序遍历中
 		else after = 1;
 }
 	return v;
+}
+</code></pre>
+<p>2.给出⼀个n表示有n个结点，这n个结点为0~n-1，给出这n个结点的左右孩⼦，求问这棵树是 不是完全⼆叉树</p>
+<p>分析：递归出最⼤的下标值，完全⼆叉树⼀定把前⾯的下标充满： 最⼤的下标值 == 最⼤的节点数； 不完全⼆叉树前满⼀定有位置是空，会往后挤： 最⼤的下标值 &gt; 最⼤的节点数</p>
+<p>3.完全二叉搜索树，将待插入数据a[]从小到大排序，利用中序建树，存放到CBT数组中，依次输出CBT数组的元素即为完全二叉搜索树的层序遍历序列</p>
+<pre><code>void inorder(int root){
+	if(root&gt;n) return;
+	inorder(root*2);
+	CBT[root]=a[index++];
+	inorder(root*2+1);
+}
 </code></pre>
 </li>
+<li>
+<p>注意点</p>
+<ul>
+<li>完全二叉树的存储中，如果根节点下标为1，则该树中任何一个结点i，其左孩子编号为2i，右孩子编号为2i+1，父亲节点为下取整(i/2);如果根节点下标为0，对树中某结点i,父亲结点为下取整((i-1)/2);左孩子为2i+1，右孩子为2i+2</li>
+<li>函数参数中，对指针指向的结点内容进行修改是不需要加引用的，。如果函数中需要新建结点，即对二叉树的结构做出修改，就需要加引用(如insert，)，如果是修改当前已有结点的内容，或者是遍历树，就不需要加引用。</li>
+<li>无论是先序还是后序，都必须知道中序序列才能唯一确定一棵树</li>
+<li>对于题目中给出左右孩子结点编号的情况，没有被当做孩子结点的结点编号即为根结点，可以用一个数组来判断</li>
 </ul>
-<p>}</p>
-<pre><code>
-
-
-2.给出⼀个n表示有n个结点，这n个结点为0~n-1，给出这n个结点的左右孩⼦，求问这棵树是 不是完全⼆叉树
-
- 分析：递归出最⼤的下标值，完全⼆叉树⼀定把前⾯的下标充满： 最⼤的下标值 == 最⼤的节点数； 不完全⼆叉树前满⼀定有位置是空，会往后挤： 最⼤的下标值 &gt; 最⼤的节点数
-
-* 注意点
-
-* 完全二叉树的存储中，如果根节点下标为1，则该树中任何一个结点i，其左孩子编号为2i，右孩子编号为2i+1，父亲节点为下取整(i/2);如果根节点下标为0，对树中某结点i,父亲结点为下取整((i-1)/2);左孩子为2i+1，右孩子为2i+2
-* 函数参数中，对指针指向的结点内容进行修改是不需要加引用的，。如果函数中需要新建结点，即对二叉树的结构做出修改，就需要加引用(如insert，)，如果是修改当前已有结点的内容，或者是遍历树，就不需要加引用。
-* 无论是先序还是后序，都必须知道中序序列才能唯一确定一棵树
-* 对于题目中给出左右孩子结点编号的情况，没有被当做孩子结点的结点编号即为根结点，可以用一个数组来判断
-
-</code></pre>
+</li>
+</ul>
 </li>
 <li>
 <p>普通树</p>
@@ -1761,7 +1772,7 @@ vector&lt;int&gt; levelorder(node* root) {//层序遍历中
 <li>
 <p>计算平衡因子</p>
 <pre><code>int getbalancefactor(node* root) {
-	return getheight(root-&gt;lchild) - getbalancefactor(root-&gt;rchild);
+	return getheight(root-&gt;lchild) - getheight(root-&gt;rchild);
 	//注意是左减右
 }
 </code></pre>
@@ -1891,17 +1902,33 @@ vector&lt;int&gt; levelorder(node* root) {//层序遍历中
 <p>A1107 A1114 A1118</p>
 <ul>
 <li>
-<p>找根结点</p>
+<p>初始化</p>
 <pre><code>for(int i=0;i&lt;N;i++){//初始化，千万不要忘了
     father[i]=i;
 }
-int findfather(int x){//普通版找根节点
+</code></pre>
+</li>
+<li>
+<p>找根结点</p>
+<pre><code>int findfather(int x){//普通版找根节点
     while(x!=father[x]){
-    x=father[x];
+      x=father[x];
     }
     return x;
 }
-int findfather(int v){//路径压缩版找根结点
+
+int findfather(int x){//路径压缩版找根结点(非递归写法)
+    int a=x;
+    while(x!=father[x]) x=father[x];
+    while(a!=father[a]){
+        int z=a;
+        a=father[a];//a回溯到其父亲节点
+        father[z]=x;//将原先的结点a的父亲节点改为根节点
+    }
+    return x;
+}
+
+int findfather(int v){//路径压缩版找根结点(递归写法)
 	if(father[v]==v) return v;
 	else{
 		int F=findfather(father[v]);
@@ -2373,6 +2400,72 @@ int main(){
 <p>A1014(30 模拟  难题)</p>
 <h3 id="32-n皇后">32 n皇后</h3>
 <p>A1128(20)</p>
+<h3 id="33堆">33.堆</h3>
+<p>堆是一棵完全二叉树，可以用heap[1]~heap[n]数组存储，</p>
+<ul>
+<li>
+<p>堆排序</p>
+<pre><code>//大顶堆为例
+void downadjust(int low, int high) {
+	int i = low, j = 2 * i;
+	while (j &lt;= high) {
+		if (j + 1 &lt;= high &amp;&amp; heap[j + 1] &gt; heap[j]) {
+			j = j + 1;
+		}
+		if (heap[i] &lt; heap[j]) {
+			swap(heap[i], heap[j]);
+			i = j;
+			j = 2 * i;
+		}
+		else {
+			break;
+		}
+	}
+}
+void createheap() {//建堆
+	for (int i = n / 2; i &gt;= 1; i--) {
+		downadjust(i, n);
+	}
+}
+void heapsort(){
+    createheap();
+    for(int i=n;i&gt;1;i--){
+        swap(heap[1],heap[i]);
+        upadjust(1,i-1);
+    }
+}
+</code></pre>
+</li>
+<li>
+<p>删除堆顶元素</p>
+<pre><code>void deleteTop(){
+    heap[1]=heap[n--];//用最后一个元素覆盖堆顶元素，并让元素个数减一
+    downadjust(1,n);
+}
+</code></pre>
+</li>
+<li>
+<p>在堆的最后插入新元素</p>
+<pre><code>void upadjust(int low, int high) {//
+	int i = high, j = i / 2;
+	while (j &gt;= low) {
+		if (heap[i] &lt; heap[j]) {
+			swap(heap[i], heap[j]);
+			i = j;
+			j = i / 2;
+		}
+		else {
+			break;
+		}
+	}
+}
+void insert(int x){
+    heap[++n]=x;
+    upadjust(1,n);
+}
+</code></pre>
+</li>
+</ul>
 <h1 id="注意">注意</h1>
 <p>1.= 与 ==</p>
 <p>2.变量初始化赋值时有时必须赋值为0或1</p>
