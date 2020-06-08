@@ -7,7 +7,7 @@
 <meta name="description" content="菜鸡成长之路">
 <meta name="theme-color" content="#000">
 <title>PAT题解 | lxb&#39;blog</title>
-<link rel="shortcut icon" href="https://liuxbo.github.io/favicon.ico?v=1591366369316">
+<link rel="shortcut icon" href="https://liuxbo.github.io/favicon.ico?v=1591631861327">
 <link rel="stylesheet" href="https://liuxbo.github.io/styles/main.css">
 
 <link rel="stylesheet" href="/media/css/gemini.css">
@@ -204,7 +204,7 @@
 <li><a href="#a101025-%E4%BA%8C%E5%88%86">A1010(25 二分)</a></li>
 <li><a href="#a1011">A1011</a></li>
 <li><a href="#a101225-%E6%9D%A1%E4%BB%B6%E6%8E%92%E5%BA%8F">A1012(25 条件排序)</a></li>
-<li><a href="#a1013">A1013</a></li>
+<li><a href="#a101325-%E5%9B%BE%E7%9A%84dfs%E9%81%8D%E5%8E%86%E8%AE%A1%E7%AE%97%E8%BF%9E%E9%80%9A%E5%9D%97%E4%B8%AA%E6%95%B0">A1013(25 图的dfs遍历，计算连通块个数)</a></li>
 <li><a href="#a101430-%E6%A8%A1%E6%8B%9F-%E9%9A%BE%E9%A2%98">A1014(30 模拟  难题)</a></li>
 <li><a href="#a1015">A1015</a></li>
 <li><a href="#a101625-%E6%8E%92%E5%BA%8F-%E5%A4%84%E7%90%86%E5%A4%9A%E6%9D%A1%E9%80%9A%E8%AF%9D%E6%97%B6%E9%97%B4%E8%AE%B0%E5%BD%95">A1016(25 排序 处理多条通话时间记录)</a></li>
@@ -212,7 +212,7 @@
 <li><a href="#a1018">A1018</a></li>
 <li><a href="#a1019">A1019</a></li>
 <li><a href="#a102025-%E5%90%8E%E5%BA%8F%E4%B8%AD%E5%BA%8F%E5%BB%BA%E6%A0%91%E8%BE%93%E5%87%BA%E5%B1%82%E5%BA%8F">A1020(25 后序+中序建树，输出层序)</a></li>
-<li><a href="#a1021">A1021</a></li>
+<li><a href="#a102125-%E6%89%BE%E5%87%BA%E5%9B%BE%E4%B8%AD%E4%BD%BF%E6%B7%B1%E5%BA%A6%E6%9C%80%E6%B7%B1%E7%9A%84%E7%BB%93%E7%82%B9%E9%A6%96%E5%85%88%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E8%83%BD%E7%9C%8B%E6%88%90%E6%A0%91">A1021(25 找出图中使深度最深的结点(首先判断是否能看成树))</a></li>
 <li><a href="#a1022">A1022</a></li>
 <li><a href="#a1023">A1023</a></li>
 <li><a href="#a1024">A1024</a></li>
@@ -288,7 +288,7 @@
 <li><a href="#a109530-%E6%A0%A1%E5%9B%AD%E5%81%9C%E8%BD%A6-%E6%8E%92%E5%BA%8F-%E4%B8%A4%E8%BE%86%E9%85%8D%E5%AF%B9-%E6%97%B6%E9%97%B4%E6%9F%A5%E8%AF%A2%E8%BE%93%E5%87%BA">A1095(30 校园停车 排序  两辆配对  时间查询输出)</a></li>
 <li><a href="#a1096">A1096</a></li>
 <li><a href="#a109725-%E9%93%BE%E8%A1%A8%E5%88%86%E7%A6%BB">A1097(25 链表分离)</a></li>
-<li><a href="#a1098">A1098</a></li>
+<li><a href="#a109825-%E5%88%A4%E6%96%AD%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F%E5%92%8C%E5%A0%86%E6%8E%92%E5%BA%8F">A1098(25 判断插入排序和堆排序)</a></li>
 <li><a href="#a109930-%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E5%BB%BA%E7%AB%8B%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91">A1099(30 中序遍历建立二叉搜索树)</a></li>
 <li><a href="#a110020-%E5%AD%97%E7%AC%A6%E4%B8%B2-string-map">A1100(20 字符串 string map)</a></li>
 <li><a href="#a110125-%E9%80%BB%E8%BE%91%E9%A2%98">A1101(25 逻辑题)</a></li>
@@ -636,7 +636,7 @@ window.addEventListener('load', function() {
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>28839<span class="pc-show">字数</span></span>
+      <span>28864<span class="pc-show">字数</span></span>
     </span>
   </div>
 </header>
@@ -1069,44 +1069,38 @@ int main(){
 	return 0;
 }
 </code></pre>
-<h3 id="a1013">A1013</h3>
+<h3 id="a101325-图的dfs遍历计算连通块个数">A1013(25 图的dfs遍历，计算连通块个数)</h3>
 <pre><code>#include&lt;cstdio&gt;
-#include&lt;vector&gt;
 #include&lt;algorithm&gt;
 using namespace std;
-const int maxn=1010;
-vector&lt;int&gt; G[maxn];
-bool vis[maxn]={false};
-int deletepoint;
-void DFS(int v){
-	if(v==deletepoint) return;
+const int maxn=10010;
+int n,m,k,G[maxn][maxn],cnt=0;
+bool vis[maxn];
+void dfs(int v){
 	vis[v]=true;
-	for(int i=0;i&lt;G[v].size();i++){
-		if(vis[G[v][i]]==false){
-			DFS(G[v][i]);
-		}
+	for(int i=1;i&lt;=n;i++){
+		if(G[v][i]==1&amp;&amp;vis[i]==false) dfs(i);
 	}
 }
 int main(){
-	int n,m,k;
+	int a,b;
 	scanf(&quot;%d%d%d&quot;,&amp;n,&amp;m,&amp;k);
 	while(m--){
-		int a,b;
 		scanf(&quot;%d%d&quot;,&amp;a,&amp;b);
-		G[a].push_back(b);
-		G[b].push_back(a);
+		G[a][b]=G[b][a]=1;
 	}
-	for(int i=0;i&lt;k;i++){
-		int block=0;
-		scanf(&quot;%d&quot;,&amp;deletepoint);
+	while(k--){
+		int cnt=0;
 		fill(vis,vis+maxn,false);
-		for(int j=1;j&lt;=n;j++){
-			if(j!=deletepoint&amp;&amp;vis[j]==false){
-				DFS(j);
-				block++;
+		scanf(&quot;%d&quot;,&amp;a);
+		vis[a]=true;
+		for(int i=1;i&lt;=n;i++){
+			if(vis[i]==false){
+				dfs(i);
+				cnt++;
 			}
 		}
-		printf(&quot;%d\n&quot;,block-1);
+		printf(&quot;%d\n&quot;,cnt-1);//需要添加的路径为连通块个数减1 
 	}
 	return 0;
 }
@@ -1477,61 +1471,54 @@ int main(){
 	return 0;
 }
 </code></pre>
-<h3 id="a1021">A1021</h3>
+<h3 id="a102125-找出图中使深度最深的结点首先判断是否能看成树">A1021(25 找出图中使深度最深的结点(首先判断是否能看成树))</h3>
 <pre><code>#include&lt;cstdio&gt;
-#include&lt;set&gt;
 #include&lt;vector&gt;
 #include&lt;algorithm&gt;
+#include&lt;set&gt;
 using namespace std;
-const int maxn=10010;
-vector&lt;vector&lt;int&gt; &gt; G;
-set&lt;int&gt; ans;
-vector&lt;int&gt; temp;
-bool vis[maxn]={false};
-int maxheight=0;
-void DFS(int node,int height){
+bool vis[10010]; 
+int n,maxheight=-1;
+vector&lt;int&gt; ans,G[10010];
+void dfs(int index,int height){
+	vis[index]=true;
 	if(height&gt;maxheight){
 		maxheight=height;
-		temp.clear();
-		temp.push_back(node);
-	}else if(height==maxheight){
-		temp.push_back(node);
-	}
-	vis[node]=true;
-	for(int i=0;i&lt;G[node].size();i++){
-		if(vis[G[node][i]]==false){
-			DFS(G[node][i],height+1);
-		}
-	}
+		ans.clear();
+		ans.push_back(index);
+	}else if(height==maxheight) ans.push_back(index);
+	for(int i=0;i&lt;G[index].size();i++){
+		if(vis[G[index][i]]==false) dfs(G[index][i],height+1); 
+	} 
 }
 int main(){
-	int n,count=0,select1;
+	int v1,v2,cnt=0,st;
+	set&lt;int&gt; res;
 	scanf(&quot;%d&quot;,&amp;n);
-	G.resize(n+1);
-	for(int i=0;i&lt;n-1;i++){
-		int a,b;
-		scanf(&quot;%d%d&quot;,&amp;a,&amp;b);
-		G[a].push_back(b);
-		G[b].push_back(a);
-	}
+	for(int i=1;i&lt;=n-1;i++){
+		scanf(&quot;%d%d&quot;,&amp;v1,&amp;v2);
+		G[v1].push_back(v2);
+		G[v2].push_back(v1);
+	} 
+	fill(vis,vis+10010,false);
 	for(int i=1;i&lt;=n;i++){
 		if(vis[i]==false){
-			DFS(i,1);
-		    if(i==1){
-			   if(temp.size()!=0) select1=temp[0];
-			   for(int j=0;j&lt;temp.size();j++)	ans.insert(temp[j]);
-	    	}
-	    	count++;
-		} 	
+			dfs(i,0);
+			if(i==1){
+				if(ans.size()!=0) st=ans[0];
+				for(int j=0;j&lt;ans.size();j++) res.insert(ans[j]);
+			} 
+			cnt++;
+		}
 	}
-	if(count&gt;=2) printf(&quot;Error: %d components&quot;,count);
+	if(cnt&gt;1) printf(&quot;Error: %d components&quot;,cnt);
 	else{
-		temp.clear();
-		maxheight=0;
-		fill(vis,vis+maxn,false);
-		DFS(select1,1);
-		for(int i=0;i&lt;temp.size();i++) ans.insert(temp[i]);
-		for(auto it=ans.begin();it!=ans.end();it++) printf(&quot;%d\n&quot;,*it);
+		ans.clear(); 
+		fill(vis,vis+10010,false);
+		maxheight=-1;
+		dfs(st,0);
+		for(int i=0;i&lt;ans.size();i++) res.insert(ans[i]);
+		for(auto it=res.begin();it!=res.end();it++) printf(&quot;%d\n&quot;,*it);
 	}
 	return 0;
 }
@@ -4720,53 +4707,46 @@ int main(){
 	return 0;
 }
 </code></pre>
-<h3 id="a1098">A1098</h3>
+<h3 id="a109825-判断插入排序和堆排序">A1098(25 判断插入排序和堆排序)</h3>
 <pre><code>#include&lt;cstdio&gt;
 #include&lt;vector&gt;
 #include&lt;algorithm&gt;
 using namespace std;
-const int maxn = 110;
-void downadjust(vector&lt;int&gt; &amp;b,int low, int high) {
-	int i = low, j = 2 * i;
-	while (j &lt;= high) {
-		if (j + 1 &lt;= high &amp;&amp; b[j + 1] &gt; b[j]) {
-			j = j + 1;
-		}
-		if (b[i] &lt; b[j]) {
-			swap(b[i], b[j]);
-			i = j;
-			j = 2 * i;
-		}
-		else {
-			break;
-		}
+void downadjust(vector&lt;int&gt;&amp;b,int low,int high){
+	int i=low,j=i*2;
+	while(j&lt;=high){
+		if(j+1&lt;=high&amp;&amp;b[j+1]&gt;b[j]) j=j+1;
+		if(b[i]&gt;=b[j]) break;
+		swap(b[i],b[j]);
+		i=j;
+		j=i*2;
 	}
 }
-int main() {
-	int n,p=2;
-	scanf(&quot;%d&quot;, &amp;n);
-	vector&lt;int&gt;a(n + 1);
-	vector&lt;int&gt;b(n + 1);
-	for (int i = 1; i &lt;= n; i++) scanf(&quot;%d&quot;, &amp;a[i]);
-	for (int i = 1; i &lt;= n; i++) scanf(&quot;%d&quot;, &amp;b[i]);
-	while (p &lt;= n &amp;&amp; b[p - 1] &lt;= b[p]) p++;
-	int k = p;
-	while (a[p] == b[p]&amp;&amp;p&lt;=n) p++;
-	if (p == n + 1) {
+int main(){
+	int n,p,q;
+	scanf(&quot;%d&quot;,&amp;n);
+	vector&lt;int&gt;a(n+1),b(n+1);
+	for(int i=1;i&lt;=n;i++) scanf(&quot;%d&quot;,&amp;a[i]);
+	for(int i=1;i&lt;=n;i++) scanf(&quot;%d&quot;,&amp;b[i]);
+	for(p=2;b[p-1]&lt;=b[p]&amp;&amp;p&lt;=n;p++);
+	int index=p;
+	while(index&lt;=n&amp;&amp;a[index]==b[index]) index++;
+	if(index==n+1){
 		printf(&quot;Insertion Sort\n&quot;);
-		sort(b.begin() + 1, b.begin() + k + 1);
+		sort(b.begin()+1,b.begin()+p+1);	
 	}
-	else {
-        printf(&quot;Heap Sort\n&quot;);
-		p = n;
-		while (p &gt; 2 &amp;&amp; b[p] &gt;= b[1]) p--;
-		swap(b[1], b[p]);
-		downadjust(b, 1, p - 1);
+	else{
+		printf(&quot;Heap Sort\n&quot;);
+		for(q=n;b[q]&gt;=b[1]&amp;&amp;q&gt;2;q--);
+		swap(b[1],b[q]);
+		downadjust(b,1,q-1);
 	}
-    printf(&quot;%d&quot;, b[1]);
-	for (int i = 2; i &lt;= n; i++) printf(&quot; %d&quot;, b[i]);
+	for(int i=1;i&lt;=n;i++){
+		if(i&gt;1) printf(&quot; &quot;);
+		printf(&quot;%d&quot;,b[i]);
+	}
 	return 0;
-}
+} 
 </code></pre>
 <h3 id="a109930-中序遍历建立二叉搜索树">A1099(30 中序遍历建立二叉搜索树)</h3>
 <pre><code>#include&lt;cstdio&gt;

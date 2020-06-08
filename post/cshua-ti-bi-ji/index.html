@@ -7,7 +7,7 @@
 <meta name="description" content="菜鸡成长之路">
 <meta name="theme-color" content="#000">
 <title>c++(PAT)刷题笔记汇总 | lxb&#39;blog</title>
-<link rel="shortcut icon" href="https://liuxbo.github.io/favicon.ico?v=1591366369316">
+<link rel="shortcut icon" href="https://liuxbo.github.io/favicon.ico?v=1591631861327">
 <link rel="stylesheet" href="https://liuxbo.github.io/styles/main.css">
 
 <link rel="stylesheet" href="/media/css/gemini.css">
@@ -514,12 +514,12 @@ window.addEventListener('load', function() {
     
     <span class="meta-item">
       <i class="fa fa-clock-o"></i>
-      <span>57分钟</span>
+      <span>58分钟</span>
     </span>
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>11988<span class="pc-show">字数</span></span>
+      <span>12045<span class="pc-show">字数</span></span>
     </span>
   </div>
 </header>
@@ -2029,11 +2029,11 @@ BFStrave(G){
 </li>
 </ul>
 <pre><code>for(int j=1;j&lt;=n;j++){
-			if(vis[j]==false){
-				DFS(j);
-				block++;
-			}
-		}
+	if(vis[j]==false){
+		DFS(j);
+		block++;
+	}
+}
 </code></pre>
 </li>
 <li>
@@ -2145,6 +2145,9 @@ fill(num,num+maxn,0);//最短路径条数，</p>
 </li>
 <li>
 <p>不论是DFS、BFS、djkst都要先初始化传入参数(即起始结点)的相关信息</p>
+</li>
+<li>
+<p>删除图中某个点i，可以设置该结点vis[i]=true实现“删除”</p>
 </li>
 </ul>
 </li>
@@ -2513,7 +2516,12 @@ isfri[abs(stoi(a))*10000+abs(stoi(b))]=isfri[abs(stoi(b))*10000+abs(stoi(a))]=tr
 <li>某个测试点不过有可能是数据类型有问题，比如需要强制类型转换等等，换成数据表示范围更大的64位数据类型</li>
 </ol>
 <ul>
-<li>层序遍历中队列里存放的是结点的地址，动态的就是node*类型，静态的就是root(int型)结点编号</li>
+<li>
+<p>层序遍历中队列里存放的是结点的地址，动态的就是node*类型，静态的就是root(int型)结点编号</p>
+</li>
+<li>
+<p>将图当做树去处理时，注意无向图是双向的，可能会回溯已经访问的结点，要注意避免</p>
+</li>
 </ul>
 
               </div>
