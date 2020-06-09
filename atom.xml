@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://liuxbo.github.io</id>
     <title>lxb&apos;blog</title>
-    <updated>2020-06-08T15:58:16.413Z</updated>
+    <updated>2020-06-09T13:55:39.498Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://liuxbo.github.io"/>
     <link rel="self" href="https://liuxbo.github.io/atom.xml"/>
@@ -119,6 +119,7 @@
 <h3 id="15图">15.图</h3>
 <p>1013(25 图的dfs遍历，计算连通块个数)</p>
 <p><strong>1021(25 找出图中使深度最深的结点(首先判断是否能看成树))</strong>  必看，结论</p>
+<p><strong>1034(30 图的深度遍历、map、连通块、边权和点权)</strong></p>
 <h3 id="单词">单词</h3>
 <p>coefficients 系数</p>
 <p>Palindromic 回文的</p>
@@ -133,6 +134,7 @@
 <p>cluster 群</p>
 <p>repetition 重复，背诵</p>
 <p>acyclic 非循环的，非周期的</p>
+<p>cluster  群，聚集</p>
 ]]></content>
     </entry>
     <entry>
@@ -1896,70 +1898,59 @@ int main() {
 	return 0;
 }
 </code></pre>
-<h3 id="a1034">A1034</h3>
+<h3 id="a103430-图的深度遍历-map-连通块-边权和点权">A1034(30 图的深度遍历、map、连通块、边权和点权)</h3>
 <pre><code>#include&lt;iostream&gt;
 #include&lt;map&gt;
 #include&lt;string&gt;
 using namespace std;
-const int maxn = 2100;
-map&lt;string, int&gt; stringtoint;
-map&lt;int, string&gt; inttostring;
-map&lt;string, int&gt; gang;
-int G[maxn][maxn] = { 0 }, numperson = 0, weight[maxn] = { 0 }, k;
-bool vis[maxn] = { false };
-void DFS(int visnow, int&amp; head, int&amp; nummember, int&amp; totalvalue) {
-	nummember++;
-	vis[visnow] = true;
-	if (weight[visnow] &gt; weight[head]) head = visnow;
-	for (int i = 0; i &lt; numperson; i++) {
-		if (G[visnow][i] &gt; 0) {
-			totalvalue += G[visnow][i];
-			G[visnow][i] = 0;
-			G[i][visnow] = 0;
-            if (vis[i] == false) {
-			DFS(i, head, nummember, totalvalue);
-	 	  }
-		}	
+map&lt;string,int&gt; strtoint;
+map&lt;int,string&gt; inttostr;
+map&lt;string,int&gt; ans;
+bool vis[2020];
+int G[2020][2020],weight[2020],n,k,index=1;
+int Stringtoint(string s){
+	if(strtoint.count(s)==0){
+		strtoint[s]=index;
+		inttostr[index]=s;
+		index++;//同时计数总的结点个数 
+	}
+	return strtoint[s];
+}
+void dfs(int id,int &amp;totaltime,int&amp;head,int &amp;num){
+	vis[id]=true;
+	num++;
+	if(weight[id]&gt;weight[head]) head=id;
+	for(int i=1;i&lt;index;i++){
+		if(G[id][i]!=0){
+			totaltime+=G[id][i];
+			G[id][i]=G[i][id]=0;
+			if(vis[i]==false) dfs(i,totaltime,head,num);
+		} 
 	}
 }
-void DFStrave() {
-	for (int i = 0; i &lt; numperson; i++) {
-		if (vis[i] == false) {
-			int head = i, nummember = 0, totalvalue = 0;
-			DFS(i, head, nummember, totalvalue);
-			if (totalvalue &gt; k &amp;&amp; nummember &gt; 2) {
-				gang[inttostring[head]] = nummember;
-			}
+int main(){
+	string s1,s2;
+	cin&gt;&gt;n&gt;&gt;k;
+	int id1,id2,calltime;
+	for(int i=0;i&lt;n;i++){
+		cin&gt;&gt;s1&gt;&gt;s2&gt;&gt;calltime;
+		id1=Stringtoint(s1),id2=Stringtoint(s2);
+		G[id1][id2]+=calltime;
+		G[id2][id1]+=calltime;
+		weight[id1]+=calltime;
+		weight[id2]+=calltime;
+	}
+	fill(vis,vis+2020,false);
+	for(int i=1;i&lt;index;i++){
+		if(vis[i]==false){
+			int totaltime=0,head=i,num=0;
+			dfs(i,totaltime,head,num);
+			if(num&gt;2&amp;&amp;totaltime&gt;k) ans[inttostr[head]]=num;
 		}
 	}
-}
-int change(string str) {
-	if (stringtoint.count(str) == 0) {
-		stringtoint[str] = numperson;
-		inttostring[numperson] = str;
-		return numperson++;
-	}
-	else {
-		return stringtoint[str];
-	}
-}
-int main() {
-	int n, phonetime;
-	string str1, str2;
-	cin &gt;&gt; n &gt;&gt; k;
-	for (int i = 0; i &lt; n; i++) {
-		cin &gt;&gt; str1 &gt;&gt; str2 &gt;&gt; phonetime;
-		int id1 = change(str1);
-		int id2 = change(str2);
-		weight[id1] += phonetime;
-		weight[id2] += phonetime;
-		G[id1][id2] += phonetime;
-		G[id2][id1] += phonetime;
-	}
-	DFStrave();
-	cout &lt;&lt; gang.size() &lt;&lt; endl;
-	for (auto it = gang.begin();it!=gang.end();it++) {
-		cout &lt;&lt; it-&gt;first &lt;&lt; &quot; &quot; &lt;&lt; it-&gt;second &lt;&lt; endl;
+	cout&lt;&lt;ans.size()&lt;&lt;endl;
+	for(auto it=ans.begin();it!=ans.end();it++){
+		cout&lt;&lt;it-&gt;first&lt;&lt;&quot; &quot;&lt;&lt;it-&gt;second&lt;&lt;endl;
 	}
 	return 0;
 }
@@ -8758,7 +8749,7 @@ isfri[abs(stoi(a))*10000+abs(stoi(b))]=isfri[abs(stoi(b))*10000+abs(stoi(a))]=tr
 <p>层序遍历中队列里存放的是结点的地址，动态的就是node*类型，静态的就是root(int型)结点编号</p>
 </li>
 <li>
-<p>将图当做树去处理时，注意无向图是双向的，可能会回溯已经访问的结点，要注意避免</p>
+<p>将图当做树去处理时，注意无向图是双向的，可能会回溯已经访问的结点，要注意避免；在统计图的边权和或者点权和等信息时，为了避免重复访问或者累加，可以在访问后将点权或边权设为0</p>
 </li>
 </ul>
 ]]></content>

@@ -7,7 +7,7 @@
 <meta name="description" content="菜鸡成长之路">
 <meta name="theme-color" content="#000">
 <title>PAT题解 | lxb&#39;blog</title>
-<link rel="shortcut icon" href="https://liuxbo.github.io/favicon.ico?v=1591631894097">
+<link rel="shortcut icon" href="https://liuxbo.github.io/favicon.ico?v=1591710936659">
 <link rel="stylesheet" href="https://liuxbo.github.io/styles/main.css">
 
 <link rel="stylesheet" href="/media/css/gemini.css">
@@ -224,7 +224,7 @@
 <li><a href="#a1031">A1031</a></li>
 <li><a href="#a103225-%E9%93%BE%E8%A1%A8-%E6%89%BE%E5%85%AC%E5%85%B1%E5%90%8E%E7%BC%80">A1032(25 链表  找公共后缀)</a></li>
 <li><a href="#a1033">A1033</a></li>
-<li><a href="#a1034">A1034</a></li>
+<li><a href="#a103430-%E5%9B%BE%E7%9A%84%E6%B7%B1%E5%BA%A6%E9%81%8D%E5%8E%86-map-%E8%BF%9E%E9%80%9A%E5%9D%97-%E8%BE%B9%E6%9D%83%E5%92%8C%E7%82%B9%E6%9D%83">A1034(30 图的深度遍历、map、连通块、边权和点权)</a></li>
 <li><a href="#a103520-%E5%AD%97%E7%AC%A6%E4%B8%B2">A1035(20 字符串)</a></li>
 <li><a href="#a1036">A1036</a></li>
 <li><a href="#a103725-%E8%B4%AA%E5%BF%83">A1037(25 贪心)</a></li>
@@ -636,7 +636,7 @@ window.addEventListener('load', function() {
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>28864<span class="pc-show">字数</span></span>
+      <span>28881<span class="pc-show">字数</span></span>
     </span>
   </div>
 </header>
@@ -2046,70 +2046,59 @@ int main() {
 	return 0;
 }
 </code></pre>
-<h3 id="a1034">A1034</h3>
+<h3 id="a103430-图的深度遍历-map-连通块-边权和点权">A1034(30 图的深度遍历、map、连通块、边权和点权)</h3>
 <pre><code>#include&lt;iostream&gt;
 #include&lt;map&gt;
 #include&lt;string&gt;
 using namespace std;
-const int maxn = 2100;
-map&lt;string, int&gt; stringtoint;
-map&lt;int, string&gt; inttostring;
-map&lt;string, int&gt; gang;
-int G[maxn][maxn] = { 0 }, numperson = 0, weight[maxn] = { 0 }, k;
-bool vis[maxn] = { false };
-void DFS(int visnow, int&amp; head, int&amp; nummember, int&amp; totalvalue) {
-	nummember++;
-	vis[visnow] = true;
-	if (weight[visnow] &gt; weight[head]) head = visnow;
-	for (int i = 0; i &lt; numperson; i++) {
-		if (G[visnow][i] &gt; 0) {
-			totalvalue += G[visnow][i];
-			G[visnow][i] = 0;
-			G[i][visnow] = 0;
-            if (vis[i] == false) {
-			DFS(i, head, nummember, totalvalue);
-	 	  }
-		}	
+map&lt;string,int&gt; strtoint;
+map&lt;int,string&gt; inttostr;
+map&lt;string,int&gt; ans;
+bool vis[2020];
+int G[2020][2020],weight[2020],n,k,index=1;
+int Stringtoint(string s){
+	if(strtoint.count(s)==0){
+		strtoint[s]=index;
+		inttostr[index]=s;
+		index++;//同时计数总的结点个数 
+	}
+	return strtoint[s];
+}
+void dfs(int id,int &amp;totaltime,int&amp;head,int &amp;num){
+	vis[id]=true;
+	num++;
+	if(weight[id]&gt;weight[head]) head=id;
+	for(int i=1;i&lt;index;i++){
+		if(G[id][i]!=0){
+			totaltime+=G[id][i];
+			G[id][i]=G[i][id]=0;
+			if(vis[i]==false) dfs(i,totaltime,head,num);
+		} 
 	}
 }
-void DFStrave() {
-	for (int i = 0; i &lt; numperson; i++) {
-		if (vis[i] == false) {
-			int head = i, nummember = 0, totalvalue = 0;
-			DFS(i, head, nummember, totalvalue);
-			if (totalvalue &gt; k &amp;&amp; nummember &gt; 2) {
-				gang[inttostring[head]] = nummember;
-			}
+int main(){
+	string s1,s2;
+	cin&gt;&gt;n&gt;&gt;k;
+	int id1,id2,calltime;
+	for(int i=0;i&lt;n;i++){
+		cin&gt;&gt;s1&gt;&gt;s2&gt;&gt;calltime;
+		id1=Stringtoint(s1),id2=Stringtoint(s2);
+		G[id1][id2]+=calltime;
+		G[id2][id1]+=calltime;
+		weight[id1]+=calltime;
+		weight[id2]+=calltime;
+	}
+	fill(vis,vis+2020,false);
+	for(int i=1;i&lt;index;i++){
+		if(vis[i]==false){
+			int totaltime=0,head=i,num=0;
+			dfs(i,totaltime,head,num);
+			if(num&gt;2&amp;&amp;totaltime&gt;k) ans[inttostr[head]]=num;
 		}
 	}
-}
-int change(string str) {
-	if (stringtoint.count(str) == 0) {
-		stringtoint[str] = numperson;
-		inttostring[numperson] = str;
-		return numperson++;
-	}
-	else {
-		return stringtoint[str];
-	}
-}
-int main() {
-	int n, phonetime;
-	string str1, str2;
-	cin &gt;&gt; n &gt;&gt; k;
-	for (int i = 0; i &lt; n; i++) {
-		cin &gt;&gt; str1 &gt;&gt; str2 &gt;&gt; phonetime;
-		int id1 = change(str1);
-		int id2 = change(str2);
-		weight[id1] += phonetime;
-		weight[id2] += phonetime;
-		G[id1][id2] += phonetime;
-		G[id2][id1] += phonetime;
-	}
-	DFStrave();
-	cout &lt;&lt; gang.size() &lt;&lt; endl;
-	for (auto it = gang.begin();it!=gang.end();it++) {
-		cout &lt;&lt; it-&gt;first &lt;&lt; &quot; &quot; &lt;&lt; it-&gt;second &lt;&lt; endl;
+	cout&lt;&lt;ans.size()&lt;&lt;endl;
+	for(auto it=ans.begin();it!=ans.end();it++){
+		cout&lt;&lt;it-&gt;first&lt;&lt;&quot; &quot;&lt;&lt;it-&gt;second&lt;&lt;endl;
 	}
 	return 0;
 }
