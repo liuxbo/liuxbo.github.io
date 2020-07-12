@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://liuxbo.github.io</id>
     <title>lxb&apos;blog</title>
-    <updated>2020-07-09T16:14:48.482Z</updated>
+    <updated>2020-07-12T05:44:38.731Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://liuxbo.github.io"/>
     <link rel="self" href="https://liuxbo.github.io/atom.xml"/>
@@ -51,6 +51,8 @@
 <p><strong>1108(20 字符串 sscanf、sprintf)</strong></p>
 <p><strong>1112(20 字符串、map、找出“坏键”)</strong>   先对对原字符串加工，在首尾各加上一个特殊字符</p>
 <p>1132(20 字符串 水题)</p>
+<p><strong>1136 (20 回文串 字符串)</strong></p>
+<p>1140(20 字符串) Look-and-say Sequence</p>
 <h3 id="5排序">5.排序</h3>
 <p>1062(25 按条件排序)</p>
 <p><strong>1012(25 条件排序)</strong></p>
@@ -64,11 +66,14 @@
 <p><strong>1095(30 校园停车 排序  两辆配对  时间查询输出)</strong></p>
 <p><strong>1089  (25 插入排序和归并排序)</strong></p>
 <p>1109(25 排序)</p>
+<p>1137(25 map 排序)</p>
+<p>1141(25 stl、排序)</p>
 <h3 id="6hash">6.<code>hash</code></h3>
 <p>1092(20 字符串 hash)</p>
 <p>1041(20 hash)</p>
 <p>1050(20 hash)</p>
 <p><strong>1048(25 hash 找出两个数的和为指定的数)</strong></p>
+<p>1134(25 hash散列)  <strong>注意初始化hashtable[maxn]={0}</strong></p>
 <h3 id="7贪心">7.贪心</h3>
 <p>1070(25 贪心)</p>
 <p>1037(25 贪心)</p>
@@ -113,6 +118,7 @@
 <p>**1053(30 输出权值总和同为给定值的路径(dfs)) ** 必看</p>
 <p><strong>1119 (30 树的前序和后序 求中序)</strong>  必看</p>
 <p><strong>1130(中序遍历二叉树 输出中缀表达式)</strong></p>
+<p><strong>1138(25 树 前序加中序输出后序)</strong>  看柳神解法</p>
 </li>
 <li>
 <p>完全二叉树</p>
@@ -129,6 +135,15 @@
 <li>
 <p>平衡二叉树</p>
 <p><strong>1066(25 建立平衡二叉树)</strong>  背背模板</p>
+</li>
+<li>
+<p>红黑树</p>
+<p><strong>1135(30 判断红黑树 递归判断)</strong></p>
+</li>
+<li>
+<p>LCA</p>
+<p><strong>1143(30 树 LCA 最低公共祖先)</strong></p>
+<p><strong>1151(30  树 中序加先序求LCA)</strong></p>
 </li>
 </ul>
 <h3 id="13并查集">13.并查集</h3>
@@ -151,6 +166,7 @@
 <p><strong>1122(25 哈密顿回路  set)</strong></p>
 <p><strong>1126(25 欧拉图 欧拉回路 欧拉路径)</strong></p>
 <p><strong>1127(30 中序后序建树，bfs，输出z字形层序遍历)</strong>  两种方法(只是bfs不同)，方法一:层序遍历用结构体统计每层结点；方法二:层序遍历用当前队列的元素个数统计每层节点</p>
+<p><strong>1142(25 无向完全图 最大子图  两点相连)</strong>  <strong>考逻辑</strong></p>
 <h3 id="单词">单词</h3>
 <p>coefficients 系数</p>
 <p>Palindromic 回文的</p>
@@ -528,7 +544,7 @@ int main() {
         <link href="https://liuxbo.github.io/post/pat-ti-jie/">
         </link>
         <updated>2020-05-06T13:21:28.000Z</updated>
-        <content type="html"><![CDATA[<h3 id="a-100120-两数相加">A 1001(20  两数相加)</h3>
+        <content type="html"><![CDATA[<h3 id="a100120-两数相加">A1001(20  两数相加)</h3>
 <pre><code>#include&lt;iostream&gt;
 #include&lt;string&gt;
 using namespace std;
@@ -6100,92 +6116,90 @@ int main() {
 	return 0;
 }
 </code></pre>
-<h3 id="a1134图-结点与边的问题">A1134(图  结点与边的问题)</h3>
+<h3 id="a113425-hash散列">A1134(25 hash散列)</h3>
 <pre><code>#include&lt;cstdio&gt;
 #include&lt;vector&gt;
 using namespace std;
-int main() {
-	int n, m, v1, v2, k, nv;
-	scanf(&quot;%d%d&quot;, &amp;n, &amp;m);
-	vector&lt;int&gt; v[10010];
-	for (int i = 0; i &lt; m; i++) {
-		scanf(&quot;%d%d&quot;, &amp;v1, &amp;v2);
-		v[v1].push_back(i);
-		v[v2].push_back(i);
-	}
-	scanf(&quot;%d&quot;, &amp;k);
-	for (int i = 0; i &lt; k; i++) {
-		scanf(&quot;%d&quot;, &amp;nv);
-		bool flag[10010] = { false };
-		int temp, j;
-		for (int j = 0; j &lt; nv; j++) {
-			scanf(&quot;%d&quot;, &amp;temp);
-			for (int x = 0; x &lt; v[temp].size(); x++) flag[v[temp][x]] = true;
+int main(){
+	int n,m,k,exist[10001];
+	scanf(&quot;%d%d&quot;,&amp;n,&amp;m);
+	vector&lt;int&gt; v[10001];
+	for(int i=0;i&lt;m;i++){
+		int v1,v2;
+		scanf(&quot;%d%d&quot;,&amp;v1,&amp;v2);
+		v[i].push_back(v1);
+		v[i].push_back(v2);
+	} 
+	scanf(&quot;%d&quot;,&amp;k);
+	while(k--){
+		int num,hashtable[10001]={0},temp,flag=1;
+		scanf(&quot;%d&quot;,&amp;num);
+		for(int i=0;i&lt;num;i++){
+			scanf(&quot;%d&quot;,&amp;temp);
+			hashtable[temp]=1;
 		}
-		for (j = 0; j &lt; m; j++) {
-			if (flag[j] == false) {
-				printf(&quot;No\n&quot;);
+		for(int i=0;i&lt;m;i++){
+			if(hashtable[v[i][0]]!=1&amp;&amp;hashtable[v[i][1]]!=1){
+				flag=0;
 				break;
 			}
 		}
-		if(j==m) printf(&quot;Yes\n&quot;);
+		if(flag==1) printf(&quot;Yes\n&quot;);
+		else printf(&quot;No\n&quot;);
 	}
 	return 0;
 }
 </code></pre>
 <h3 id="a113530-判断红黑树-递归判断">A1135(30 判断红黑树 递归判断)</h3>
 <pre><code>#include&lt;cstdio&gt;
-#include&lt;vector&gt;
-#include&lt;cmath&gt;
 #include&lt;algorithm&gt;
 using namespace std;
 struct node{
 	int v;
-	node* lchild,*rchild;
+	node*left,*right;
 };
-node*create(node*root,int x){
-	if(root==NULL) {
+void create(node*&amp;root,int v){
+	if(root==NULL){
 		root=new node;
-		root-&gt;v=x;
-		root-&gt;lchild=root-&gt;rchild=NULL;
+		root-&gt;v=v;
+		root-&gt;left=root-&gt;right=NULL;
+		return;
 	}
-	else if(abs(root-&gt;v)&gt;abs(x)) root-&gt;lchild=create(root-&gt;lchild,x);
-	else if(abs(root-&gt;v)&lt;=abs(x)) root-&gt;rchild=create(root-&gt;rchild,x);
-	return root;
+	if(abs(v)&lt;=abs(root-&gt;v)) create(root-&gt;left,v);
+	else create(root-&gt;right,v);
 }
 bool judge1(node*root){
 	if(root==NULL) return true;
 	if(root-&gt;v&lt;0){
-		if(root-&gt;lchild!=NULL&amp;&amp;root-&gt;lchild-&gt;v&lt;0) return false;
-		if(root-&gt;rchild!=NULL&amp;&amp;root-&gt;rchild-&gt;v&lt;0) return false;
+		if(root-&gt;left!=NULL&amp;&amp;root-&gt;left-&gt;v&lt;0) return false;
+		if(root-&gt;right!=NULL&amp;&amp;root-&gt;right-&gt;v&lt;0) return false;
 	}
-	return judge1(root-&gt;lchild)&amp;&amp;judge1(root-&gt;rchild);
+	return judge1(root-&gt;left)&amp;&amp;judge1(root-&gt;right);
 }
-int getblacknum(node*root){
+int getnum(node*root){
 	if(root==NULL) return 0;
-	int l=getblacknum(root-&gt;lchild);
-	int r=getblacknum(root-&gt;rchild);
-	return root-&gt;v&gt;0?max(l,r)+1:max(l,r);
+	int l=getnum(root-&gt;left);
+	int r=getnum(root-&gt;right);
+	return root-&gt;v&gt;0? max(l,r)+1 :max(l,r);
 }
 bool judge2(node*root){
 	if(root==NULL) return true;
-	int l=getblacknum(root-&gt;lchild);
-	int r=getblacknum(root-&gt;rchild);
+	int l=getnum(root-&gt;left);
+	int r=getnum(root-&gt;right);
 	if(l!=r) return false;
-	return judge2(root-&gt;lchild)&amp;&amp;judge2(root-&gt;rchild);
+	return judge2(root-&gt;left)&amp;&amp;judge2(root-&gt;right);
 }
 int main(){
-	int k,n;
+	int k,n,temp;
 	scanf(&quot;%d&quot;,&amp;k);
 	while(k--){
-		scanf(&quot;%d&quot;,&amp;n);
-		vector&lt;int&gt; tree(n);
 		node*root=NULL;
+		scanf(&quot;%d&quot;,&amp;n);
 		for(int i=0;i&lt;n;i++){
-			scanf(&quot;%d&quot;,&amp;tree[i]);
-			root=create(root,tree[i]);
+			scanf(&quot;%d&quot;,&amp;temp);
+			create(root,temp);
 		}
-		if(tree[0]&gt;0&amp;&amp;judge1(root)&amp;&amp;judge2(root)) printf(&quot;Yes\n&quot;);
+		if(root-&gt;v&gt;0&amp;&amp;judge1(root)&amp;&amp;judge2(root)) printf(&quot;Yes\n&quot;);
 		else printf(&quot;No\n&quot;);
 	}
 	return 0;
@@ -6196,86 +6210,130 @@ int main(){
 #include&lt;algorithm&gt;
 #include&lt;string&gt;
 using namespace std;
-string add(string s1, string s2) {
-	string s = s1;
-	int carry = 0;
-	for (int i = s1.size() - 1; i &gt;= 0; i--) {
-		s[i] = ((s1[i] - '0') + (s2[i] - '0') + carry) % 10 + '0';
-		carry = ((s1[i] - '0') + (s2[i] - '0') + carry) / 10;
-	}
-	if (carry &gt; 0) s = '1' + s;
+string revs(string s){
+	reverse(s.begin(),s.end());
 	return s;
 }
-int main() {
-	int n = 10;
-	string origin, ans, ansv,rev;
-	cin &gt;&gt; origin;
-	rev = origin;
-	reverse(rev.begin(), rev.end());
-	if (origin == rev) {
-		cout &lt;&lt; rev &lt;&lt; &quot; is a palindromic number.&quot;;
+string add(string s1,string s2){
+	string s=s1;
+	int carry=0;
+	for(int i=s1.size()-1;i&gt;=0;i--){
+		s[i]=((s1[i]-'0')+(s2[i]-'0')+carry)%10+'0';
+		carry=((s1[i]-'0')+(s2[i]-'0')+carry)/10;
+	}
+	if(carry&gt;0) s='1'+s;
+	return s;
+}
+int main(){
+	string s,rev;
+	cin&gt;&gt;s;
+	if(s==revs(s)) {
+		cout&lt;&lt;s&lt;&lt;&quot; is a palindromic number.&quot;;
 		return 0;
 	}
-	while (n--) {
-		rev = origin;
-		reverse(rev.begin(), rev.end());
-		ans = add(origin, rev);
-		ansv = ans;
-		reverse(ansv.begin(), ansv.end());
-		cout &lt;&lt; origin &lt;&lt; &quot; + &quot; &lt;&lt; rev &lt;&lt; &quot; = &quot; &lt;&lt; ans &lt;&lt; endl;
-		if (ansv != ans) origin = ans;
-		else {
-			cout &lt;&lt; ans &lt;&lt; &quot; is a palindromic number.&quot;;
-			return 0;
+	for(int i=1;i&lt;=10;i++){
+		string sum=add(s,revs(s));
+		cout&lt;&lt;s&lt;&lt;&quot; + &quot;&lt;&lt;revs(s)&lt;&lt;&quot; = &quot;&lt;&lt;sum&lt;&lt;endl;
+		s=sum;
+		if(s==revs(s)){
+			cout&lt;&lt;s&lt;&lt;&quot; is a palindromic number.&quot;;
+			break;
+		}else{
+			if(i==10) cout&lt;&lt;&quot;Not found in 10 iterations.&quot;;
 		}
 	}
-	cout &lt;&lt; &quot;Not found in 10 iterations.&quot;;
 	return 0;
 }
 </code></pre>
 <h3 id="a113725-map-排序">A1137(25 map 排序)</h3>
-<pre><code>#include&lt;map&gt;
+<pre><code>#include&lt;iostream&gt;
 #include&lt;string&gt;
-#include&lt;iostream&gt;
+#include&lt;map&gt;
 #include&lt;vector&gt;
 #include&lt;algorithm&gt;
+#include&lt;cmath&gt;
 using namespace std;
 struct node{
-	string s;
-	int gp,gm,gf,g; 
-};
-bool cmp(const node &amp;a,const node &amp;b){
-	return a.g!=b.g? a.g&gt;b.g : a.s&lt;b.s;
+	string id;
+	int gp=-1,gm=-1,gf=-1,g;
+}stu[10001];
+map&lt;string,int&gt; stoint;
+int index=0;
+vector&lt;node&gt; v;
+int strtoint(string s){
+	if(stoint.count(s)==0) stoint[s]=index++;
+	return stoint[s];
 }
-map&lt;string,int&gt; mp;
+bool cmp(node a,node b){
+	return a.g!=b.g? a.g&gt;b.g : a.id&lt;b.id;
+}
 int main(){
-	vector&lt;node&gt;v,ans;
-	int p,m,n,score,cnt=0;
+	int p,m,n,score,tid;
+	string id;
 	cin&gt;&gt;p&gt;&gt;m&gt;&gt;n;
-	string stuid;
 	for(int i=0;i&lt;p;i++){
-		cin&gt;&gt;stuid&gt;&gt;score;
-		if(score&gt;=200){
-			v.push_back(node{stuid,score,-1,-1,-1});
-			mp[stuid]=cnt++;
-		}
+		cin&gt;&gt;id&gt;&gt;score;
+		int tid=strtoint(id);
+		stu[tid].gp=score;
+		stu[tid].id=id;
 	}
 	for(int i=0;i&lt;m;i++){
-		cin&gt;&gt;stuid&gt;&gt;score;
-		if(mp.count(stuid)!=0) v[mp[stuid]].gm=score; 
+		cin&gt;&gt;id&gt;&gt;score;
+		int tid=strtoint(id);
+		stu[tid].gm=score;
+		stu[tid].id=id;
 	}
 	for(int i=0;i&lt;n;i++){
-		cin&gt;&gt;stuid&gt;&gt;score;
-		if(mp.count(stuid)!=0) v[mp[stuid]].gf=v[mp[stuid]].g=score;
-		if(v[mp[stuid]].gf&lt;v[mp[stuid]].gm) v[mp[stuid]].g=(int)(v[mp[stuid]].gm*0.4+v[mp[stuid]].gf*0.6+0.5);
+		cin&gt;&gt;id&gt;&gt;score;
+		int tid=strtoint(id);
+		stu[tid].gf=score;
+		stu[tid].id=id;
 	}
+	for(int i=0;i&lt;index;i++){
+		if(stu[i].gp&gt;=200){
+			if(stu[i].gm&gt;stu[i].gf){
+				if(stu[i].gf!=-1) stu[i].g=round(stu[i].gm*0.4+stu[i].gf*0.6);
+				else stu[i].g=round(stu[i].gm*0.4);
+			}else{
+				if(stu[i].gf==-1) stu[i].g=0;
+				else stu[i].g=stu[i].gf;
+			}
+			if(stu[i].g&gt;=60) v.push_back(stu[i]);
+		}
+	}
+	sort(v.begin(),v.end(),cmp);
 	for(int i=0;i&lt;v.size();i++){
-		if(v[i].g&gt;=60) ans.push_back(v[i]);
+		printf(&quot;%s %d %d %d %d\n&quot;,v[i].id.c_str(),v[i].gp,v[i].gm,v[i].gf,v[i].g);	
 	}
-	sort(ans.begin(),ans.end(),cmp);
-	for(int i=0;i&lt;ans.size();i++) 
-	    printf(&quot;%s %d %d %d %d\n&quot;,ans[i].s.c_str(),ans[i].gp,ans[i].gm,ans[i].gf,ans[i].g);
 	return 0;
+}
+</code></pre>
+<h3 id="a113825-树-前序加中序输出后序">A1138(25 树 前序加中序输出后序)</h3>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;vector&gt;
+using namespace std;
+vector&lt;int&gt; pre, in;
+bool flag = false;
+void postOrder(int prel, int inl, int inr) {
+ if (inl &gt; inr || flag == true) return;
+ int i = inl;
+ while (in[i] != pre[prel]) i++;
+ postOrder(prel+1, inl, i-1);
+ postOrder(prel+i-inl+1, i+1, inr);
+ if (flag == false) {
+ printf(&quot;%d&quot;, in[i]);
+ flag = true;
+ }
+}
+int main() {
+ int n;
+ scanf(&quot;%d&quot;, &amp;n);
+ pre.resize(n);
+ in.resize(n);
+ for (int i = 0; i &lt; n; i++) scanf(&quot;%d&quot;, &amp;pre[i]);
+ for (int i = 0; i &lt; n; i++) scanf(&quot;%d&quot;, &amp;in[i]);
+ postOrder(0, 0, n-1);
+ return 0;
 }
 </code></pre>
 <h3 id="a113930-逻辑题-unordered_map">A1139(30 逻辑题 unordered_map)</h3>
@@ -6322,7 +6380,7 @@ isfri[abs(stoi(a))*10000+abs(stoi(b))]=isfri[abs(stoi(b))*10000+abs(stoi(a))]=tr
 	return 0;
 }
 </code></pre>
-<h3 id="a1140">A1140</h3>
+<h3 id="a114020-字符串">A1140(20 字符串)</h3>
 <pre><code>#include&lt;iostream&gt; 
 #include&lt;string&gt;
 using namespace std;
@@ -6342,57 +6400,56 @@ int main(){
 	return 0;
 } 
 </code></pre>
-<h3 id="a1141">A1141</h3>
-<pre><code>#include&lt;cstdio&gt;
-#include&lt;iostream&gt; 
-#include&lt;map&gt;
-#include&lt;cctype&gt;
+<h3 id="a114125-stl-排序">A1141(25 stl、排序)</h3>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;vector&gt;
 #include&lt;string&gt;
 #include&lt;algorithm&gt;
+#include&lt;unordered_map&gt;
 using namespace std;
-const int maxn=100010;
 struct node{
 	string name;
-	double totalscore;
-	int num;
-}school[maxn];
+	double score=0;
+	int num=0,fscore=0,rank;
+}t[100010];
+int index=0;
+unordered_map&lt;string,int&gt; mp;
+int change(string &amp;s){
+	for(int i=0;i&lt;s.size();i++){
+		if(isupper(s[i])) s[i]=tolower(s[i]);
+	}
+	if(mp.count(s)==0) mp[s]=index++;
+	return mp[s]; 
+}
 bool cmp(node a,node b){
-	if((int)a.totalscore!=(int)b.totalscore) return (int)a.totalscore&gt;(int)b.totalscore;
+	if(a.fscore!=b.fscore) return a.fscore&gt;b.fscore;
 	else if(a.num!=b.num) return a.num&lt;b.num;
 	else return a.name&lt;b.name;
 }
-map&lt;string,int&gt; s;
 int main(){
-	int n,num=0;
-	double score;
-	string id,schoolname;
-	scanf(&quot;%d&quot;,&amp;n);
-	for(int i=0;i&lt;maxn;i++){
-		school[i].totalscore=0;
-		school[i].num=0;
-	}
+	int n;
+	cin&gt;&gt;n;
+	//cout&lt;&lt;&quot;pppp\n&quot;;
 	for(int i=0;i&lt;n;i++){
-		cin&gt;&gt;id&gt;&gt;score&gt;&gt;schoolname;
-		for(int j=0;j&lt;schoolname.size();j++){
-			if(isupper(schoolname[j])) schoolname[j]+=32;
-		}
-		if(s.count(schoolname)==0){
-			s[schoolname]=num;
-			school[s[schoolname]].name=schoolname;
-			num++;
-		}
-		if(id[0]=='B') score=score/1.5;
-		if(id[0]=='T') score=score*1.5;
-		school[s[schoolname]].totalscore+=score;
-		school[s[schoolname]].num++;
+		string id,code;
+		int score,tid;
+		cin&gt;&gt;id&gt;&gt;score&gt;&gt;code;
+		tid=change(code);
+		t[tid].name=code;
+		t[tid].num++;
+		if(id[0]=='B') t[tid].score+=score/1.5;
+		if(id[0]=='A') t[tid].score+=score*1.0;
+		if(id[0]=='T') t[tid].score+=score*1.5;
 	}
-	cout&lt;&lt;num&lt;&lt;endl;
-	sort(school,school+num,cmp);
-	int r=1;
-	printf(&quot;%d %s %d %d\n&quot;,r,school[0].name.c_str(),(int)school[0].totalscore,school[0].num);
-	for(int i=1;i&lt;num;i++){
-		if((int)school[i].totalscore!=(int)school[i-1].totalscore) r=i+1;
-		printf(&quot;%d %s %d %d\n&quot;,r,school[i].name.c_str(),(int)school[i].totalscore,school[i].num);
+	for(int i=0;i&lt;index;i++) t[i].fscore=(int)(t[i].score);
+	sort(t,t+index,cmp);
+	cout&lt;&lt;index&lt;&lt;endl;
+	t[0].rank=1;
+	printf(&quot;%d %s %d %d\n&quot;,t[0].rank,t[0].name.c_str(),t[0].fscore,t[0].num);
+	for(int i=1;i&lt;index;i++){
+		if(t[i].fscore==t[i-1].fscore) t[i].rank=t[i-1].rank;
+		else t[i].rank=i+1;
+		printf(&quot;%d %s %d %d\n&quot;,t[i].rank,t[i].name.c_str(),t[i].fscore,t[i].num);
 	}
 	return 0;
 }
@@ -6402,74 +6459,75 @@ int main(){
 #include&lt;vector&gt;
 using namespace std;
 int main(){
-	int g[210][210]={0};
-	int nv,ne,v1,v2,k,n;
+	int nv,ne,m,k,g[210][210],v1,v2;
 	scanf(&quot;%d%d&quot;,&amp;nv,&amp;ne);
 	for(int i=0;i&lt;ne;i++){
 		scanf(&quot;%d%d&quot;,&amp;v1,&amp;v2);
-		g[v1][v2]=1;
-		g[v2][v1]=1;
+		g[v1][v2]=g[v2][v1]=1;
 	}
-	scanf(&quot;%d&quot;,&amp;k);
-	while(k--){
-		int hash[nv+1]={0};
-		int ismax=1,iscli=1;
-		scanf(&quot;%d&quot;,&amp;n);
-		vector&lt;int&gt; v(n);
-		for(int i=0;i&lt;n;i++){
+	scanf(&quot;%d&quot;,&amp;m);
+	while(m--){
+		int isclique=1,ismax=1,hash[210]={0};
+		scanf(&quot;%d&quot;,&amp;k);
+		vector&lt;int&gt; v(k);
+		for(int i=0;i&lt;k;i++) {
 			scanf(&quot;%d&quot;,&amp;v[i]);
 			hash[v[i]]=1;
 		}
-		for(int i=0;i&lt;n-1;i++){
-			for(int j=i+1;j&lt;n;j++){
-				if(g[v[i]][v[j]]==0)
-				iscli=0;
-				break;
-			}
-		}
-		if(iscli==0) {
-			printf(&quot;Not a Clique\n&quot;);
-			continue;
-		}
-		for(int i=1;i&lt;=nv;i++){
-			if(hash[i]==0){
-				for(int j=0;j&lt;n;j++){
-					if(g[v[j]][i]==0) break;
-					if(j==n-1) ismax=0;
+		for(int i=0;i&lt;k-1;i++){
+			if(isclique==0) break;
+			for(int j=i+1;j&lt;k;j++){
+				if(g[v[i]][v[j]]!=1){
+					isclique=0;
+					printf(&quot;Not a Clique\n&quot;);
+				    break;
 				}
 			}
 		}
-		if(iscli==1&amp;&amp;ismax==1) printf(&quot;Yes\n&quot;);
-		else if(iscli==1&amp;&amp;ismax==0) printf(&quot;Not Maximal\n&quot;);
-	}
+		if(isclique==0) continue;
+		for(int i=1;i&lt;=nv;i++){
+			if(ismax==0) break;
+			if(hash[i]!=1){
+				for(int j=0;j&lt;k;j++){
+					if(g[i][v[j]]==1){
+						if(j==k-1) ismax=0;
+					}else break;
+				}
+			}
+		}
+		if(ismax==1) printf(&quot;Yes\n&quot;);
+		else printf(&quot;Not Maximal\n&quot;);
+	} 
 	return 0;
 }
 </code></pre>
-<h3 id="a1143">A1143</h3>
+<h3 id="a114330-树-lca-最低公共祖先">A1143(30 树 LCA 最低公共祖先)</h3>
 <pre><code>#include&lt;cstdio&gt;
+#include&lt;unordered_map&gt;
 #include&lt;vector&gt;
-#include&lt;map&gt;
 using namespace std;
-const int maxn = 10010;
-map&lt;int, bool&gt; node;
-int main() {
-	int m, n, v, u, a;
-	scanf(&quot;%d%d&quot;, &amp;m, &amp;n);
+int main(){
+	int m,n,u,v,ans;
+	scanf(&quot;%d%d&quot;,&amp;m,&amp;n);
+	unordered_map&lt;int,bool&gt;mp;
 	vector&lt;int&gt; pre(n);
-	for (int i = 0; i &lt; n; i++) {
-		scanf(&quot;%d&quot;, &amp;pre[i]);
-		node[pre[i]] = true;
+	for(int i=0;i&lt;n;i++){
+		scanf(&quot;%d&quot;,&amp;pre[i]);
+		mp[pre[i]]=true;
 	}
-	for (int i = 0; i &lt; m; i++) {
-		scanf(&quot;%d%d&quot;, &amp;u, &amp;v);
-		for (int j = 0; j &lt; n; j++) {
-			a = pre[j];
-			if ((a &gt;= u &amp;&amp; a &lt;= v) || (a &lt;= u &amp;&amp; a &gt;= v)) break;
+	for(int i=0;i&lt;m;i++){
+		scanf(&quot;%d%d&quot;,&amp;u,&amp;v);
+		for(int j=0;j&lt;n;j++){
+			if((pre[j]&gt;=u&amp;&amp;pre[j]&lt;=v)||(pre[j]&lt;=u&amp;&amp;pre[j]&gt;=v)){
+				ans=pre[j];
+				break;
+			}
 		}
-		if (node.count(u) == 0 &amp;&amp; node.count(v) == 0) printf(&quot;ERROR: %d and %d are not found.\n&quot;, u, v);
-		else if (node.count(u) == 0 || node.count(v) == 0) printf(&quot;ERROR: %d is not found.\n&quot;, node.count(u) == 0?u:v);
-		else if ((a &lt; u &amp;&amp; a &gt; v) || (a &gt; u &amp;&amp; a &lt; v)) printf(&quot;LCA of %d and %d is %d.\n&quot;, u, v, a);
-		else if (a == v || a == u) printf(&quot;%d is an ancestor of %d.\n&quot;, a, a == v ? u : v);
+		if(mp.count(u)==0&amp;&amp;mp.count(v)==0) printf(&quot;ERROR: %d and %d are not found.\n&quot;,u,v);
+		else if(mp.count(u)==0&amp;&amp;mp.count(v)!=0) printf(&quot;ERROR: %d is not found.\n&quot;,u);
+		else if(mp.count(v)==0&amp;&amp;mp.count(u)!=0) printf(&quot;ERROR: %d is not found.\n&quot;,v);
+		else if(ans==u||ans==v) printf(&quot;%d is an ancestor of %d.\n&quot;,ans,ans==u?v:u);
+		else printf(&quot;LCA of %d and %d is %d.\n&quot;,u,v,ans);
 	}
 	return 0;
 }
@@ -6712,8 +6770,9 @@ int main(){
 	return 0;
 }
 </code></pre>
-<h3 id="a1151">A1151</h3>
-<pre><code>#include&lt;cstdio&gt;
+<h3 id="a115130-树-中序加先序求lca">A1151(30  树 中序加先序求LCA)</h3>
+<pre><code>方法一:
+#include&lt;cstdio&gt;
 #include&lt;map&gt;
 #include&lt;vector&gt;
 using namespace std;
@@ -6746,6 +6805,60 @@ int main(){
 		if(pos.count(b)==0&amp;&amp;pos.count(a)!=0) printf(&quot;ERROR: %d is not found.\n&quot;,b);
 		if(pos.count(a)==0&amp;&amp;pos.count(b)==0) printf(&quot;ERROR: %d and %d are not found.\n&quot;,a,b);
 		if(pos.count(a)!=0&amp;&amp;pos.count(b)!=0) lca(1,n,1,a,b);
+	}
+	return 0;
+}
+
+方法二:建树加dfs
+#include&lt;cstdio&gt;
+#include&lt;unordered_map&gt;
+using namespace std;
+const int maxn=10010;
+int in[maxn],pre[maxn];
+struct node{
+	int v;
+	node*left,*right;
+};
+node* create(int prel,int prer,int inl,int inr){
+	if(prel&gt;prer) return NULL;
+	node*root=new node;
+	root-&gt;v=pre[prel];
+	int k=inl;
+	while(in[k]!=root-&gt;v&amp;&amp;k&lt;=inr) k++;
+	int leftnum=k-inl;
+	root-&gt;left=create(prel+1,prel+leftnum,inl,k-1);
+	root-&gt;right=create(prel+leftnum+1,prer,k+1,inr);
+	return root;
+}
+node* lca(node*root,int a,int b){
+	if(root==NULL||root-&gt;v==a||root-&gt;v==b) return root;
+	node*l=lca(root-&gt;left,a,b);
+	node*r=lca(root-&gt;right,a,b);
+	if(l==NULL) return r;
+	if(r==NULL) return l;
+	return root;
+}
+int main(){
+	int m,n,u,v,res;
+	scanf(&quot;%d%d&quot;,&amp;m,&amp;n);
+	unordered_map&lt;int,bool&gt;mp;
+	for(int i=0;i&lt;n;i++){
+		scanf(&quot;%d&quot;,&amp;in[i]);
+		mp[in[i]]=true;
+	}
+	for(int i=0;i&lt;n;i++) scanf(&quot;%d&quot;,&amp;pre[i]);
+	node*root=create(0,n-1,0,n-1);
+	for(int i=0;i&lt;m;i++){
+		scanf(&quot;%d%d&quot;,&amp;u,&amp;v);
+		if(mp.count(u)==0&amp;&amp;mp.count(v)==0) printf(&quot;ERROR: %d and %d are not found.\n&quot;,u,v);
+		else if(mp.count(u)==0&amp;&amp;mp.count(v)!=0) printf(&quot;ERROR: %d is not found.\n&quot;,u);
+		else if(mp.count(v)==0&amp;&amp;mp.count(u)!=0) printf(&quot;ERROR: %d is not found.\n&quot;,v);
+		else{
+			node*ans=lca(root,u,v);
+			res=ans-&gt;v;
+			if(res==u||res==v) printf(&quot;%d is an ancestor of %d.\n&quot;,res,res==u?v:u);
+		    else printf(&quot;LCA of %d and %d is %d.\n&quot;,u,v,res);
+		}
 	}
 	return 0;
 }
@@ -7119,6 +7232,7 @@ bool operator &lt; (const node &amp;a,const node &amp;b){
 }
 //set存放的node型变量就会定义的方式排序
 </code></pre>
+<p>可以考虑 ⽤ unordered_map （或者 unordered_set ）缩短代码运⾏时间、提⾼代码效率</p>
 </li>
 </ul>
 <p>A1039,A1047,A1063,A1060,A1100,A1054，A1071,A1022 A1120 ,A1149(map、vector)</p>
@@ -8297,6 +8411,50 @@ vector&lt;int&gt; levelorder(node* root) {//层序遍历中
 </code></pre>
 </li>
 </ul>
+</li>
+<li>
+<p>红黑树</p>
+<p>定义：红黑树是每个节点都带有颜色属性的平衡二叉查找树 ，颜色为红色或黑色。除了二叉查找树一般要求以外，对于任何有效的红黑树增加了如下的额外要求:</p>
+<p>（1） 节点是要么红色或要么是黑色。</p>
+<p>（2） 根一定是黑色节点。</p>
+<p>（3） 每个叶子结点都带有两个空的黑色结点（称之为NIL节点，它又被称为黑哨兵）。</p>
+<p>（4） 每个红色节点的两个子节点都是黑色（或者说从每个叶子到根的所有路径上不能有两个连续的红色节点）。</p>
+<p>（5） 从任一节点到它所能到达得叶子节点的所有简单路径都包含相同数目的黑色节点</p>
+<pre><code>void create(node*&amp;root,int v){//创建BST
+	if(root==NULL){
+		root=new node;
+		root-&gt;v=v;
+		root-&gt;left=root-&gt;right=NULL;
+		return;
+	}
+	if(abs(v)&lt;=abs(root-&gt;v)) create(root-&gt;left,v);
+	else create(root-&gt;right,v);
+}
+//负点权代表红，正点权代表黑
+bool judge1(node*root){//判断红结点的孩子结点是否都为黑
+	if(root==NULL) return true;
+	if(root-&gt;v&lt;0){
+		if(root-&gt;left!=NULL&amp;&amp;root-&gt;left-&gt;v&lt;0) return false;
+		if(root-&gt;right!=NULL&amp;&amp;root-&gt;right-&gt;v&lt;0) return false;
+	}
+	return judge1(root-&gt;left)&amp;&amp;judge1(root-&gt;right);
+}
+
+int getnum(node*root){
+	if(root==NULL) return 0;
+	int l=getnum(root-&gt;left);
+	int r=getnum(root-&gt;right);
+	return root-&gt;v&gt;0? max(l,r)+1 :max(l,r);
+}
+bool judge2(node*root){//判断从任意结点到叶⼦结点的路径中，黑色结点的个数是否相同
+	if(root==NULL) return true;
+	int l=getnum(root-&gt;left);
+	int r=getnum(root-&gt;right);
+	if(l!=r) return false;
+	return judge2(root-&gt;left)&amp;&amp;judge2(root-&gt;right);
+}
+</code></pre>
+<p>1135(30 判断红黑树 递归判断)</p>
 </li>
 </ul>
 <h3 id="26-并查集">26 并查集</h3>

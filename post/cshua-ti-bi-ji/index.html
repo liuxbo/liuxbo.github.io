@@ -7,7 +7,7 @@
 <meta name="description" content="菜鸡成长之路">
 <meta name="theme-color" content="#000">
 <title>c++(PAT)刷题笔记汇总 | lxb&#39;blog</title>
-<link rel="shortcut icon" href="https://liuxbo.github.io/favicon.ico?v=1594311285817">
+<link rel="shortcut icon" href="https://liuxbo.github.io/favicon.ico?v=1594532674400">
 <link rel="stylesheet" href="https://liuxbo.github.io/styles/main.css">
 
 <link rel="stylesheet" href="/media/css/gemini.css">
@@ -514,12 +514,12 @@ window.addEventListener('load', function() {
     
     <span class="meta-item">
       <i class="fa fa-clock-o"></i>
-      <span>59分钟</span>
+      <span>62分钟</span>
     </span>
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>12430<span class="pc-show">字数</span></span>
+      <span>12895<span class="pc-show">字数</span></span>
     </span>
   </div>
 </header>
@@ -761,6 +761,7 @@ bool operator &lt; (const node &amp;a,const node &amp;b){
 }
 //set存放的node型变量就会定义的方式排序
 </code></pre>
+<p>可以考虑 ⽤ unordered_map （或者 unordered_set ）缩短代码运⾏时间、提⾼代码效率</p>
 </li>
 </ul>
 <p>A1039,A1047,A1063,A1060,A1100,A1054，A1071,A1022 A1120 ,A1149(map、vector)</p>
@@ -1939,6 +1940,50 @@ vector&lt;int&gt; levelorder(node* root) {//层序遍历中
 </code></pre>
 </li>
 </ul>
+</li>
+<li>
+<p>红黑树</p>
+<p>定义：红黑树是每个节点都带有颜色属性的平衡二叉查找树 ，颜色为红色或黑色。除了二叉查找树一般要求以外，对于任何有效的红黑树增加了如下的额外要求:</p>
+<p>（1） 节点是要么红色或要么是黑色。</p>
+<p>（2） 根一定是黑色节点。</p>
+<p>（3） 每个叶子结点都带有两个空的黑色结点（称之为NIL节点，它又被称为黑哨兵）。</p>
+<p>（4） 每个红色节点的两个子节点都是黑色（或者说从每个叶子到根的所有路径上不能有两个连续的红色节点）。</p>
+<p>（5） 从任一节点到它所能到达得叶子节点的所有简单路径都包含相同数目的黑色节点</p>
+<pre><code>void create(node*&amp;root,int v){//创建BST
+	if(root==NULL){
+		root=new node;
+		root-&gt;v=v;
+		root-&gt;left=root-&gt;right=NULL;
+		return;
+	}
+	if(abs(v)&lt;=abs(root-&gt;v)) create(root-&gt;left,v);
+	else create(root-&gt;right,v);
+}
+//负点权代表红，正点权代表黑
+bool judge1(node*root){//判断红结点的孩子结点是否都为黑
+	if(root==NULL) return true;
+	if(root-&gt;v&lt;0){
+		if(root-&gt;left!=NULL&amp;&amp;root-&gt;left-&gt;v&lt;0) return false;
+		if(root-&gt;right!=NULL&amp;&amp;root-&gt;right-&gt;v&lt;0) return false;
+	}
+	return judge1(root-&gt;left)&amp;&amp;judge1(root-&gt;right);
+}
+
+int getnum(node*root){
+	if(root==NULL) return 0;
+	int l=getnum(root-&gt;left);
+	int r=getnum(root-&gt;right);
+	return root-&gt;v&gt;0? max(l,r)+1 :max(l,r);
+}
+bool judge2(node*root){//判断从任意结点到叶⼦结点的路径中，黑色结点的个数是否相同
+	if(root==NULL) return true;
+	int l=getnum(root-&gt;left);
+	int r=getnum(root-&gt;right);
+	if(l!=r) return false;
+	return judge2(root-&gt;left)&amp;&amp;judge2(root-&gt;right);
+}
+</code></pre>
+<p>1135(30 判断红黑树 递归判断)</p>
 </li>
 </ul>
 <h3 id="26-并查集">26 并查集</h3>
