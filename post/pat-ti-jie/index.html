@@ -7,7 +7,7 @@
 <meta name="description" content="菜鸡成长之路">
 <meta name="theme-color" content="#000">
 <title>PAT题解 | lxb&#39;blog</title>
-<link rel="shortcut icon" href="https://liuxbo.github.io/favicon.ico?v=1594532674400">
+<link rel="shortcut icon" href="https://liuxbo.github.io/favicon.ico?v=1594636024635">
 <link rel="stylesheet" href="https://liuxbo.github.io/styles/main.css">
 
 <link rel="stylesheet" href="/media/css/gemini.css">
@@ -335,8 +335,9 @@
 <li><a href="#a114225-%E6%97%A0%E5%90%91%E5%AE%8C%E5%85%A8%E5%9B%BE-%E6%9C%80%E5%A4%A7%E5%AD%90%E5%9B%BE-%E4%B8%A4%E7%82%B9%E7%9B%B8%E8%BF%9E">A1142(25 无向完全图 最大子图  两点相连)</a></li>
 <li><a href="#a114330-%E6%A0%91-lca-%E6%9C%80%E4%BD%8E%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88">A1143(30 树 LCA 最低公共祖先)</a></li>
 <li><a href="#a114525-hash-%E5%B9%B3%E6%96%B9%E6%8E%A2%E6%9F%A5">A1145(25 hash 平方探查)</a></li>
-<li><a href="#a1144">A1144</a></li>
-<li><a href="#a1146%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E4%B8%BA%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F%E5%BA%8F%E5%88%97">A1146(判断是否为拓扑排序序列 )</a></li>
+<li><a href="#a114420-%E6%89%BE%E4%B8%A2%E5%A4%B1%E7%9A%84%E6%9C%80%E5%B0%8F%E6%AD%A3%E6%95%B0">A1144(20 找丢失的最小正数)</a></li>
+<li><a href="#a114525-hash-%E5%B9%B3%E6%96%B9%E6%8E%A2%E6%9F%A5%E6%B3%95%E6%8F%92%E5%85%A5%E4%B8%8E%E6%9F%A5%E6%89%BE">A1145(25 hash 平方探查法插入与查找)</a></li>
+<li><a href="#a114625-%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E4%B8%BA%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F%E5%BA%8F%E5%88%97">A1146(25 判断是否为拓扑排序序列)</a></li>
 <li><a href="#a114730-%E5%88%A4%E6%96%AD%E5%A4%A7%E9%A1%B6%E5%A0%86%E5%B0%8F%E9%A1%B6%E5%A0%86-%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86">A1147(30  判断大顶堆小顶堆 后序遍历)</a></li>
 <li><a href="#a1148%E7%8B%BC%E4%BA%BA%E6%9D%80-%E6%89%BE%E5%88%B0%E4%B8%A4%E4%B8%AA%E7%8B%BC%E4%BA%BA">A1148(狼人杀 找到两个狼人)</a></li>
 <li><a href="#a1149">A1149</a></li>
@@ -633,12 +634,12 @@ window.addEventListener('load', function() {
     
     <span class="meta-item">
       <i class="fa fa-clock-o"></i>
-      <span>186分钟</span>
+      <span>188分钟</span>
     </span>
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>30208<span class="pc-show">字数</span></span>
+      <span>30432<span class="pc-show">字数</span></span>
     </span>
   </div>
 </header>
@@ -6674,56 +6675,96 @@ int main(){
     return 0;
 }
 </code></pre>
-<h3 id="a1144">A1144</h3>
-<pre><code>#include&lt;cstdio&gt;
+<h3 id="a114420-找丢失的最小正数">A1144(20 找丢失的最小正数)</h3>
+<pre><code>#include&lt;iostream&gt;
 #include&lt;map&gt;
 using namespace std;
 int main(){
-    int n,temp,num=0;
-    map&lt;int,int&gt; s;
-    scanf(&quot;%d&quot;,&amp;n);
-    for(int i=0;i&lt;n;i++) {
-        scanf(&quot;%d&quot;,&amp;temp);
-        s[temp]++;
-    }
-    while(++num){
-        if(s.count(num)==0){
-            printf(&quot;%d&quot;,num);
-            break;
-        }
-    }
-    return 0;
+	int n,ans=1,temp;
+    map&lt;int,int&gt; mp;
+	cin&gt;&gt;n;
+	for(int i=0;i&lt;n;i++){
+		cin&gt;&gt;temp;
+		if(temp&gt;0) mp[temp]++;
+	}
+	while(mp[ans]!=0) ans++;
+	cout&lt;&lt;ans;
+	return 0;
+} 
+</code></pre>
+<h3 id="a114525-hash-平方探查法插入与查找">A1145(25 hash 平方探查法插入与查找)</h3>
+<pre><code>#include&lt;cstdio&gt;
+#include&lt;cmath&gt;
+#include&lt;vector&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+bool isprime(int n){
+	if(n&lt;=1) return false;
+	int sqr=sqrt(n*1.0);
+	for(int i=2;i&lt;=sqr;i++){
+		if(n%i==0) return false;
+	}
+	return true;
+}
+int main(){
+	int msize,n,m,temp,cnt=0;;
+	scanf(&quot;%d%d%d&quot;,&amp;msize,&amp;n,&amp;m);
+	while(!isprime(msize)) msize++;
+	vector&lt;int&gt; v(msize,0);
+	for(int i=0;i&lt;n;i++){
+		scanf(&quot;%d&quot;,&amp;temp);
+		int flag=0;
+		for(int j=0;j&lt;msize;j++){//注意是小于号 
+			int pos=(temp+j*j)%msize;
+			if(v[pos]==0){
+				v[pos]=temp;
+				flag=1;
+				break;
+			}
+		}
+		if(flag==0) printf(&quot;%d cannot be inserted.\n&quot;,temp);
+	}
+	for(int i=0;i&lt;m;i++){
+		scanf(&quot;%d&quot;,&amp;temp);
+		for(int j=0;j&lt;=msize;j++){//注意这里是等号,与插入时不同，要回到初始位置才知道查找失败 
+			int pos=(temp+j*j)%msize;
+			cnt++;
+			if(v[pos]==temp||v[pos]==0) break;
+		}
+	}
+	printf(&quot;%.1f&quot;,cnt*1.0/m);
 }
 </code></pre>
-<h3 id="a1146判断是否为拓扑排序序列">A1146(判断是否为拓扑排序序列 )</h3>
+<h3 id="a114625-判断是否为拓扑排序序列">A1146(25 判断是否为拓扑排序序列)</h3>
 <pre><code>#include&lt;cstdio&gt;
 #include&lt;vector&gt;
 using namespace std;
-int main() {
-	int a, b, flag = 0, in[1010] = { 0 }, n, m, k;
-	vector&lt;int&gt; v[1010];
-	scanf(&quot;%d%d&quot;, &amp;n, &amp;m);
-	for (int i = 0; i &lt; m; i++) {
-		scanf(&quot;%d%d&quot;, &amp;a, &amp;b);
-		v[a].push_back(b);
-		in[b]++;
+int main(){
+	int n,m,k,in[1001]={0},flag=0,temp;
+	scanf(&quot;%d%d&quot;,&amp;n,&amp;m);
+	vector&lt;int&gt; v[1001];
+	for(int i=0;i&lt;m;i++){
+		int v1,v2;
+		scanf(&quot;%d%d&quot;,&amp;v1,&amp;v2);
+		v[v1].push_back(v2);
+		in[v2]++;
 	}
-	scanf(&quot;%d&quot;, &amp;k);
-	for (int i = 0; i &lt; k; i++) {
-		int judge = 1;
-		vector&lt;int&gt; query(in, in + n + 1);
-		for (int j = 0; j &lt; n; j++) {
-			scanf(&quot;%d&quot;, &amp;a);
-			if (query[a] != 0) judge = 0;
-			for (int x = 0; x &lt; v[a].size(); x++) query[v[a][x]]--;
+	scanf(&quot;%d&quot;,&amp;k);
+	for(int i=0;i&lt;k;i++){
+		vector&lt;int&gt; tin(in,in+n+1);
+		int judge=1;
+		for(int j=0;j&lt;n;j++){
+			scanf(&quot;%d&quot;,&amp;temp);
+			if(tin[temp]!=0) judge=0;
+			for(int x=0;x&lt;v[temp].size();x++) tin[v[temp][x]]--;
 		}
-    if(judge==1) continue;
-		else if (flag == 1 &amp;&amp; judge == 0) printf(&quot; %d&quot;, i);
-		else if (flag == 0 &amp;&amp; judge == 0) printf(&quot;%d&quot;, i);
-		flag = 1;
+		if(judge==1) continue;
+		if(flag==1) printf(&quot; &quot;);
+		printf(&quot;%d&quot;,i);
+		flag=1;	
 	}
 	return 0;
-}
+} 
 </code></pre>
 <h3 id="a114730-判断大顶堆小顶堆-后序遍历">A1147(30  判断大顶堆小顶堆 后序遍历)</h3>
 <pre><code>#include&lt;cstdio&gt;
@@ -6744,7 +6785,7 @@ int main() {
 	while (m--) {
 		v.resize(n+1);
 		bool flagmin = true, flagmax = true;
-		for (int i = 1; i &lt;= n; i++) scanf_s(&quot;%d&quot;, &amp;v[i]);
+		for (int i = 1; i &lt;= n; i++) scanf(&quot;%d&quot;, &amp;v[i]);
 		for (int i = 2; i &lt;= n; i++) {
 			if (v[i] &gt;= v[i / 2]) flagmax = false;
 			if (v[i] &lt;= v[i / 2]) flagmin = false;
@@ -7051,42 +7092,41 @@ int main() {
 <pre><code>#include&lt;cstdio&gt;
 #include&lt;vector&gt;
 using namespace std;
-vector&lt;int&gt;v;
-int n, a[1010];
-void dfs(int index) {
-	if (index * 2 &gt; n &amp;&amp; index * 2 + 1 &gt; n) {
-		if (index &lt;= n) {
-			for (int i = 0; i &lt; v.size(); i++) {
-				if (i != 0) printf(&quot; &quot;);
-				printf(&quot;%d&quot;, v[i]);
+int n,t[1005],index;
+vector&lt;int&gt; v;
+void dfs(int i){
+	if(i*2+1&gt;n&amp;&amp;i*2&gt;n){
+		if(i&lt;=n){
+			for(int i=0;i&lt;v.size();i++){
+				if(i&gt;0) printf(&quot; &quot;);
+				printf(&quot;%d&quot;,v[i]);
 			}
 			printf(&quot;\n&quot;);
 		}
+		return;
 	}
-	else {
-		v.push_back(a[index * 2 + 1]);
-		dfs(index * 2 + 1);
-		v.pop_back();
-		v.push_back(a[index * 2]);
-		dfs(index * 2);
-		v.pop_back();
-	}
+	v.push_back(t[i*2+1]);
+	dfs(i*2+1);
+	v.pop_back();
+	v.push_back(t[i*2]);
+	dfs(i*2);
+	v.pop_back();
 }
-int main() {
-	bool minflag = true, maxflag = true;
-	scanf(&quot;%d&quot;, &amp;n);
-	for (int i = 1; i &lt;= n; i++) scanf(&quot;%d&quot;, &amp;a[i]);
-	v.push_back(a[1]);
-	for (int i = 2; i &lt;= n; i++) {
-		if (a[i] &gt;= a[i / 2]) maxflag = false;
-		if (a[i] &lt;= a[i / 2]) minflag = false;
+int main(){
+	scanf(&quot;%d&quot;,&amp;n);
+	int flagmax=1,flagmin=1;
+	for(int i=1;i&lt;=n;i++) scanf(&quot;%d&quot;,&amp;t[i]);
+	v.push_back(t[1]);
+	for(int i=2;i&lt;=n;i++){
+		if(t[i]&lt;t[i/2]) flagmin=0;
+		if(t[i]&gt;t[i/2]) flagmax=0;
 	}
 	dfs(1);
-	if (minflag) printf(&quot;Min Heap&quot;);
-	else if (maxflag) printf(&quot;Max Heap&quot;);
-	else if (maxflag == false &amp;&amp; minflag == false) printf(&quot;Not Heap&quot;);
+	if(flagmin==1) printf(&quot;Min Heap&quot;);
+	else if(flagmax==1) printf(&quot;Max Heap&quot;);
+	else if(flagmin==0&amp;&amp;flagmax==0) printf(&quot;Not Heap&quot;);
 	return 0;
-}
+} 
 </code></pre>
 
               </div>

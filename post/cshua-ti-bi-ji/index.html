@@ -7,7 +7,7 @@
 <meta name="description" content="菜鸡成长之路">
 <meta name="theme-color" content="#000">
 <title>c++(PAT)刷题笔记汇总 | lxb&#39;blog</title>
-<link rel="shortcut icon" href="https://liuxbo.github.io/favicon.ico?v=1594532674400">
+<link rel="shortcut icon" href="https://liuxbo.github.io/favicon.ico?v=1594636024635">
 <link rel="stylesheet" href="https://liuxbo.github.io/styles/main.css">
 
 <link rel="stylesheet" href="/media/css/gemini.css">
@@ -519,7 +519,7 @@ window.addEventListener('load', function() {
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>12895<span class="pc-show">字数</span></span>
+      <span>13034<span class="pc-show">字数</span></span>
     </span>
   </div>
 </header>
@@ -1147,10 +1147,37 @@ void heapsort(){
 </li>
 <li>
 <p>拓扑排序</p>
-<pre><code>
+<pre><code>vector&lt;int&gt; G[maxn]; //邻接表
+int n,m,indegree[maxn]; //顶点数，入度 
 </code></pre>
 </li>
 </ul>
+<p>bool topologicalSort(){<br>
+int num=0;<br>
+queue<int> q;<br>
+for(int i=0;i&lt;n;i++){<br>
+if(indegree[i])==0 q.push(i);<br>
+}<br>
+while(!q.empty()){<br>
+int u=q.front();//取队首结点<br>
+q.pop();<br>
+for(int i=0;i&lt;G[u].size();i++){<br>
+int v=G[u][i];//u的后继结点<br>
+indegree[v]--;<br>
+if(indegree[v]<mark>0) q.push(v);<br>
+}<br>
+G[u].clear();//清空u的所有出边，如无必要可不写<br>
+num++;<br>
+}<br>
+if(num</mark>n) return true;//加入拓扑排序的顶点数为n，说明拓扑排序成功<br>
+else return false; //顶点数小于n，失败<br>
+}</p>
+<pre><code>
+
+
+
+
+</code></pre>
 </li>
 </ul>
 <h3 id="15-计算时长">15 计算时长</h3>
