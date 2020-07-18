@@ -7,7 +7,7 @@
 <meta name="description" content="菜鸡成长之路">
 <meta name="theme-color" content="#000">
 <title>c++(PAT)刷题笔记汇总 | lxb&#39;blog</title>
-<link rel="shortcut icon" href="https://liuxbo.github.io/favicon.ico?v=1594636024635">
+<link rel="shortcut icon" href="https://liuxbo.github.io/favicon.ico?v=1595064463780">
 <link rel="stylesheet" href="https://liuxbo.github.io/styles/main.css">
 
 <link rel="stylesheet" href="/media/css/gemini.css">
@@ -514,12 +514,12 @@ window.addEventListener('load', function() {
     
     <span class="meta-item">
       <i class="fa fa-clock-o"></i>
-      <span>62分钟</span>
+      <span>65分钟</span>
     </span>
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>13034<span class="pc-show">字数</span></span>
+      <span>13572<span class="pc-show">字数</span></span>
     </span>
   </div>
 </header>
@@ -724,24 +724,22 @@ vector&lt;int&gt; vec1{ 1, 2, 3, 4, 5, 6 };       //vec1内容1,2，3,4,5,6
 <p>该容器只能通过top()访问队首元素，push()进队，pop()出队，empty()检空</p>
 </li>
 <li>
+<p>String</p>
+<p><code>string &amp;insert(int p0, int n, char c);</code>//在p0处插入n个字符c</p>
+<p><code>string &amp;insert(int p0,const string &amp;s);</code>//在p0位置插入字符串s</p>
+<p><code>void insert(iterator it, const_iterator first, const_iterator last);</code>  //在it处插入从first开始至last-1的所有字符</p>
+</li>
+<li>
 <p>异同</p>
 <p>只有<code>vector</code>和<code>string</code>支持<code>*(it+i)</code>的访问方式 ,<code>set</code>只能通过迭代器访问(即*it)，</p>
 <p><code>map</code> 、<code>string</code>和<code>vector</code>支持下标访问和迭代器访问。</p>
 <p>map与set内部都会自动递增排序，(这里指map的key），并且set的元素值与map的key在其各自内部都是唯一的，包括数字和字</p>
 </li>
 <li>
-<p>常用函数</p>
-<ul>
-<li>
-<p><code>string</code>  <code>s.begin() s.end()</code>  <code>s.c_str()</code> <code>s.length() s.size()</code> <code>s.substr()</code></p>
-</li>
-<li>
-<p><code>map</code></p>
+<p>map</p>
 <p>使用count，返回的是被查找元素的个数。如果有，返回1；否则，返回0。注意，map中不存在相同元素，所以返回值只能是1或0。count(key值)</p>
 <p>遍历map中所有的元素<code>for (auto it : mp)</code>,mp为map容器变量名，用<code>it.first</code>和<code>it.second</code>访问每个key和相应的value</p>
 <p>find() erase() size() clear()</p>
-</li>
-</ul>
 </li>
 <li>
 <p>注意</p>
@@ -861,11 +859,16 @@ do{
 z[num++]=n%b;
 n/=b;
 }while(n!=0);
-2.数字形式(将十进制数a转化为任意b进制数，将结果存在数组中)
-while(a != 0) {
-   arr[index++] = a % b;
-   a = a / b;
-}//注意在数组中存储的顺序(下标从0开始)是反的
+2.数字形式(将十进制数n转化为任意b进制数，将结果存在数组中)
+vector change(int n,int b){
+	vector&lt;int&gt; v;
+	int ans=0;
+	while(n!=0){
+		v.push_back(n%b);
+		n/=b;
+	}//注意在数组中存储的顺序(下标从0开始)是反的
+	return ans;
+}
 3.
 void change(int n,int b){
 	if(n&gt;0){
@@ -877,6 +880,11 @@ void change(int n,int b){
 }
 </code></pre>
 <ul>
+<li>
+<p>其他进制转化为十进制</p>
+<pre><code>for(int i=0;i&lt;v.size();i++) ans+=v[i]*pow(b,i);
+</code></pre>
+</li>
 <li>
 <p>给定⼀个数值和⼀个进制，将它转化为10进制。转化过程中可能产⽣溢出,数值中只有小写字母和数字</p>
 <pre><code>long long convert(string n, long long radix) {
@@ -917,7 +925,7 @@ void to_array(int n,int a[]){
 2.数组变为数字
 int exp=0;
 for(int i=0;i&lt;len;i++){
-    exp=exp*10+(str[i]='0');
+    exp=exp*10+(str[i]-'0');
 }
 或
 
@@ -1294,43 +1302,60 @@ bool flag3 = 0; // flag3为false
 </li>
 <li>
 <p>分数化简</p>
-<pre><code>struct fraction {
-	ll up, down;
-}a, b;
-fraction reduction(fraction result) {
-	if (result.down &lt; 0) {
-		result.up = -result.up;
-		result.down = -result.down;
+<pre><code>struct node{
+	long long up, down;
+}
+node reduction(node res){
+	if(res.down&lt;0){
+		res.up=-res.up;
+		res.down=-res.down;
 	}
-	if (result.up == 0) result.down = 1;
-	else {
-		ll gcdvalue = gcd(abs(result.up), abs(result.down));
-		result.up /= gcdvalue;
-		result.down /= gcdvalue;
+	if(res.up==0) res.down=1;
+	else{
+		long long d=gcd(abs(res.up),abs(res.down));
+		res.up/=d;
+		res.down/=d;
 	}
-	return result;
+	return res;
 }
 </code></pre>
 </li>
 <li>
-<p>四则运算</p>
-<pre><code>fraction add(fraction f1, fraction f2) {
-	fraction result;
-	result.up = f1.up * f2.down + f1.down * f2.up;
-	result.down = f1.down * f2.down;
-	return reduction(result);
+<p>分数的四则运算</p>
+<pre><code>node add(node f1,node f2){//分数相加
+	node res;
+	res.up=f1.down*f2.up+f1.up*f2.down;
+	res.down=f1.down*f2.down;
+	return reduction(res);
+}
+node minu(node f1,node f2){//分数相减
+	node res;
+	res.up=f1.up*f2.down-f2.up*f1.down;
+	res.down=f1.down*f2.down;
+	return reduction(res);
+}
+node multi(node f1,node f2){//分数相乘
+	node res;
+	res.up=f1.up*f2.up;
+	res.down=f1.down*f2.down;
+	return reduction(res);
+}
+node divide(node f1,node f2){//分数相除
+	node res;
+	res.up=f1.up*f2.down;
+	res.down=f1.down*f2.up;
+	return reduction(res);
 }
 </code></pre>
 </li>
 <li>
 <p>分数输出</p>
-<pre><code>void showresult(fraction r) {
-	r = reduction(r);
-	if (r.up &lt; 0) printf(&quot;(&quot;);
-	if (r.down == 1) printf(&quot;%lld&quot;, r.up);
-	else if (abs(r.up) &lt; r.down) printf(&quot;%lld/%lld&quot;, r.up, r.down);
-	else if (abs(r.up) &gt; r.down) printf(&quot;%lld %lld/%lld&quot;, r.up / r.down, abs(r.up) % r.down, r.down);
-	if (r.up &lt; 0) printf(&quot;)&quot;);
+<pre><code>void showres(node res){
+	res=reduction(res);
+	if(res.down==1) printf(&quot;%lld\n&quot;,res.up);
+	else if(abs(res.up)&gt;abs(res.down)){
+		printf(&quot;%lld %lld/%lld\n&quot;,res.up/res.down,abs(res.up%res.down),res.down);
+	}else printf(&quot;%lld/%lld\n&quot;,res.up,res.down);
 }
 </code></pre>
 </li>
@@ -1362,6 +1387,23 @@ void find_prime() {
 </li>
 <li>
 <p>大整数运算</p>
+<ul>
+<li>
+<p>以字符串方式存储、运算</p>
+<pre><code>string add(string s1, string s2) {//加法运算，十进制，两个数位数相同
+	string s = s1;
+	int carry = 0;
+	for (int i = s1.size() - 1; i &gt;= 0; i--) {
+		s[i] = ((s1[i] - '0') + (s2[i] - '0') + carry) % 10 + '0';
+		carry = ((s1[i] - '0') + (s2[i] - '0') + carry) / 10;
+	}
+	if (carry &gt; 0) s = '1' + s;
+	return s;
+}
+</code></pre>
+</li>
+<li>
+<p>以结构体方式存储运算</p>
 <pre><code>struct bign {
 	int d[1000];
 	int len;
@@ -1374,11 +1416,40 @@ bign change(string str) {
 	bign a;
 	a.len = str.length();
 	for (int i = 0; i &lt; a.len; i++) {
-		a.d[i] = str[a.len - 1 - i]-'0';
+	a.d[i] = str[a.len - 1 - i]-'0';//整数的高位会变成数组的低位
 	}
 	return a;
 }
-bign multi(bign a, int b) {
+
+bign add(bign a, bign b) {//加法
+	bign c;
+	int carry=0;
+	for (int i = 0; i &lt; a.len||i&lt;b.len; i++) {
+		int temp = a.d[i] +b.d[i] + carry;
+		c.d[c.len++] = temp % 10;
+		carry = temp / 10;
+	}
+	if(carry != 0) {
+		c.d[c.len++] = carry;
+	}
+	return c;
+}
+
+bign sub(bign a, bign b) {//加法
+	bign c;
+	for (int i = 0; i &lt; a.len||i&lt;b.len; i++) {
+	    if(a.d[i]&lt;b.d[i]){//如果不够减
+	       a.d[i+1]--;//向高位结尾
+	       a.d[i]+=10;//当前位加10
+	    }
+	    c.d[c.len++]=a.d[i]-b.d[i];
+	}
+	while(c.len-1&gt;=1&amp;&amp;c.d[c.len-1]==0) c.len--;
+	//去除高位的0，同时至少保留一位最低位
+	return c;
+}
+
+bign multi(bign a, int b) {//乘法
 	bign c;
 	int carry=0;
 	for (int i = 0; i &lt; a.len; i++) {
@@ -1386,13 +1457,30 @@ bign multi(bign a, int b) {
 		c.d[c.len++] = temp % 10;
 		carry = temp / 10;
 	}
-	while (carry != 0) {
+	while (carry != 0) {//乘法的进位可能不止一位
 		c.d[c.len++] = carry % 10;
 		carry /= 10;
 	}
 	return c;
 }
+
+bign divide(bign a,int b,int&amp; r){//r为余数
+    bign c;
+    c.len=a.len;
+    for(int i=a.len-1;i&gt;=0;i--){//从高位开始
+       r=r*10+a.d[i];//和上一位遗留的余数组合
+       if(r&lt;b) c.d[i]=0;//不够除,改位为0
+       else{
+          c.d[i]=r/b;//商
+          r=r%b; //获得新的余数
+       }
+    }
+    while(c.len-1&gt;=1&amp;&amp;c.d[c.len-1]==0)  c.len--;//去除高位的0，同时至少保留一位最低位
+    return c;
+}
 </code></pre>
+</li>
+</ul>
 </li>
 </ul>
 <p>A1069,A1049,A1088,A1015,A1078,A1096,A1023,A1024</p>
@@ -2623,7 +2711,7 @@ isfri[abs(stoi(a))*10000+abs(stoi(b))]=isfri[abs(stoi(b))*10000+abs(stoi(a))]=tr
 <p>30.题目中数据量大的时候最好不用<code>cin</code>和<code>cout</code></p>
 <p>31.数据量大时sort的cmp函数可以用引用传值，以防超时</p>
 <p>比如</p>
-<pre><code>bool cmp2(node&amp; a,node&amp; b){
+<pre><code>bool cmp2(cosnt node&amp; a,const node&amp; b){
 	return a.id&lt;b.id;
 }
 </code></pre>
