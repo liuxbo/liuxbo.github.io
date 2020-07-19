@@ -7,7 +7,7 @@
 <meta name="description" content="菜鸡成长之路">
 <meta name="theme-color" content="#000">
 <title>c++(PAT)刷题笔记汇总 | lxb&#39;blog</title>
-<link rel="shortcut icon" href="https://liuxbo.github.io/favicon.ico?v=1595064463780">
+<link rel="shortcut icon" href="https://liuxbo.github.io/favicon.ico?v=1595166129712">
 <link rel="stylesheet" href="https://liuxbo.github.io/styles/main.css">
 
 <link rel="stylesheet" href="/media/css/gemini.css">
@@ -152,7 +152,7 @@
     <div class="sidebar-item-box">
       <a href="/archives/">
         
-        <span class="site-item-stat-count">10</span>
+        <span class="site-item-stat-count">11</span>
         <span class="site-item-stat-name">文章</span>
       </a>
     </div>
@@ -519,7 +519,7 @@ window.addEventListener('load', function() {
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>13572<span class="pc-show">字数</span></span>
+      <span>13590<span class="pc-show">字数</span></span>
     </span>
   </div>
 </header>
@@ -736,7 +736,11 @@ vector&lt;int&gt; vec1{ 1, 2, 3, 4, 5, 6 };       //vec1内容1,2，3,4,5,6
 <p>map与set内部都会自动递增排序，(这里指map的key），并且set的元素值与map的key在其各自内部都是唯一的，包括数字和字</p>
 </li>
 <li>
-<p>map</p>
+<p>set、unordered_map</p>
+<p><code>s.find(value)</code>,返回集合s中值为value的迭代器</p>
+</li>
+<li>
+<p>map 、unordered_map</p>
 <p>使用count，返回的是被查找元素的个数。如果有，返回1；否则，返回0。注意，map中不存在相同元素，所以返回值只能是1或0。count(key值)</p>
 <p>遍历map中所有的元素<code>for (auto it : mp)</code>,mp为map容器变量名，用<code>it.first</code>和<code>it.second</code>访问每个key和相应的value</p>
 <p>find() erase() size() clear()</p>

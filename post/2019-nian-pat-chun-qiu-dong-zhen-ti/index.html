@@ -6,7 +6,7 @@
 <meta name="keywords" content="Gridea静态个人博客">
 <meta name="description" content="菜鸡成长之路">
 <meta name="theme-color" content="#000">
-<title>关于 | lxb&#39;blog</title>
+<title>2019年PAT春、秋、冬真题 | lxb&#39;blog</title>
 <link rel="shortcut icon" href="https://liuxbo.github.io/favicon.ico?v=1595166129712">
 <link rel="stylesheet" href="https://liuxbo.github.io/styles/main.css">
 
@@ -25,7 +25,7 @@
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
     onload="renderMathInElement(document.body);"></script>
 
-    <meta name="description" content="关于" />
+    <meta name="description" content="2019年PAT春、秋、冬真题" />
     <meta name="keywords" content="" />
   </head>
   <body>
@@ -190,9 +190,22 @@
     <ul class="markdownIt-TOC">
 <li>
 <ul>
-<li><a href="#%E5%85%B3%E4%BA%8E%E6%9C%AC%E7%AB%99-%E8%AE%B0%E5%BD%95%E5%AD%A6%E4%B9%A0%E5%92%8C%E7%94%9F%E6%B4%BB">🏠 关于本站  记录学习和生活</a></li>
-<li><a href="#%E5%8D%9A%E4%B8%BB%E6%98%AF%E8%B0%81">👨‍💻 博主是谁</a></li>
-<li><a href="#%E8%81%94%E7%B3%BB%E6%88%91%E5%91%80-qq1697896527">📬 联系我呀  QQ1697896527</a></li>
+<li>
+<ul>
+<li><a href="#115620-sexy-primes-%E7%B4%A0%E6%95%B0">1156(20 Sexy Primes  素数)</a></li>
+<li><a href="#115725-anniversary-unordered_mapset">1157(25 Anniversary unordered_map/set)</a></li>
+<li><a href="#115825-%E7%94%B5%E4%BF%A1%E8%AF%88%E9%AA%97-%E5%B9%B6%E6%9F%A5%E9%9B%86-%E5%9B%BE">1158(25 电信诈骗 并查集 图)</a></li>
+<li><a href="#1159">1159</a></li>
+<li><a href="#1160">1160</a></li>
+<li><a href="#1161">1161</a></li>
+<li><a href="#1162">1162</a></li>
+<li><a href="#1163">1163</a></li>
+<li><a href="#1164">1164</a></li>
+<li><a href="#1165">1165</a></li>
+<li><a href="#1166">1166</a></li>
+<li><a href="#1167">1167</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -445,8 +458,8 @@ window.addEventListener('load', function() {
               <div class="article-box">
     <header class="post-header">
   <h1 class="post-title">
-    <a class="post-title-link" href="https://liuxbo.github.io/post/about/">
-      关于
+    <a class="post-title-link" href="https://liuxbo.github.io/post/2019-nian-pat-chun-qiu-dong-zhen-ti/">
+      2019年PAT春、秋、冬真题
     </a>
   </h1>
   <div class="post-meta">
@@ -454,29 +467,377 @@ window.addEventListener('load', function() {
     <span class="meta-item pc-show">
       <i class="fa fa-calendar-o"></i>
       <span>发布于</span>
-      <span>2019-01-25</span>
+      <span>2020-07-19</span>
       <span class="post-meta-divider pc-show">|</span>
     </span>
     
     <span class="meta-item">
       <i class="fa fa-clock-o"></i>
-      <span>1分钟</span>
+      <span>14分钟</span>
     </span>
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>35<span class="pc-show">字数</span></span>
+      <span>2213<span class="pc-show">字数</span></span>
     </span>
   </div>
 </header>
 </div>
               <div class="post-body next-md-body" id="post_body">
-                <blockquote>
-<p>欢迎来到我的小站呀，很高兴遇见你！🤝</p>
-</blockquote>
-<h2 id="关于本站-记录学习和生活">🏠 关于本站  记录学习和生活</h2>
-<h2 id="博主是谁">👨‍💻 博主是谁</h2>
-<h2 id="联系我呀-qq1697896527">📬 联系我呀  QQ1697896527</h2>
+                <h3 id="115620-sexy-primes-素数">1156(20 Sexy Primes  素数)</h3>
+<p>题目描述：</p>
+<p>Sexy primes are pairs of primes of the form (p, p+6), so-named since “sex” is the Latin word for “six”. (Quoted from http://mathworld.wolfram.com/SexyPrimes.html)</p>
+<p>Now given an integer, you are supposed to tell if it is a sexy prime.</p>
+<p>Input Specification:<br>
+Each input file contains one test case. Each case gives a positive integer N (≤10^8).</p>
+<p>Output Specification:<br>
+For each case, print in a line Yes if N is a sexy prime, then print in the next line the other sexy prime paired with N (if the answer is not unique, output the smaller number). Or if N is not a sexy prime, print No instead, then print in the next line the smallest sexy prime which is larger than N.</p>
+<pre><code>Sample Input 1:
+47
+Sample Output 1:
+Yes
+41
+Sample Input 2:
+21
+Sample Output 2:
+No
+23
+</code></pre>
+<p>————————————————</p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cmath&gt;
+using namespace std;
+bool isprime(int x) {
+	if(x&lt;=1) return false;
+	int sqr=sqrt(1.0*x);
+	for(int i=2; i&lt;=sqr; i++) {
+		if(x%i==0) return false;
+	}
+	return true;
+}
+bool sexprime(int x) {
+	if(((isprime(x)&amp;&amp;isprime(x+6)))||((isprime(x))&amp;&amp;isprime(x-6)))
+		return true;
+	return false;
+}
+int main() {
+	int n;
+	cin&gt;&gt;n;
+	if(sexprime(n)) cout&lt;&lt;&quot;Yes\n&quot;&lt;&lt;n-6;
+	else {
+		cout&lt;&lt;&quot;No\n&quot;;
+		while(!sexprime(n)) n++;
+		cout&lt;&lt;n;
+	}
+	return 0;
+}
+</code></pre>
+<h3 id="115725-anniversary-unordered_mapset">1157(25 Anniversary unordered_map/set)</h3>
+<p>题目描述:</p>
+<p>Zhejiang University is about to celebrate her 122th anniversary in 2019. To prepare for the celebration, the alumni association （校友会） has gathered the ID’s of all her alumni. Now your job is to write a program to count the number of alumni<br>
+among all the people who come to the celebration.</p>
+<p>Input Specification:<br>
+Each input file contains one test case. For each case, the first part is about the information of all the alumni. Given in the first line is a positive integer NNN (≤105).<br>
+Then NNN lines follow, each contains an ID number of an alumnus. An ID number is a string of 18 digits or the letter X. It is guaranteed that all the ID’s are distinct.<br>
+The next part gives the information of all the people who come to the celebration.<br>
+Again given in the first line is a positive integer MMM(≤105). Then MMM lines follow, each contains an ID number of a guest. It is guaranteed that all the ID’s are distinct.</p>
+<p>Output Specification:<br>
+First print in a line the number of alumni among all the people who come to the celebration. Then in the second line, print the ID of the oldest alumnus – notice that the 7th - 14th digits of the ID gives one’s birth date. If no alumnus comes, output the ID of the oldest guest instead. It is guaranteed that such an alumnus or guest is unique.</p>
+<pre><code>Sample Input:
+5
+372928196906118710
+610481197806202213
+440684198612150417
+13072819571002001X
+150702193604190912
+6
+530125197901260019
+150702193604190912
+220221196701020034
+610481197806202213
+440684198612150417
+370205198709275042
+
+Sample Output:
+3
+150702193604190912
+</code></pre>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;string&gt;
+#include&lt;unordered_map&gt;
+using namespace std;
+int main() {
+	int n,m,cnt=0;
+	cin&gt;&gt;n;
+	getchar();//注意 
+	string s,oldest=&quot;999999999999999999&quot;;
+	unordered_map&lt;string,bool&gt; mp;
+	for(int i=0; i&lt;n; i++) {
+		cin&gt;&gt;s;
+		if(s.substr(6,8)&lt;oldest.substr(6,8)) oldest=s;
+		mp[s]=true;
+	}
+	cin&gt;&gt;m;
+	while(m--) {
+		cin&gt;&gt;s;
+		if(mp[s]==true) cnt++;
+	}
+	if(cnt!=0) cout&lt;&lt;cnt&lt;&lt;endl&lt;&lt;oldest;
+    return 0;
+}
+</code></pre>
+<h3 id="115825-电信诈骗-并查集-图">1158(25 电信诈骗 并查集 图)</h3>
+<p>题目描述:</p>
+<p>Telefraud（电信诈骗） remains a common and persistent problem in our society. In some cases, unsuspecting victims lose their entire life savings. To stop this crime, you are supposed to write a program to detect those suspects from a huge amount of phone call records.</p>
+<p>A person must be detected as a suspect if he/she makes more than K short phone calls to different people everyday, but no more than 20% of these people would call back. And more, if two suspects are calling each other, we say they might belong to the same gang. A makes a short phone call to B means that the total duration of the calls from A to B is no more than 5 minutes.</p>
+<p>Input Specification:<br>
+Each input file contains one test case. For each case, the first line gives 3 positive integers K (≤500, the threshold（阈值） of the amount of short phone calls), N (≤10^3, the number of different phone numbers), and M (≤10^5, the number of phone call records). Then M lines of one day's records are given, each in the format:</p>
+<pre><code>caller receiver duration
+</code></pre>
+<p>where caller and receiver are numbered from 1 to N, and duration is no more than 1440 minutes in a day.</p>
+<p>Output Specification:<br>
+Print in each line all the detected suspects in a gang, in ascending order of their numbers. The gangs are printed in ascending order of their first members. The numbers in a line must be separated by exactly 1 space, and there must be no extra space at the beginning or the end of the line.</p>
+<p>If no one is detected, output None instead.</p>
+<pre><code>Sample Input 1:
+
+5 15 31
+1 4 2
+1 5 2
+1 5 4
+1 7 5
+1 8 3
+1 9 1
+1 6 5
+1 15 2
+1 15 5
+3 2 2
+3 5 15
+3 13 1
+3 12 1
+3 14 1
+3 10 2
+3 11 5
+5 2 1
+5 3 10
+5 1 1
+5 7 2
+5 6 1
+5 13 4
+5 15 1
+11 10 5
+12 14 1
+6 1 1
+6 9 2
+6 10 5
+6 11 2
+6 12 1
+6 13 1
+
+Sample Output 1:
+3 5
+6
+
+Sample Input 2:
+5 7 8
+1 2 1
+1 3 1
+1 4 1
+1 5 1
+1 6 1
+1 7 1
+2 1 1
+3 1 1
+
+Sample Output 2:
+None
+</code></pre>
+<pre><code>#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+#include&lt;vector&gt;
+#include&lt;unordered_map&gt;
+#include&lt;map&gt;
+using namespace std;
+const int maxn=1001;
+int k,n,m,father[maxn],g[maxn][maxn],gangnum=0;
+int findfather(int x){
+	while(x!=father[x]) x=father[x];
+	return x;
+}
+void Union(int a,int b) {
+	int faA=findfather(a);
+	int faB=findfather(b);
+	if(faA&gt;faB) father[faA]=faB;
+	else if(faA&lt;faB) father[faB]=faA;
+}
+int main() {
+	for(int i=1; i&lt;=maxn; i++) father[i]=i;
+	scanf(&quot;%d%d%d&quot;,&amp;k,&amp;n,&amp;m);
+	vector&lt;int&gt; gang[n+1],susp;
+	int v1,v2,time;
+	fill(g[0],g[0]+maxn*maxn,0);
+	for(int i=0; i&lt;m; i++) {
+		scanf(&quot;%d%d%d&quot;,&amp;v1,&amp;v2,&amp;time);
+		g[v1][v2]=time;
+	}
+	for(int i=1;i&lt;=n;i++){
+		int total=0,cnt=0;
+		for(int j=1;j&lt;=n;j++){
+			if(g[i][j]&gt;0&amp;&amp;g[i][j]&lt;=5){
+				total++;
+				if(g[j][i]&gt;0) cnt++;
+			}
+		}
+		if((double)(cnt*1.0/total)&lt;=0.2&amp;&amp;total&gt;k) susp.push_back(i);
+	}
+	for(int i=0;i&lt;susp.size();i++){
+		for(int j=0;j&lt;susp.size();j++){
+			if(g[susp[i]][susp[j]]&gt;0&amp;&amp;g[susp[j]][susp[i]]&gt;0) Union(susp[i],susp[j]);
+		}
+	}
+	for(int i=0;i&lt;susp.size();i++){
+		gang[findfather(susp[i])].push_back(susp[i]);
+	}
+	for(int i=1;i&lt;=n;i++){
+		if(gang[i].size()!=0){
+			for(int j=0;j&lt;gang[i].size();j++){
+				if(j&gt;0) printf(&quot; &quot;);
+				printf(&quot;%d&quot;,gang[i][j]);
+			}
+			gangnum++;
+			printf(&quot;\n&quot;);
+		}
+	}
+	if(gangnum==0) printf(&quot;None&quot;);
+	return 0;
+}
+</code></pre>
+<h3 id="1159">1159</h3>
+<p>题目描述:</p>
+<p>Suppose that all the keys in a binary tree are distinct positive integers. Given the postorder and inorder traversal sequences, a binary tree can be uniquely determined.</p>
+<p>Now given a sequence of statements about the structure of the resulting tree, you are supposed to tell if they are correct or not. A statment is one of the following:</p>
+<pre><code>A is the root
+A and B are siblings
+A is the parent of B
+A is the left child of B
+A is the right child of B
+A and B are on the same level
+It is a full tree
+</code></pre>
+<p>Note:</p>
+<ul>
+<li>
+<p>Two nodes are on the same level, means that they have the same depth.</p>
+</li>
+<li>
+<p>A full binary tree is a tree in which every node other than the<br>
+leaves has two children.</p>
+</li>
+</ul>
+<p><strong>Input Specification:</strong><br>
+Each input file contains one test case. For each case, the first line gives a positive integer N (≤30), the total number of nodes in the binary tree. The second line gives the postorder sequence and the third line gives the inorder sequence. All the numbers in a line are no more than 103 and are separated by a space.</p>
+<p>Then another positive integer M (≤30) is given, followed by M lines of statements. It is guaranteed that both A and B in the statements are in the tree.</p>
+<p><strong>Output Specification:</strong><br>
+For each statement, print in a line Yes if it is correct, or No if not.</p>
+<p><strong>Sample Input:</strong></p>
+<pre><code>9
+16 7 11 32 28 2 23 8 15
+16 23 7 32 11 2 28 15 8
+7
+15 is the root
+8 and 2 are siblings
+32 is the parent of 11
+23 is the left child of 16
+28 is the right child of 2
+7 and 11 are on the same level
+It is a full tree
+</code></pre>
+<p><strong>Sample Output:</strong></p>
+<pre><code>Yes
+No
+Yes
+No
+Yes
+Yes
+Yes
+</code></pre>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;string&gt;
+#include&lt;vector&gt;
+#include&lt;unordered_map&gt;
+using namespace std;
+struct node {
+	int v,level;
+	node*parent,*lc,*rc;
+	node(int val,int lev) : v(val),parent(NULL),lc(NULL),rc(NULL),level(lev) {}  //构造函数 
+};
+unordered_map&lt;int,node*&gt; mp;//妙啊
+vector&lt;int&gt; in,post;
+node*root=NULL;
+bool isfull=true;
+node*create(int postl,int postr,int inl,int inr,int level) {
+	if(postl&gt;postr) return NULL;
+	node*root=new node(post[postr],level);
+	int k=inl;
+	while(k&lt;=inr&amp;&amp;in[k]!=root-&gt;v) k++;
+	int leftnum=k-inl;
+	root-&gt;lc=create(postl,postl+leftnum-1,inl,k-1,level+1);
+	root-&gt;rc=create(postl+leftnum,postr-1,k+1,inr,level+1);
+	if(root-&gt;lc!=NULL) root-&gt;lc-&gt;parent=root;
+	if(root-&gt;rc!=NULL) root-&gt;rc-&gt;parent=root;
+	if((root-&gt;lc==NULL&amp;&amp;root-&gt;rc!=NULL)||(root-&gt;lc!=NULL&amp;&amp;root-&gt;rc==NULL)) isfull=false;
+	mp[root-&gt;v]=root;
+	return root;
+}
+bool judge(string s) {
+	int a,b;
+	if(s.find(&quot;root&quot;)!=string::npos) {
+		sscanf(s.c_str(),&quot;%d is the root&quot;,&amp;a);
+		return a==root-&gt;v;
+	} else if(s.find(&quot;siblings&quot;)!=string::npos) {
+		sscanf(s.c_str(),&quot;%d and %d are siblings&quot;,&amp;a,&amp;b);
+		return mp[a]-&gt;parent==mp[b]-&gt;parent;
+	} else if(s.find(&quot;parent&quot;)!=string::npos) {
+		sscanf(s.c_str(),&quot;%d is the parent of %d&quot;,&amp;a,&amp;b);
+		return mp[b]-&gt;parent==mp[a];
+	} else if(s.find(&quot;left&quot;)!=string::npos) {
+		sscanf(s.c_str(),&quot;%d is the left child of %d&quot;,&amp;a,&amp;b);
+		return mp[b]-&gt;lc==mp[a]; //注意在判断时一定要判断地址是否相等， 不要判断数值，因为可能会有空地址 
+	} else if(s.find(&quot;right&quot;)!=string::npos) {
+		sscanf(s.c_str(),&quot;%d is the right child of %d&quot;,&amp;a,&amp;b);
+		return mp[b]-&gt;rc==mp[a];
+	}else if(s.find(&quot;on&quot;)!=string::npos){
+		sscanf(s.c_str(),&quot;%d and %d are on the same level&quot;,&amp;a,&amp;b);
+		return mp[a]-&gt;level==mp[b]-&gt;level;
+	}else return isfull;
+}
+int main(){
+	int n,m;
+	string s;
+	cin&gt;&gt;n;
+	in.resize(n),post.reserve(n);
+	for(int i=0;i&lt;n;i++) cin&gt;&gt;post[i];
+	for(int i=0;i&lt;n;i++) cin&gt;&gt;in[i];
+	root=create(0,n-1,0,n-1,0);
+	cin&gt;&gt;m;
+	getchar();//注意 
+	while(m--){
+		getline(cin,s);
+		if(judge(s)) cout&lt;&lt;&quot;Yes\n&quot;;
+		else cout&lt;&lt;&quot;No\n&quot;;
+	}
+	return 0;
+}
+</code></pre>
+<h3 id="1160">1160</h3>
+<p>题目描述:</p>
+<h3 id="1161">1161</h3>
+<p>题目描述:</p>
+<h3 id="1162">1162</h3>
+<h3 id="1163">1163</h3>
+<h3 id="1164">1164</h3>
+<h3 id="1165">1165</h3>
+<h3 id="1166">1166</h3>
+<h3 id="1167">1167</h3>
 
               </div>
               <div class="post-footer">
@@ -487,7 +848,7 @@ window.addEventListener('load', function() {
     </li>
     <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="https://liuxbo.github.io/post/about/" title="关于">关于</a>
+      <a href="https://liuxbo.github.io/post/2019-nian-pat-chun-qiu-dong-zhen-ti/" title="2019年PAT春、秋、冬真题">2019年PAT春、秋、冬真题</a>
     </li>
     <li class="post-copyright-license">
       <strong>版权声明： </strong>
@@ -502,6 +863,10 @@ window.addEventListener('load', function() {
       
     </div>
     <div class="nav-next">
+      
+        <a class="nav-pc-next" title="PAT题型总结" href="https://liuxbo.github.io/post/pat-ti-xing-zong-jie/">PAT题型总结</a>
+        <a class="nav-mobile-next" title="PAT题型总结" href="https://liuxbo.github.io/post/pat-ti-xing-zong-jie/">下一篇</a>
+        <i class="fa fa-chevron-right"></i>
       
     </div>
   </div>
