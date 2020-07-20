@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://liuxbo.github.io</id>
     <title>lxb&apos;blog</title>
-    <updated>2020-07-19T13:42:12.599Z</updated>
+    <updated>2020-07-20T10:05:32.587Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://liuxbo.github.io"/>
     <link rel="self" href="https://liuxbo.github.io/atom.xml"/>
@@ -243,7 +243,7 @@ int main() {
 	return 0;
 }
 </code></pre>
-<h3 id="1159">1159</h3>
+<h3 id="115930-map-sscanf-中序后序建树加树的综合性考察">1159(30 map、sscanf、中序后序建树加树的综合性考察)</h3>
 <p>题目描述:</p>
 <p>Suppose that all the keys in a binary tree are distinct positive integers. Given the postorder and inorder traversal sequences, a binary tree can be uniquely determined.</p>
 <p>Now given a sequence of statements about the structure of the resulting tree, you are supposed to tell if they are correct or not. A statment is one of the following:</p>
@@ -360,12 +360,409 @@ int main(){
 	return 0;
 }
 </code></pre>
-<h3 id="1160">1160</h3>
+<h3 id="1160-20-forever-dfs回溯剪枝">1160 (20 Forever dfs+回溯剪枝)</h3>
 <p>题目描述:</p>
-<h3 id="1161">1161</h3>
+<p>&quot;Forever number&quot; is a positive integer <em>A</em> with <em>K</em> digits, satisfying the following constrains:</p>
+<ul>
+<li>the sum of all the digits of <em>A</em> is <em>m</em>;</li>
+<li>the sum of all the digits of <em>A</em>+1 is <em>n</em>; and</li>
+<li>the greatest common divisor of <em>m</em> and <em>n</em> is a prime number which is greater than 2.</li>
+</ul>
+<p>Now you are supposed to find these forever numbers.</p>
+<p>Input Specification:</p>
+<p>Each input file contains one test case. For each test case, the first line contains a positive integer <em>N</em> (≤5). Then <em>N</em> lines follow, each gives a pair of <em>K</em> (3&lt;<em>K</em>&lt;10) and <em>m</em> (1&lt;<em>m</em>&lt;90), of which the meanings are given in the problem description.</p>
+<p>Output Specification:</p>
+<p>For each pair of <em>K</em> and <em>m</em>, first print in a line <code>Case X</code>, where <code>X</code> is the case index (starts from 1). Then print <em>n</em> and <em>A</em> in the following line. The numbers must be separated by a space. If the solution is not unique, output in the ascending order of <em>n</em>. If still not unique, output in the ascending order of <em>A</em>. If there is no solution, output <code>No Solution</code>.</p>
+<p><strong>Sample Input:</strong></p>
+<pre><code>2
+6 45
+7 80
+</code></pre>
+<p><strong>Sample Output:</strong></p>
+<pre><code>Case 1
+10 189999
+10 279999
+10 369999
+10 459999
+10 549999
+10 639999
+10 729999
+10 819999
+10 909999
+Case 2
+No Solution
+</code></pre>
+<pre><code>方法一:dfs
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+#include&lt;vector&gt;
+using namespace std;
+struct node {
+	int n, A;	//n A+1各个位数之和 A求的数
+};
+int n,m,N,k;
+vector&lt;node&gt; ans;
+bool cmp(node a,node b) {	//按照n递增排序，n相同按照A递增排序
+	if(a.n != b.n) return a.n &lt; b.n;
+	else return a.A &lt; b.A;
+}
+bool isPrime(int x) {	//判断是不是大于3的素数
+	if(x &lt;= 2) return false;
+	for(int i = 2; i * i&lt;= x; i++)
+		if(x % i == 0) return false;
+	return true;
+}
+int gcd(int a,int b) {	//求最大公约数
+	return b == 0 ? a : gcd(b,a%b);
+}
+int digit_sum(int A) {	//各个位数之和
+	int sum = 0;
+	while(A) {
+		sum += A%10;
+		A/=10;
+	}
+	return sum;
+}
+void DFS(int A, int sum, int rest_K) {	//A目标数 sum当前位数和 rest_k剩余k位
+	if(rest_K == 0) {	//递归边界
+		if(sum == m) {
+			int n = digit_sum(A + 1);
+			if(isPrime(gcd(m, n)))
+				ans.push_back({n, A});
+		}
+	} else if(rest_K &gt; 0) {
+		for(int i = 0; i &lt;= 9; i++) {
+			//如果当前位为i，即时剩余的rest_k - 1位全部取9也无法达到m，则剪枝
+			//当前位数和sum，当前位取i，已经超过了m也剪枝
+			if(sum + i + (rest_K-1)*9 &gt;= m &amp;&amp; sum + i &lt;= m)
+				DFS(A*10 + i, sum+i, rest_K-1);
+		}
+	}
+}
+int main() {
+	scanf(&quot;%d&quot;,&amp;N);	//样例数
+	for(int x = 1; x &lt;= N; x++) {
+		ans.clear();
+		printf(&quot;Case %d\n&quot;,x);
+		scanf(&quot;%d%d&quot;,&amp;k,&amp;m);	//k A的位数， m A各位数之和
+		for(int i = 1; i &lt;= 9; i++)	//i是当前位数
+			DFS(i, i, k-1);
+		if(ans.empty()) {
+			printf(&quot;No Solution\n&quot;);
+			continue;
+		}
+		sort(ans.begin(), ans.end(), cmp);
+		for(int i = 0; i &lt; ans.size(); i++) {
+			printf(&quot;%d %d\n&quot;,ans[i].n, ans[i].A);
+		}
+	}
+	return 0;
+}
+
+方法二:数学规律
+按照尾数为99的数枚举，加一不进位的话，这两个数的各位之和相差的是1，无论如何也不会有不小于三的最小公约数
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;algorithm&gt;
+#include &lt;set&gt;
+#include &lt;map&gt;
+#include &lt;cmath&gt;
+using namespace std;
+int k, n,m,a,b,c,d,num;
+bool f=false;
+struct node {
+	int n,a;
+};
+int gcd(int a,int b) {
+	return b==0?a:gcd(b,a%b);
+}
+bool isPrime(int n) {
+	if(n&lt;=2)return false;
+	int sq=(int)sqrt(n);
+	for(int j=2; j&lt;=sq; j++) {
+		if(n%j==0)return false;
+	}
+	return true;
+}
+int sum(int n) {
+	return n==0? 0: n%10 + sum(n/10);
+}
+bool cmp(node &amp;a,node &amp;b) {
+	if(a.n!=b.n)return a.n&lt;b.n;
+	return a.a&lt;b.a;
+}
+int main() {
+	scanf(&quot;%d&quot;, &amp;n);
+	for(int i=0; i&lt;n; i++) {
+		scanf(&quot;%d %d&quot;,&amp;k,&amp;m);
+		printf(&quot;Case %d\n&quot;,i+1);
+		a=(int)pow(10,k-3);//-3
+		b=a*10;
+		vector&lt;node&gt; v;
+		for(int x=a; x&lt;b; x++) {
+			c=x*100+99;
+			d=sum(c+1);
+			if(sum(c)==m &amp;&amp; isPrime(gcd(d,m))) {
+				v.push_back({d,c});
+			}
+		}
+		if(v.size()==0) printf(&quot;No Solution\n&quot;);
+		else {
+			sort(v.begin(),v.end(),cmp);
+			for(auto it:v) {
+				printf(&quot;%d %d\n&quot;,it.n,it.a);
+			}
+		}
+	}
+	return 0;
+}
+</code></pre>
+<h3 id="116125-合并链表">1161(25 合并链表)</h3>
+<p><strong>Merging Linked Lists</strong> (25分)</p>
 <p>题目描述:</p>
-<h3 id="1162">1162</h3>
-<h3 id="1163">1163</h3>
+<p>Merging Linked Lists (25分)</p>
+<p>Given two singly linked lists <em>L</em>1=<em>a</em>1→<em>a</em>2→⋯→<em>a**n</em>−1→<em>a**n</em> and <em>L</em>2=<em>b</em>1→<em>b</em>2→⋯→<em>b**m</em>−1→<em>b**m</em>. If <em>n</em>≥2<em>m</em>, you are supposed to reverse and merge the shorter one into the longer one to obtain a list like <em>a</em>1→<em>a</em>2→<em>b**m</em>→<em>a</em>3→<em>a</em>4→<em>b**m</em>−1⋯. For example, given one list being 6→7 and the other one 1→2→3→4→5, you must output 1→2→7→3→4→6→5.</p>
+<p>Input Specification:</p>
+<p>Each input file contains one test case. For each case, the first line contains the two addresses of the first nodes of <em>L</em>1 and <em>L</em>2, plus a positive <em>N</em> (≤105) which is the total number of nodes given. The address of a node is a 5-digit nonnegative integer, and NULL is represented by <code>-1</code>.</p>
+<p>Then <em>N</em> lines follow, each describes a node in the format:</p>
+<pre><code>Address Data Next
+</code></pre>
+<p>where <code>Address</code> is the position of the node, <code>Data</code> is a positive integer no more than 105, and <code>Next</code> is the position of the next node. It is guaranteed that no list is empty, and the longer list is at least twice as long as the shorter one.</p>
+<p>Output Specification:</p>
+<p>For each case, output in order the resulting linked list. Each node occupies a line, and is printed in the same format as in the input.</p>
+<p><strong>Sample Input:</strong></p>
+<pre><code class="language-in">00100 01000 7
+02233 2 34891
+00100 6 00001
+34891 3 10086
+01000 1 02233
+00033 5 -1
+10086 4 00033
+00001 7 -1
+</code></pre>
+<p><strong>Sample Output:</strong></p>
+<pre><code class="language-out">01000 1 02233
+02233 2 00001
+00001 7 34891
+34891 3 10086
+10086 4 00100
+00100 6 00033
+00033 5 -1
+</code></pre>
+<pre><code>#include&lt;cstdio&gt;
+#include&lt;vector&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+const int maxn=100010;
+struct node {
+	int address,data,next;
+} list[maxn];
+int main() {
+	int n,st1,st2;
+	vector&lt;node&gt; v1,v2,v;
+	scanf(&quot;%d%d%d&quot;,&amp;st1,&amp;st2,&amp;n);
+	for(int i=0; i&lt;n; i++) {
+		int addrs;
+		scanf(&quot;%d&quot;,&amp;addrs);
+		list[addrs].address=addrs;
+		scanf(&quot;%d%d&quot;,&amp;list[addrs].data,&amp;list[addrs].next);
+	}
+	while(st1!=-1) {
+		v1.push_back(list[st1]);
+		st1=list[st1].next;
+	}
+	while(st2!=-1) {
+		v2.push_back(list[st2]);
+		st2=list[st2].next;
+	}
+	int len1=v1.size(),len2=v2.size(),index=0;
+	if(len1&gt;len2) {
+		reverse(v2.begin(),v2.end());
+		for(int i=0; i&lt;=len1; i++) {
+			if(i!=0&amp;&amp;i%2==0&amp;&amp;index&lt;len2) {
+				v.push_back(v2[index++]);
+			}
+			if(i&lt;len1) v.push_back(v1[i]);
+		}
+	} else {
+		reverse(v1.begin(),v1.end());
+		for(int i=0; i&lt;=len2; i++) {
+			if(i!=0&amp;&amp;i%2==0&amp;&amp;index&lt;len1) {
+				v.push_back(v1[index++]);
+			}
+			if(i&lt;len2) v.push_back(v2[i]);
+		}
+	}
+	for(int i=0;i&lt;v.size()-1;i++) printf(&quot;%05d %d %05d\n&quot;,v[i].address,v[i].data,v[i+1].address);
+	printf(&quot;%05d %d -1&quot;,v[v.size()-1].address,v[v.size()-1].data);
+	return 0;
+}
+</code></pre>
+<h3 id="116225-输出树的后缀表达式">1162(25 输出树的后缀表达式)</h3>
+<p><strong>Postfix Expression</strong>(25分)</p>
+<p>Given a syntax tree (binary), you are supposed to output the corresponding postfix expression, with parentheses reflecting the precedences of the operators.</p>
+<p>Input Specification:</p>
+<p>Each input file contains one test case. For each case, the first line gives a positive integer N (≤ 20) which is the total number of nodes in the syntax tree. Then N lines follow, each gives the information of a node (the <em>i</em>-th line corresponds to the <em>i</em>-th node) in the format:</p>
+<pre><code>data left_child right_child
+</code></pre>
+<p>where <code>data</code> is a string of no more than 10 characters, <code>left_child</code> and <code>right_child</code> are the indices of this node's left and right children, respectively. The nodes are indexed from 1 to N. The NULL link is represented by −1. The figures 1 and 2 correspond to the samples 1 and 2, respectively.</p>
+<figure data-type="image" tabindex="1"><img src="C:%5CUsers%5Clxb%5CPictures%5C%E6%A0%91.png" alt="https://images.ptausercontent.com/4d1c4a98-33cc-45ff-820f-c548845681ba.JPG" loading="lazy"></figure>
+<p>Output Specification:</p>
+<p>For each case, print in a line the postfix expression, with parentheses reflecting the precedences of the operators.There must be no space between any symbols.</p>
+<p><strong>Sample Input 1:</strong></p>
+<pre><code class="language-in">8
+* 8 7
+a -1 -1
+* 4 1
++ 2 5
+b -1 -1
+d -1 -1
+- -1 6
+c -1 -1
+</code></pre>
+<p><strong>Sample Output 1:</strong></p>
+<pre><code class="language-out">(((a)(b)+)((c)(-(d))*)*)
+</code></pre>
+<p><strong>Sample Input 2:</strong></p>
+<pre><code class="language-in">8
+2.35 -1 -1
+* 6 1
+- -1 4
+% 7 8
++ 2 3
+a -1 -1
+str -1 -1
+871 -1 -1
+</code></pre>
+<p><strong>Sample Output 2:</strong></p>
+<pre><code class="language-out">(((a)(2.35)*)(-((str)(871)%))+)
+</code></pre>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;string&gt;
+using namespace std;
+struct node {
+	string data;
+	int lc,rc;
+} v[21];
+string ans;
+void postorder(int index) {
+	bool flag=false;
+	if((v[index].rc!=-1&amp;&amp;v[index].lc!=-1)||(v[index].lc==-1&amp;&amp;v[index].rc!=-1)||(v[index].lc==-1&amp;&amp;v[index].rc==-1)) {
+		flag=true;
+		ans+=&quot;(&quot;;
+	}
+	if(v[index].lc==-1&amp;&amp;v[index].rc!=-1) {
+		ans+=v[index].data;
+		postorder(v[index].rc);
+	} else {
+		if(v[index].lc!=-1)postorder(v[index].lc);
+		if(v[index].rc!=-1)postorder(v[index].rc);
+		ans+=v[index].data;
+	}
+	if(flag) ans+=&quot;)&quot;;
+}
+int main() {
+	int n,root=1,notroot[21]= {0};
+	cin&gt;&gt;n;
+	for(int i=1; i&lt;=n; i++) {
+		cin&gt;&gt;v[i].data&gt;&gt;v[i].lc&gt;&gt;v[i].rc;
+		if(v[i].lc!=-1) notroot[v[i].lc]=1;
+		if(v[i].rc!=-1) notroot[v[i].rc]=1;
+	}
+	while(notroot[root]==1) root++;
+	postorder(root);
+	cout&lt;&lt;ans;
+	return 0;
+}
+</code></pre>
+<h3 id="116330-判断dijkst的合法路径">1163(30 判断dijkst的合法路径)</h3>
+<p>Dijkstra Sequence (30分)</p>
+<p>Dijkstra's algorithm is one of the very famous greedy algorithms. It is used for solving the single source shortest path problem which gives the shortest paths from one particular source vertex to all the other vertices of the given graph. It was conceived by computer scientist Edsger W. Dijkstra in 1956 and published three years later.</p>
+<p>In this algorithm, a set contains vertices included in shortest path tree is maintained. During each step, we find one vertex which is not yet included and has a minimum distance from the source, and collect it into the set. Hence step by step an ordered sequence of vertices, let's call it <strong>Dijkstra sequence</strong>, is generated by Dijkstra's algorithm.</p>
+<p>On the other hand, for a given graph, there could be more than one Dijkstra sequence. For example, both { 5, 1, 3, 4, 2 } and { 5, 3, 1, 2, 4 } are Dijkstra sequences for the graph, where 5 is the source. Your job is to check whether a given sequence is Dijkstra sequence or not.</p>
+<p>Input Specification:</p>
+<p>Each input file contains one test case. For each case, the first line contains two positive integers <em>N**v</em> (≤103) and <em>N**e</em> (≤105), which are the total numbers of vertices and edges, respectively. Hence the vertices are numbered from 1 to <em>N**v</em>.</p>
+<p>Then <em>N**e</em> lines follow, each describes an edge by giving the indices of the vertices at the two ends, followed by a positive integer weight (≤100) of the edge. It is guaranteed that the given graph is connected.</p>
+<p>Finally the number of queries, <em>K</em>, is given as a positive integer no larger than 100, followed by <em>K</em> lines of sequences, each contains a permutationof the <em>N**v</em> vertices. It is assumed that the first vertex is the source for each sequence.</p>
+<p>All the inputs in a line are separated by a space.</p>
+<p>Output Specification:</p>
+<p>For each of the <em>K</em> sequences, print in a line <code>Yes</code> if it is a Dijkstra sequence, or <code>No</code> if not.</p>
+<p><strong>Sample Input:</strong></p>
+<pre><code class="language-in">5 7
+1 2 2
+1 5 1
+2 3 1
+2 4 1
+2 5 2
+3 5 1
+3 4 1
+4
+5 1 3 4 2
+5 3 1 2 4
+2 3 4 5 1
+3 2 1 5 4
+</code></pre>
+<p><strong>Sample Output:</strong></p>
+<pre><code class="language-out">Yes
+Yes
+Yes
+No
+</code></pre>
+<pre><code>#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+#include&lt;vector&gt;
+using namespace std;
+const int maxn=1001;
+const int INF=0x7fffffff;
+int g[maxn][maxn],d[maxn],nv,ne,k,index;
+bool vis[maxn];
+vector&lt;int&gt; path;
+bool judge(int s) {
+	fill(vis,vis+maxn,false);
+	fill(d,d+maxn,INF);
+	d[s]=0;
+	for(int i=1; i&lt;=nv; i++) {
+		int u=-1,MIN=INF;
+		for(int j=1; j&lt;=nv; j++) {
+			if(vis[j]==false&amp;&amp;d[j]&lt;MIN) {
+				MIN=d[j];
+				u=j;
+			}
+		}
+		if(u==-1) return true;
+		if(d[path[index]]==MIN&amp;&amp;vis[path[index]]==false) {
+			u=path[index];
+			index++;
+			vis[u]=true;
+		} else return false;
+		for(int v=1; v&lt;=nv; v++) {
+			if(vis[v]==false&amp;&amp;g[u][v]!=INF) {
+				if(d[v]&gt;d[u]+g[u][v]) d[v]=d[u]+g[u][v];
+			}
+		}
+	}
+}
+int main() {
+	scanf(&quot;%d%d&quot;,&amp;nv,&amp;ne);
+	fill(g[0],g[0]+maxn*maxn,INF);
+	for(int i=0; i&lt;ne; i++) {
+		int v1,v2;
+		scanf(&quot;%d%d&quot;,&amp;v1,&amp;v2);
+		scanf(&quot;%d&quot;,&amp;g[v1][v2]);
+		g[v2][v1]=g[v1][v2];
+	}
+	scanf(&quot;%d&quot;,&amp;k);
+	while(k--) {
+		path.clear();
+		path.resize(nv);
+		for(int i=0; i&lt;nv; i++) scanf(&quot;%d&quot;,&amp;path[i]);
+		index=0;
+		if(judge(path[index])) printf(&quot;Yes\n&quot;);
+		else printf(&quot;No\n&quot;);
+	}
+	return 0;
+}
+</code></pre>
 <h3 id="1164">1164</h3>
 <h3 id="1165">1165</h3>
 <h3 id="1166">1166</h3>
