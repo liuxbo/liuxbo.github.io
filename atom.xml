@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://liuxbo.github.io</id>
     <title>lxb&apos;blog</title>
-    <updated>2020-07-20T10:06:34.845Z</updated>
+    <updated>2020-07-21T13:19:41.180Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://liuxbo.github.io"/>
     <link rel="self" href="https://liuxbo.github.io/atom.xml"/>
@@ -763,10 +763,479 @@ int main() {
 	return 0;
 }
 </code></pre>
-<h3 id="1164">1164</h3>
-<h3 id="1165">1165</h3>
-<h3 id="1166">1166</h3>
-<h3 id="1167">1167</h3>
+<h3 id="116420-图形输出-逻辑题-注意用stringgetchar吸收换行符">1164(20 图形输出 逻辑题 注意用string，getchar吸收换行符)</h3>
+<p>7-1 Good in C (20分)</p>
+<p>When your interviewer asks you to write &quot;Hello World&quot; using C, can you do as the following figure shows?</p>
+<p>Input Specification:</p>
+<p>Each input file contains one test case. For each case, the first part gives the 26 capital English letters A-Z, each in a 7×5 matrix of <code>C</code>'s and <code>.</code>'s. Then a sentence is given in a line, ended by a return. The sentence is formed by several words (no more than 10 continuous capital English letters each), and the words are separated by any characters other than capital English letters.</p>
+<p>It is guaranteed that there is at least one word given.</p>
+<p>Output Specification:</p>
+<p>For each word, print the matrix form of each of its letters in a line, and the letters must be separated by exactly one column of space. There must be no extra space at the beginning or the end of the word.</p>
+<p>Between two adjacent words, there must be a single empty line to separate them. There must be no extra line at the beginning or the end of the output.</p>
+<p>Sample Input:</p>
+<pre><code class="language-in">..C..
+.C.C.
+C...C
+CCCCC
+C...C
+C...C
+C...C
+CCCC.
+C...C
+C...C
+CCCC.
+C...C
+C...C
+CCCC.
+.CCC.
+C...C
+C....
+C....
+C....
+C...C
+.CCC.
+CCCC.
+C...C
+C...C
+C...C
+C...C
+C...C
+CCCC.
+CCCCC
+C....
+C....
+CCCC.
+C....
+C....
+CCCCC
+CCCCC
+C....
+C....
+CCCC.
+C....
+C....
+C....
+CCCC.
+C...C
+C....
+C.CCC
+C...C
+C...C
+CCCC.
+C...C
+C...C
+C...C
+CCCCC
+C...C
+C...C
+C...C
+CCCCC
+..C..
+..C..
+..C..
+..C..
+..C..
+CCCCC
+CCCCC
+....C
+....C
+....C
+....C
+C...C
+.CCC.
+C...C
+C..C.
+C.C..
+CC...
+C.C..
+C..C.
+C...C
+C....
+C....
+C....
+C....
+C....
+C....
+CCCCC
+C...C
+C...C
+CC.CC
+C.C.C
+C...C
+C...C
+C...C
+C...C
+C...C
+CC..C
+C.C.C
+C..CC
+C...C
+C...C
+.CCC.
+C...C
+C...C
+C...C
+C...C
+C...C
+.CCC.
+CCCC.
+C...C
+C...C
+CCCC.
+C....
+C....
+C....
+.CCC.
+C...C
+C...C
+C...C
+C.C.C
+C..CC
+.CCC.
+CCCC.
+C...C
+CCCC.
+CC...
+C.C..
+C..C.
+C...C
+.CCC.
+C...C
+C....
+.CCC.
+....C
+C...C
+.CCC.
+CCCCC
+..C..
+..C..
+..C..
+..C..
+..C..
+..C..
+C...C
+C...C
+C...C
+C...C
+C...C
+C...C
+.CCC.
+C...C
+C...C
+C...C
+C...C
+C...C
+.C.C.
+..C..
+C...C
+C...C
+C...C
+C.C.C
+CC.CC
+C...C
+C...C
+C...C
+C...C
+.C.C.
+..C..
+.C.C.
+C...C
+C...C
+C...C
+C...C
+.C.C.
+..C..
+..C..
+..C..
+..C..
+CCCCC
+....C
+...C.
+..C..
+.C...
+C....
+CCCCC
+HELLO~WORLD!
+</code></pre>
+<p>Sample Output:</p>
+<pre><code class="language-out">C...C CCCCC C.... C.... .CCC.
+C...C C.... C.... C.... C...C
+C...C C.... C.... C.... C...C
+CCCCC CCCC. C.... C.... C...C
+C...C C.... C.... C.... C...C
+C...C C.... C.... C.... C...C
+C...C CCCCC CCCCC CCCCC .CCC.
+
+C...C .CCC. CCCC. C.... CCCC.
+C...C C...C C...C C.... C...C
+C...C C...C CCCC. C.... C...C
+C.C.C C...C CC... C.... C...C
+CC.CC C...C C.C.. C.... C...C
+C...C C...C C..C. C.... C...C
+C...C .CCC. C...C CCCCC CCCC.
+</code></pre>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cctype&gt;
+#include&lt;vector&gt;
+using namespace std;
+string a[30][10],str;
+vector&lt;int&gt; word;
+int main() {
+	for(int i=0; i&lt;26; i++) {
+		for(int j=0; j&lt;7; j++) {
+			cin&gt;&gt;a[i][j];
+		}
+	}
+	getchar();//因为cin会把换行符留在缓冲区，所以这里要将换行符忽略掉
+	getline(cin,str);
+	bool flag=false;
+	for(int i=0; i&lt;str.size(); i++) {
+		if(isupper(str[i]) &amp;&amp; i==str.size()-1)
+			word.push_back(str[i]-'A');
+		if(isupper(str[i]) &amp;&amp; i!=str.size()-1) {
+			word.push_back(str[i]-'A');
+		} else {
+			if(word.size()==0) cout&lt;&lt;&quot;&quot;;
+			else {
+				if(flag) cout&lt;&lt;endl&lt;&lt;endl;
+				for(int k=0; k&lt;7; k++) {
+					for(int j=0; j&lt;word.size(); j++) {
+						if(j!=0) cout&lt;&lt;&quot; &quot;;
+						cout&lt;&lt;a[word[j]][k];
+						flag=true;
+					}
+					if(k!=6)cout&lt;&lt;endl;
+				}
+				word.clear();
+			}
+		}
+	}
+	return 0;
+}
+</code></pre>
+<h3 id="116525-链表分段拼接">1165(25 链表分段拼接)</h3>
+<p>Given a singly linked list <em>L</em>. Let us consider every <em>K</em> nodes as a <strong>block</strong> (if there are less than <em>K</em> nodes at the end of the list, the rest of the nodes are still considered as a block). Your job is to reverse all the blocks in <em>L</em>. For example, given <em>L</em> as 1→2→3→4→5→6→7→8 and <em>K</em> as 3, your output must be 7→8→4→5→6→1→2→3.</p>
+<p>Input Specification:</p>
+<p>Each input file contains one test case. For each case, the first line contains the address of the first node, a positive <em>N</em> (≤105) which is the total number of nodes, and a positive <em>K</em> (≤<em>N</em>) which is the size of a block. The address of a node is a 5-digit nonnegative integer, and NULL is represented by −1.</p>
+<p>Then <em>N</em> lines follow, each describes a node in the format:</p>
+<pre><code>Address Data Next
+</code></pre>
+<p>where <code>Address</code> is the position of the node, <code>Data</code> is an integer, and <code>Next</code> is the position of the next node.</p>
+<p>Output Specification:</p>
+<p>For each case, output the resulting ordered linked list. Each node occupies a line, and is printed in the same format as in the input.</p>
+<p>Sample Input:</p>
+<pre><code class="language-in">00100 8 3
+71120 7 88666
+00000 4 99999
+00100 1 12309
+68237 6 71120
+33218 3 00000
+99999 5 68237
+88666 8 -1
+12309 2 33218
+</code></pre>
+<p>Sample Output:</p>
+<pre><code class="language-out">71120 7 88666
+88666 8 00000
+00000 4 99999
+99999 5 68237
+68237 6 00100
+00100 1 12309
+12309 2 33218
+33218 3 -1
+</code></pre>
+<pre><code>#include&lt;cstdio&gt;
+#include&lt;vector&gt;
+using namespace std;
+struct node{
+	int addrs,data,next;
+}list[100000];
+int main(){
+	int st,n,k,cnt,len;
+	scanf(&quot;%d%d%d&quot;,&amp;st,&amp;n,&amp;k);
+	for(int i=0;i&lt;n;i++){
+		int addrs;
+		scanf(&quot;%d&quot;,&amp;addrs);
+		list[addrs].addrs=addrs;
+		scanf(&quot;%d%d&quot;,&amp;list[addrs].data,&amp;list[addrs].next);
+	}
+	vector&lt;node&gt; v;
+	while(st!=-1){
+		v.push_back(list[st]);
+		st=list[st].next;
+	}
+	if(v.size()%k==0) cnt=v.size()/k;
+	else cnt=v.size()/k+1;
+	int pos;
+	for(int i=0;i&lt;cnt;i++){
+		int j,x;
+		if(i==0) j=v.size()-(cnt-1)*k;
+		else j=k;
+		if(i==0) pos=v.size()-j;
+		for(x=pos;x&lt;pos+j-1;x++) printf(&quot;%05d %d %05d\n&quot;,v[x].addrs,v[x].data,v[x+1].addrs);
+		pos-=k;
+		if(pos&lt;0) printf(&quot;%05d %d -1\n&quot;,v[x].addrs,v[x].data);
+		else printf(&quot;%05d %d %05d\n&quot;,v[x].addrs,v[x].data,v[pos].addrs);
+	}
+	return 0;
+}
+</code></pre>
+<h3 id="116625-图">1166(25 图)</h3>
+<p>7-3 Summit (25分)</p>
+<p>A <strong>summit</strong> (峰会) is a meeting of heads of state or government. Arranging the rest areas for the summit is not a simple job. The ideal arrangement of one area is to invite those heads so that everyone is a direct friend of everyone.</p>
+<p>Now given a set of tentative arrangements, your job is to tell the organizers whether or not each area is all set.</p>
+<p>Input Specification:</p>
+<p>Each input file contains one test case. For each case, the first line gives two positive integers N (≤ 200), the number of heads in the summit, and M, the number of friendship relations. Then M lines follow, each gives a pair of indices of the heads who are friends to each other. The heads are indexed from 1 to N.</p>
+<p>Then there is another positive integer K (≤ 100), and K lines of tentative arrangement of rest areas follow, each first gives a positive number L (≤ N), then followed by a sequence of L distinct indices of the heads. All the numbers in a line are separated by a space.</p>
+<p>Output Specification:</p>
+<p>For each of the K areas, print in a line your advice in the following format:</p>
+<ul>
+<li>if in this area everyone is a direct friend of everyone, and no friend is missing (that is, no one else is a direct friend of everyone in this area), print <code>Area X is OK.</code>.</li>
+<li>if in this area everyone is a direct friend of everyone, yet there are some other heads who may also be invited without breaking the ideal arrangement, print <code>Area X may invite more people, such as H.</code> where <code>H</code> is the smallest index of the head who may be invited.</li>
+<li>if in this area the arrangement is not an ideal one, then print <code>Area X needs help.</code> so the host can provide some special service to help the heads get to know each other.</li>
+</ul>
+<p>Here <code>X</code> is the index of an area, starting from 1 to <code>K</code>.</p>
+<p>Sample Input:</p>
+<pre><code class="language-in">8 10
+5 6
+7 8
+6 4
+3 6
+4 5
+2 3
+8 2
+2 7
+5 3
+3 4
+6
+4 5 4 3 6
+3 2 8 7
+2 2 3
+1 1
+2 4 6
+3 3 2 1
+</code></pre>
+<p>Sample Output:</p>
+<pre><code class="language-out">Area 1 is OK.
+Area 2 is OK.
+Area 3 is OK.
+Area 4 is OK.
+Area 5 may invite more people, such as 3.
+Area 6 needs help.
+</code></pre>
+<pre><code>#include&lt;cstdio&gt;
+#include&lt;vector&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+const int maxn=205;
+int main() {
+	int n,m,g[maxn][maxn],k,num,vis[maxn];
+	fill(g[0],g[0]+maxn*maxn,0);
+	scanf(&quot;%d%d&quot;,&amp;n,&amp;m);
+	for(int i=0; i&lt;m; i++) {
+		int v1,v2;
+		scanf(&quot;%d%d&quot;,&amp;v1,&amp;v2);
+		g[v1][v2]=g[v2][v1]=1;
+	}
+	scanf(&quot;%d&quot;,&amp;k);
+	for(int i=1; i&lt;=k; i++) {
+		fill(vis,vis+maxn,false);
+		scanf(&quot;%d&quot;,&amp;num);
+		vector&lt;int&gt; v(num);
+		int flag=1;
+		for(int j=0; j&lt;num; j++) {
+			scanf(&quot;%d&quot;,&amp;v[j]);
+			vis[v[j]]=true;
+		}
+		for(int j=0; j&lt;num-1; j++) {
+			for(int x=j+1; x&lt;num; x++) {
+				if(flag==0) break;
+				if(g[v[j]][v[x]]!=1) {
+					flag=0;
+					break;
+				}
+			}
+		}
+		if(flag==0) {
+			printf(&quot;Area %d needs help.\n&quot;,i);
+			continue;
+		} else {
+			for(int j=1; j&lt;=n; j++) {
+				if(vis[j]==false) {
+					int x;
+					for(x=0; x&lt;v.size(); x++) {
+						if(g[v[x]][j]==0) break;
+					}
+					if(x==v.size()) {
+						printf(&quot;Area %d may invite more people, such as %d.\n&quot;,i,j);
+						flag=0;
+						break;
+					}
+				}
+			}
+			if(flag==1) printf(&quot;Area %d is OK.\n&quot;,i);
+		}
+	}
+	return 0;
+}
+</code></pre>
+<h3 id="116730-用中序遍历序列建立堆树">1167(30 用中序遍历序列建立“堆”树)</h3>
+<p>7-4 Cartesian Tree (30分)</p>
+<p>A <strong>Cartesian tree</strong> is a binary tree constructed from a sequence of distinct numbers. The tree is heap-ordered, and an inorder traversal returns the original sequence. For example, given the sequence { 8, 15, 3, 4, 1, 5, 12, 10, 18, 6 }, the min-heap Cartesian tree is shown by the figure.</p>
+<figure data-type="image" tabindex="2"><img src="https://images.ptausercontent.com/6a99f68a-6578-46e0-9232-fbf0adf3691f.jpg" alt="CTree.jpg" loading="lazy"></figure>
+<p>Your job is to output the level-order traversal sequence of the min-heap Cartesian tree.</p>
+<p>Input Specification:</p>
+<p>Each input file contains one test case. Each case starts from giving a positive integer <em>N</em> (≤30), and then <em>N</em> distinct numbers in the next line, separated by a space. All the numbers are in the range of <strong>int</strong>.</p>
+<p>Output Specification:</p>
+<p>For each test case, print in a line the level-order traversal sequence of the min-heap Cartesian tree. All the numbers in a line must be separated by exactly one space, and there must be no extra space at the beginning or the end of the line.</p>
+<p>Sample Input:</p>
+<pre><code class="language-in">10
+8 15 3 4 1 5 12 10 18 6
+</code></pre>
+<p>Sample Output:</p>
+<pre><code class="language-out">1 3 5 8 4 6 15 10 12 18
+</code></pre>
+<pre><code>#include&lt;cstdio&gt;
+#include&lt;vector&gt;
+#include&lt;queue&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+struct node {
+	int v;
+	node*lc,*rc;
+};
+int n,v[31],num=0;
+node*create(int inl,int inr) {
+	if((inl&gt;inr)||inl&lt;0||inr&gt;=n) return NULL;
+	node*root=new node;
+	int *addrs=min_element(v+inl,v+inl+(inr-inl+1));
+	int index=addrs-v;
+	root-&gt;lc=create(inl,index-1);
+	root-&gt;v=v[index];
+	root-&gt;rc=create(index+1,inr);
+	return root;
+}
+void levelorder(node*root) {
+	queue&lt;node*&gt;q;
+	q.push(root);
+	while(!q.empty()) {
+		node*t=q.front();
+		q.pop();
+		if(num!=0) printf(&quot; &quot;);
+		printf(&quot;%d&quot;,t-&gt;v);
+		num++;
+		if(t-&gt;lc!=NULL) q.push(t-&gt;lc);
+		if(t-&gt;rc!=NULL) q.push(t-&gt;rc);
+	}
+}
+int main() {
+	scanf(&quot;%d&quot;,&amp;n);
+	for(int i=0; i&lt;n; i++) scanf(&quot;%d&quot;,&amp;v[i]);
+	node*root=create(0,n-1);
+	levelorder(root);
+	return 0;
+}
+</code></pre>
 ]]></content>
     </entry>
     <entry>
