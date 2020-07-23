@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://liuxbo.github.io</id>
     <title>lxb&apos;blog</title>
-    <updated>2020-07-21T13:19:41.180Z</updated>
+    <updated>2020-07-23T06:07:12.743Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://liuxbo.github.io"/>
     <link rel="self" href="https://liuxbo.github.io/atom.xml"/>
@@ -1250,6 +1250,7 @@ int main() {
 <p>1046(最短路径)</p>
 <p>1002(多项式相加)</p>
 <p>1009(多项式相乘)</p>
+<p><strong>A1017 （25 模拟 ，时间处理、排序、）</strong></p>
 <h3 id="2水题-逻辑题">2.水题、逻辑题</h3>
 <p>1006</p>
 <p>1036</p>
@@ -2412,49 +2413,43 @@ double billfromzero(node a,int *rate){
 #include&lt;algorithm&gt;
 using namespace std;
 struct node{
-	int cometime;
-	int servetime;
-}newcustomer; 
-int Endtime[101];
-vector&lt;node&gt; customer;
-int convert(int h,int m,int s){
-	return h*3600+m*60+s;
-}
+	int cometime,servetime;
+}; 
 bool cmp(node a,node b){
 	return a.cometime&lt;b.cometime;
 }
 int main(){
-	int n,w,totwait=0;
-	scanf(&quot;%d%d&quot;,&amp;n,&amp;w);
-	int starttime=convert(8,0,0);
-	int endtime=convert(17,0,0);
+	int n,k;
+	scanf(&quot;%d%d&quot;,&amp;n,&amp;k);
+	double ans=0.0;
+	node temp;
+	vector&lt;node&gt; v;
 	for(int i=0;i&lt;n;i++){
 		int hh,mm,ss,serve;
 		scanf(&quot;%d:%d:%d %d&quot;,&amp;hh,&amp;mm,&amp;ss,&amp;serve);
-		newcustomer.cometime=convert(hh,mm,ss);
-		if(newcustomer.cometime&gt;endtime) continue;
-		newcustomer.servetime=(serve&lt;=60?serve*60:3600);
-		customer.push_back(newcustomer);
+		temp.cometime=hh*3600+mm*60+ss;
+		temp.servetime=serve*60;
+		if(temp.cometime&gt;61200) continue;
+		v.push_back(temp);
 	}
-	sort(customer.begin(),customer.end(),cmp);
-	for(int i=0;i&lt;=101;i++) Endtime[i]=starttime;
-	for(int i=0;i&lt;customer.size();i++){
-		int minendtime=1000000000,id=-1;
-		for(int j=0;j&lt;w;j++){
-			if(Endtime[j]&lt;minendtime){
-				minendtime=Endtime[j];
-				id=j;
+	sort(v.begin(),v.end(),cmp);
+	vector&lt;int&gt; window(k,28800);
+	for(int i=0;i&lt;v.size();i++){
+		int minend=window[0],index=0;
+		for(int j=1;j&lt;k;j++){
+			if(window[j]&lt;minend){
+				minend=window[j];
+				index=j;
 			}
 		}
-		if(Endtime[id]&lt;=customer[i].cometime){
-			Endtime[id]=customer[i].cometime+customer[i].servetime;
-		}else{
-			totwait+=Endtime[id]-customer[i].cometime; 
-			Endtime[id]+=customer[i].servetime; 
+		if(v[i].cometime&gt;window[index]) window[index]=v[i].cometime+v[i].servetime;
+		else if(v[i].cometime&lt;=window[index]){
+			ans+=(window[index]-v[i].cometime);
+			window[index]+=v[i].servetime; 
 		}
 	}
-	if(customer.size()==0) printf(&quot;0.0&quot;);
-	else printf(&quot;%.1f&quot;,(double)((totwait*1.0/60.0)/customer.size()));
+	if(v.size()==0) printf(&quot;0.0&quot;);
+	else printf(&quot;%.1f&quot;,(ans/60.0)/v.size());
 	return 0;
 }
 </code></pre>
@@ -6129,45 +6124,38 @@ int main(){
 	return 0; 
 }
 </code></pre>
-<h3 id="a1105">A1105</h3>
+<h3 id="a110525-顺时针螺旋二维数组注意判断下标越界">A1105(25 顺时针螺旋二维数组，注意判断下标越界)</h3>
 <pre><code>#include&lt;cstdio&gt;
-#include&lt;algorithm&gt;
-#include&lt;vector&gt;
 #include&lt;cmath&gt;
+#include&lt;vector&gt;
+#include&lt;algorithm&gt;
 using namespace std;
-const int maxn=100;
-bool cmp(int a,int b){
+bool cmp(int a,int b) {
 	return a&gt;b;
 }
-int main(){
-	int N,n,m,st=0;
+int main() {
+	int N, m,n;
 	scanf(&quot;%d&quot;,&amp;N);
-	vector&lt;int&gt; a(N);
-	for(int i=0;i&lt;N;i++) scanf(&quot;%d&quot;,&amp;a[i]);
-	n=sqrt(1.0*N);
-	while(n&gt;=1){
-		if(N%n==0) break;
-		n--;
+	vector&lt;int&gt;t(N);
+	for(int i=0; i&lt;N; i++) scanf(&quot;%d&quot;,&amp;t[i]);
+	sort(t.begin(),t.end(),cmp);
+	m=(int)(ceil(sqrt(N*1.0)));
+	while(N%m!=0) m++;
+	n=N/m;
+	vector&lt;vector&lt;int&gt; &gt;v(m,vector&lt;int&gt;(n));
+	int level=m/2+m%2,index=0;
+	for(int i=0; i&lt;level; i++) {
+		for(int j=i; j&lt;n-i&amp;&amp;index&lt;N; j++)  v[i][j]=t[index++];
+		for(int j=i+1; j&lt;m-i&amp;&amp;index&lt;N; j++) v[j][n-i-1]=t[index++];
+		for(int j=n-i-2; j&gt;=i&amp;&amp;index&lt;N; j--) v[m-i-1][j]=t[index++];
+		for(int j=m-i-2; j&gt;i&amp;&amp;index&lt;N; j--) v[j][i]=t[index++];
 	}
-	m=N/n;
-	int level=m/2+m%2;
-	sort(a.begin(),a.end(),cmp);
-	int putm=m,putn=n;
-	vector&lt;vector&lt;int&gt; &gt; ans(m, vector&lt;int&gt;(n));
-	for(int i=0;i&lt;level;i++){
-		for(int j=i;j&lt;n&amp;&amp;st&lt;=N-1;j++) ans[i][j]=a[st++];
-		for(int k=i+1;k&lt;=m-2&amp;&amp;st&lt;=N-1;k++) ans[k][n-1]=a[st++];
-		for(int x=n-1;x&gt;=i&amp;&amp;st&lt;=N-1;x--) ans[m-1][x]=a[st++];
-		for(int t=m-2;t&gt;=i+1&amp;&amp;st&lt;=N-1;t--) ans[t][i]=a[st++];
-		n--;
-		m--;
-	}
-	for(int i=0;i&lt;putm;i++){
-		for(int j=0;j&lt;putn;j++){
-			printf(&quot;%d&quot;,ans[i][j]);
-			if(j&lt;putn-1) printf(&quot; &quot;);
+	for(int i=0; i&lt;m; i++) {
+		if(i!=0) printf(&quot;\n&quot;);
+		for(int j=0; j&lt;n; j++) {
+			if(j!=0) printf(&quot; &quot;);
+			printf(&quot;%d&quot;,v[i][j]);
 		}
-		printf(&quot;\n&quot;);
 	}
 	return 0;
 }
@@ -8635,7 +8623,7 @@ int getsum(int n){
 <li>
 <p><code>math.h</code>头文件函数</p>
 <p><code>fabs(double x)</code>  取绝对值 ，</p>
-<p><code>floor(double x)</code>和<code>ceil(double x)</code> ，分别为向上取整和向下取整，返回double型</p>
+<p><code>floor(double x)</code>和<code>ceil(double x)</code> ，分别为向下取整和向上取整，返回double型</p>
 <p><code>pow(double r,double p)</code> 用于返回r^p</p>
 <p><code>sqrt(double x)</code> ,返回算数平方根</p>
 <p><code>log(double x)</code> ,返回以自然对数为底的对数，用换底公式求具体对数</p>
