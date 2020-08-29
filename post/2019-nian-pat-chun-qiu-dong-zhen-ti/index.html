@@ -6,8 +6,8 @@
 <meta name="keywords" content="Gridea静态个人博客">
 <meta name="description" content="菜鸡成长之路">
 <meta name="theme-color" content="#000">
-<title>2019年PAT春、秋、冬真题 | lxb&#39;blog</title>
-<link rel="shortcut icon" href="https://liuxbo.github.io/favicon.ico?v=1598533310811">
+<title>PAT2019春、秋、冬，2020春真题 | lxb&#39;blog</title>
+<link rel="shortcut icon" href="https://liuxbo.github.io/favicon.ico?v=1598702717937">
 <link rel="stylesheet" href="https://liuxbo.github.io/styles/main.css">
 
 <link rel="stylesheet" href="/media/css/gemini.css">
@@ -25,7 +25,7 @@
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
     onload="renderMathInElement(document.body);"></script>
 
-    <meta name="description" content="2019年PAT春、秋、冬真题" />
+    <meta name="description" content="PAT2019春、秋、冬，2020春真题" />
     <meta name="keywords" content="" />
   </head>
   <body>
@@ -204,6 +204,10 @@
 <li><a href="#116525-%E9%93%BE%E8%A1%A8%E5%88%86%E6%AE%B5%E6%8B%BC%E6%8E%A5">1165(25 链表分段拼接)</a></li>
 <li><a href="#116625-%E5%9B%BE">1166(25 图)</a></li>
 <li><a href="#116730-%E7%94%A8%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E5%BA%8F%E5%88%97%E5%BB%BA%E7%AB%8B%E5%A0%86%E6%A0%91">1167(30 用中序遍历序列建立“堆”树)</a></li>
+<li><a href="#1168-prime-day">1168  Prime Day</a></li>
+<li><a href="#1169-the-judger">1169 The Judger</a></li>
+<li><a href="#1170-safari-park">1170 Safari Park</a></li>
+<li><a href="#1171-replacement-selection">1171 <strong>Replacement Selection</strong></a></li>
 </ul>
 </li>
 </ul>
@@ -459,7 +463,7 @@ window.addEventListener('load', function() {
     <header class="post-header">
   <h1 class="post-title">
     <a class="post-title-link" href="https://liuxbo.github.io/post/2019-nian-pat-chun-qiu-dong-zhen-ti/">
-      2019年PAT春、秋、冬真题
+      PAT2019春、秋、冬，2020春真题
     </a>
   </h1>
   <div class="post-meta">
@@ -473,12 +477,12 @@ window.addEventListener('load', function() {
     
     <span class="meta-item">
       <i class="fa fa-clock-o"></i>
-      <span>43分钟</span>
+      <span>57分钟</span>
     </span>
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>7038<span class="pc-show">字数</span></span>
+      <span>9156<span class="pc-show">字数</span></span>
     </span>
   </div>
 </header>
@@ -1704,6 +1708,283 @@ int main() {
 	return 0;
 }
 </code></pre>
+<h3 id="1168-prime-day">1168  Prime Day</h3>
+<figure data-type="image" tabindex="3"><img src="C:%5CUsers%5Clxb%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200829143952987.png" alt="image-20200829143952987" loading="lazy"></figure>
+<p>The above picture is from Sina Weibo, showing May 23rd, 2019 as a very cool “Prime Day”. That is, not only that the corresponding number of the date 20190523 is a prime, but all its sub-strings ended at the last digit 3 are prime numbers.</p>
+<p>Now your job is to tell if a given date is a Prime Day.</p>
+<p><strong>Input Specification:</strong></p>
+<p>Each input file contains one test case. For each case, a date between January 1st, 0001 and December 31st, 9999 is given, in the format yyyymmdd.</p>
+<p><strong>Output Specification:</strong></p>
+<p>For each given date, output in the decreasing order of the length of the substrings, each occupies a line. In each line, print the string first, followed by a space, then Yes if it is a prime number, or No if not. If this date is a Prime Day, print in the last line All Prime!.</p>
+<p><strong>Sample Input 1:</strong></p>
+<p>20190523</p>
+<p><strong>Sample Output 1:</strong></p>
+<pre><code>20190523 Yes
+0190523 Yes
+190523 Yes
+90523 Yes
+0523 Yes
+523 Yes
+23 Yes
+3 Yes
+All Prime!
+Sample Input 2:
+20191231
+Sample Output 2:
+20191231 Yes
+0191231 Yes
+191231 Yes
+91231 No
+1231 Yes
+231 No
+31 Yes
+1 No
+</code></pre>
+<pre><code>#include&lt;bits/stdc++.h&gt; 
+using namespace std;
+bool isprime(int n){
+	if(n&lt;=1) return false;
+	int sqr=sqrt(n*1.0);
+	for(int i=2;i&lt;=sqr;i++){
+		if(n%i==0) return false;
+	}
+	return true;
+}
+int main(){
+	string s;
+	cin&gt;&gt;s;
+	int flag=1;
+	while(s.length()&gt;0){
+		int t=stoi(s);
+		cout&lt;&lt;s&lt;&lt;&quot; &quot;;
+		if(isprime(t)) printf(&quot;Yes\n&quot;);
+		else {
+			flag=0;
+			printf(&quot;No\n&quot;);
+		}
+		s.erase(s.begin());
+	}
+	if(flag) printf(&quot;All Prime!&quot;);
+	return 0; 
+}
+</code></pre>
+<h3 id="1169-the-judger">1169 The Judger</h3>
+<p>A game of numbers has the following rules: at the beginning, two distinct positive integers are given by the judge. Then each player in turn must give a number to the judge. The number must be the difference of two numbers that are previously given, and must not be duplicated to any of the existed numbers. The game will run for several rounds. The one who gives a duplicate number or even a wrong number will be kicked out.</p>
+<p>Your job is to write a judger program to judge the players' numbers and to determine the final winners.</p>
+<p>Input Specification:</p>
+<p>Each input file contains one test case. For each case, the first line gives two distinct positive integers to begin with. Both numbers are in [1,10^5 ].</p>
+<p>In the second line, two numbers are given: N (2≤N≤10), the number of players, and M (2≤M≤10^3), the number of rounds.</p>
+<p>Then N lines follow, each contains M positive integers. The i-th line corresponds to the i-th player (i=1,⋯,N). The game is to start from the 1st player giving his/her 1st number, followed by everybody else giving their 1st numbers in the 1st round; then everyone give their 2nd numbers in the 2nd round, and so on so forth.</p>
+<p>Output Specification:</p>
+<p>If the i-th player is kicked out in the k-th round, print in a line Round #k: i is out.. The rest of the numbers given by the one who is out of the game will be ignored. If more than one player is out in the same round, print them in increasing order of their indices. When the game is over, print in the last line Winner(s): W1 W2 ... Wn, where W1 ... Wn are the indices of the winners in increasing order. All the numbers in a line must be separated by exactly one space, and there must be no extra space at the beginning or the end of the line. If there is no winner, print No winner. instead.</p>
+<p>Sample Input 1:</p>
+<pre><code>101 42
+4 5
+59 34 67 9 7
+17 9 8 50 7
+25 92 43 26 37
+76 51 1 41 40
+</code></pre>
+<p>Sample Output 1:</p>
+<pre><code>Round #4: 1 is out.
+Round #5: 3 is out.
+Winner(s): 2 4
+</code></pre>
+<p>Sample Input 2:</p>
+<pre><code>42 101
+4 5
+59 34 67 9 7
+17 9 18 50 49
+25 92 58 1 39
+102 32 2 6 41
+</code></pre>
+<p>Sample Output 2:</p>
+<pre><code>Round #1: 4 is out.
+Round #3: 2 is out.
+Round #4: 1 is out.
+Round #5: 3 is out.
+No winner.
+</code></pre>
+<pre><code>#include&lt;bits/stdc++.h&gt;
+using namespace std;
+int main() {
+	int n1,n2,n,m,isout[12]= {0},v[12][1005]= {0},exist[200010]= {0};
+	vector&lt;int&gt; win,ex;
+	scanf(&quot;%d%d%d%d&quot;,&amp;n1,&amp;n2,&amp;n,&amp;m);
+	for(int i=1; i&lt;=n; i++) {
+		for(int j=1; j&lt;=m; j++) {
+			scanf(&quot;%d&quot;,&amp;v[i][j]);
+		}
+	}
+	ex.push_back(n1);
+	ex.push_back(n2);
+	exist[n1]=1;
+	exist[n2]=1;
+	for(int j=1; j&lt;=m; j++) {
+		for(int i=1; i&lt;=n; i++) {
+			int flag=0;
+			if(isout[i]==1) continue;
+			if(exist[v[i][j]]==1) {
+				isout[i]=1;
+				printf(&quot;Round #%d: %d is out.\n&quot;,j,i);
+				continue;
+			}
+			for(int k=0; k&lt;ex.size(); k++) {
+				if(exist[v[i][j]+ex[k]]==1) {
+					flag=1;
+					break;
+				}
+			}
+			if(flag==0) {
+				isout[i]=1;
+				printf(&quot;Round #%d: %d is out.\n&quot;,j,i);
+				continue;
+			}
+			exist[v[i][j]]=1;
+			ex.push_back(v[i][j]);
+		}
+	}
+	
+	for(int i=1;i&lt;=n;i++){
+		if(isout[i]==0) win.push_back(i);
+	}
+	if(win.size()==0) printf(&quot;No winner.\n&quot;);
+	else{
+		printf(&quot;Winner(s):&quot;);
+		for(int i=0;i&lt;win.size();i++) printf(&quot; %d&quot;,win[i]);
+	}
+	return 0;
+}
+</code></pre>
+<h3 id="1170-safari-park">1170 Safari Park</h3>
+<p>A safari park（野生动物园）has K species of animals, and is divided into N regions. The managers hope to spread the animals to all the regions, but not the same animals in the two neighboring regions. Of course, they also realize that this is an NP complete problem, you are not expected to solve it. Instead, they have designed several distribution plans. Your job is to write a program to help them tell if a plan is feasible.</p>
+<p>Input Specification:</p>
+<p>Each input file contains one test case. For each case, the first line gives 3 integers: N (0&lt;N≤500), the number of regions; R (≥0), the number of neighboring relations, and K (0&lt;K≤N), the number of species of animals. The regions and the species are both indexed from 1 to N.</p>
+<p>Then R lines follow, each gives the indices of a pair of neighboring regions, separated by a space.</p>
+<p>Finally there is a positive M (≤20) followed by M lines of distribution plans. Each plan gives N indices of species in a line (the i-th index is the animal in the i-th rigion), separated by spaces. It is guaranteed that any pair of neighboring regions must be different, and there is no duplicated neighboring relations.</p>
+<p>Output Specification:</p>
+<p>For each plan, print in a line Yes if no animals in the two neighboring regions are the same, or No otherwise. However, if the number of species given in a plan is not K, you must print Error: Too many species. or Error: Too few species. according to the case.</p>
+<p>Sample Input:</p>
+<pre><code>6 8 3
+2 1
+1 3
+4 6
+2 5
+2 4
+5 4
+5 6
+3 6
+5
+1 2 3 3 1 2
+1 2 3 4 5 6
+4 5 6 6 4 5
+2 3 4 2 3 4
+2 2 2 2 2 2
+</code></pre>
+<p>Sample Output:</p>
+<pre><code>Yes
+Error: Too many species.
+Yes
+No
+Error: Too few species.
+</code></pre>
+<pre><code>#include&lt;bits/stdc++.h&gt;
+using namespace std;
+int main() {
+	int n,r,k,m;
+	scanf(&quot;%d%d%d&quot;,&amp;n,&amp;r,&amp;k);
+	vector&lt;int&gt; v[r];
+	for(int i=0; i&lt;r; i++) {
+		int v1,v2;
+		scanf(&quot;%d%d&quot;,&amp;v1,&amp;v2);
+		v[i].push_back(v1);
+		v[i].push_back(v2);
+	}
+	scanf(&quot;%d&quot;,&amp;m);
+	for(int i=0; i&lt;m; i++) {
+		int g[510],flag=1;
+		set&lt;int&gt;s;
+		for(int j=1; j&lt;=n; j++) {
+			scanf(&quot;%d&quot;,&amp;g[j]);
+			s.insert(g[j]);
+		}
+		if(s.size()&gt;k) {
+			printf(&quot;Error: Too many species.\n&quot;);
+			continue;
+		} else if(s.size()&lt;k) {
+			printf(&quot;Error: Too few species.\n&quot;);
+			continue;
+		}
+		for(int j=0; j&lt;r; j++) {
+			if(g[v[j][0]]==g[v[j][1]]) {
+				flag=0;
+				printf(&quot;No\n&quot;);
+				break;
+			}
+		}
+		if(flag==1) printf(&quot;Yes\n&quot;);
+	}
+	return 0;
+}
+</code></pre>
+<h3 id="1171-replacement-selection">1171 <strong>Replacement Selection</strong></h3>
+<p>When the input is much too large to fit into memory, we have to do <strong>external sorting</strong> instead of internal sorting. One of the key steps in external sorting is to generate sets of sorted records (also called <strong>runs</strong>) with limited internal memory. The simplest method is to read as many records as possible into the memory, and sort them internally, then write the resulting run back to some tape. The size of each run is the same as the capacity of the internal memory.</p>
+<p><strong>Replacement Selection</strong> sorting algorithm was described in 1965 by Donald Knuth. Notice that as soon as the first record is written to an output tape, the memory it used becomes available for another record. Assume that we are sorting in ascending order, if the next record is not smaller than the record we have just output, then it can be included in the run.</p>
+<p>For example, suppose that we have a set of input { 81, 94, 11, 96, 12, 99, 35 }, and our memory can sort 3 records only. By the simplest method we will obtain three runs: { 11, 81, 94 }, { 12, 96, 99 } and { 35 }. According to the replacement selection algorithm, we would read and sort the first 3 records { 81, 94, 11 } and output 11 as the smallest one. Then one space is available so 96 is read in and will join the first run since it is larger than 11. Now we have { 81, 94, 96 }. After 81 is out, 12 comes in but it must belong to the next run since it is smaller than 81. Hence we have { 94, 96, 12 } where 12 will stay since it belongs to the next run. When 94 is out and 99 is in, since 99 is larger than 94, it must belong to the <strong>first run</strong>. Eventually we will obtain two runs: the first one contains { 11, 81, 94, 96, 99 } and the second one contains { 12, 35 }.</p>
+<p>Your job is to implement this replacement selection algorithm.</p>
+<p>Input Specification:</p>
+<p>Each input file contains several test cases. The first line gives two positive integers <em>N</em> (≤105) and <em>M</em> (&lt;<em>N</em>/2), which are the total number of records to be sorted, and the capacity of the internal memory. Then <em>N</em> numbers are given in the next line, all in the range of <strong>int</strong>. All the numbers in a line are separated by a space.</p>
+<p>Output Specification:</p>
+<p>For each test case, print in each line a run (in ascending order) generated by the replacement selection algorithm. All the numbers in a line must be separated by exactly 1 space, and there must be no extra space at the beginning or the end of the line.</p>
+<p>Sample Input:</p>
+<pre><code class="language-in">13 3
+81 94 11 96 12 99 17 35 28 58 41 75 15
+</code></pre>
+<p>Sample Output:</p>
+<pre><code class="language-out">11 81 94 96 99
+12 17 28 35 41 58 75
+15
+</code></pre>
+<pre><code>#include&lt;bits/stdc++.h&gt;
+using namespace std;
+int main() {
+	int n,m;
+	scanf(&quot;%d%d&quot;,&amp;n,&amp;m);
+	vector&lt;int&gt; v;
+	for(int i=0; i&lt;n; i++) {
+		int temp;
+		scanf(&quot;%d&quot;,&amp;temp);
+		v.push_back(temp);
+	}
+	priority_queue&lt;int,vector&lt;int&gt;,greater&lt;int&gt; &gt; q;
+	int index=0,count=0,TOP;
+	vector&lt;int&gt;temp,ans;
+	while(index&lt;m) q.push(v[index++]);
+	while(count!=n) {
+		TOP=q.top();
+		ans.push_back(TOP);
+		q.pop();
+		count++;
+		if(index&lt;n) {
+			if(v[index]&gt;TOP) q.push(v[index++]);
+			else temp.push_back(v[index++]);
+		}
+		if(q.empty()) {
+			for(int i=0; i&lt;ans.size(); i++) {
+				if(i&gt;0) printf(&quot; &quot;);
+				printf(&quot;%d&quot;,ans[i]);
+			}
+			printf(&quot;\n&quot;);
+			ans.clear();
+			for (int i = 0; i &lt; temp.size(); i++)//v的数全都放到q里
+				q.push(temp[i]);
+			temp.clear();
+		}
+
+	}
+	return 0;
+}
+</code></pre>
 
               </div>
               <div class="post-footer">
@@ -1714,7 +1995,7 @@ int main() {
     </li>
     <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="https://liuxbo.github.io/post/2019-nian-pat-chun-qiu-dong-zhen-ti/" title="2019年PAT春、秋、冬真题">2019年PAT春、秋、冬真题</a>
+      <a href="https://liuxbo.github.io/post/2019-nian-pat-chun-qiu-dong-zhen-ti/" title="PAT2019春、秋、冬，2020春真题">PAT2019春、秋、冬，2020春真题</a>
     </li>
     <li class="post-copyright-license">
       <strong>版权声明： </strong>
