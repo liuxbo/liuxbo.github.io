@@ -7,7 +7,7 @@
 <meta name="description" content="菜鸡成长之路">
 <meta name="theme-color" content="#000">
 <title>PAT题解 | lxb&#39;blog</title>
-<link rel="shortcut icon" href="https://liuxbo.github.io/favicon.ico?v=1598702717937">
+<link rel="shortcut icon" href="https://liuxbo.github.io/favicon.ico?v=1606651448403">
 <link rel="stylesheet" href="https://liuxbo.github.io/styles/main.css">
 
 <link rel="stylesheet" href="/media/css/gemini.css">
@@ -635,12 +635,12 @@ window.addEventListener('load', function() {
     
     <span class="meta-item">
       <i class="fa fa-clock-o"></i>
-      <span>190分钟</span>
+      <span>191分钟</span>
     </span>
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>30850<span class="pc-show">字数</span></span>
+      <span>31124<span class="pc-show">字数</span></span>
     </span>
   </div>
 </header>
@@ -696,26 +696,19 @@ int main(){
 } 
 </code></pre>
 <h3 id="a100325-dijkstra-点权-边权">A1003(25 Dijkstra、点权、边权)</h3>
-<pre><code>#include&lt;cstdio&gt;
-#include&lt;algorithm&gt;
+<pre><code>#include&lt;bits/stdc++.h&gt;
 using namespace std;
+const int maxn=510;
 const int INF=0x7fffffff;
-int main(){
-	int e[510][510],w[510],weight[510],d[510],num[510],n,m,c1,c2;
-	bool vis[510];
-	scanf(&quot;%d%d%d%d&quot;,&amp;n,&amp;m,&amp;c1,&amp;c2);
-	for(int i=0;i&lt;n;i++) scanf(&quot;%d&quot;,&amp;weight[i]);
-	fill(e[0],e[0]+510*510,INF);
-	for(int i=0;i&lt;m;i++){
-		int a,b,c;
-		scanf(&quot;%d%d%d&quot;,&amp;a,&amp;b,&amp;c);
-		e[a][b]=e[b][a]=c;
-	}
-	fill(vis,vis+510,false);
-	fill(d,d+510,INF);
-	num[c1]=1;
-	d[c1]=0;
-	w[c1]=weight[c1];
+int n,m,c1,c2,weight[maxn],g[maxn][maxn],d[maxn],w[maxn],num[maxn]={0};
+bool vis[maxn]={false};
+void dijkst(int s){
+	fill(d,d+maxn,INF);
+	fill(vis,vis+maxn,false);
+	fill(w,w+maxn,0);
+	d[s]=0;
+	num[s]=1;
+	w[s]=weight[s];
 	for(int i=0;i&lt;n;i++){
 		int u=-1,MIN=INF;
 		for(int j=0;j&lt;n;j++){
@@ -724,21 +717,32 @@ int main(){
 				MIN=d[j];
 			}
 		}
-		if(u==-1) break;
+		if(u==-1) return;
 		vis[u]=true;
 		for(int j=0;j&lt;n;j++){
-			if(vis[j]==false&amp;&amp;e[u][j]!=INF){
-				if(d[j]&gt;d[u]+e[u][j]){
-					d[j]=d[u]+e[u][j];
-					w[j]=w[u]+weight[j];
+			if(g[u][j]!=INF&amp;&amp;vis[j]==false){
+				if(d[u]+g[u][j]&lt;d[j]){
+					d[j]=d[u]+g[u][j];
 					num[j]=num[u];
-				}else if(d[j]==d[u]+e[u][j]){
+				    w[j]=w[u]+weight[j];
+				}else if(d[u]+g[u][j]==d[j]){
 					num[j]+=num[u];
-					if(weight[j]+w[u]&gt;w[j])	w[j]=weight[j]+w[u];
+					if(w[u]+weight[j]&gt;w[j]) w[j]=w[u]+weight[j];
 				}
-			} 
+			}
 		}
 	}
+}
+int main(){
+	cin&gt;&gt;n&gt;&gt;m&gt;&gt;c1&gt;&gt;c2;
+	for(int i=0;i&lt;n;i++) cin&gt;&gt;weight[i];
+	fill(g[0],g[0]+maxn*maxn,INF);
+	for(int i=0;i&lt;m;i++){
+		int v1,v2,t;
+		cin&gt;&gt;v1&gt;&gt;v2&gt;&gt;t;
+		g[v1][v2]=g[v2][v1]=t;
+	}
+	dijkst(c1);
 	printf(&quot;%d %d&quot;,num[c2],w[c2]);
 	return 0;
 }
@@ -1342,13 +1346,13 @@ void dfs(int s){
 		}
 		if(need&lt;minneed){
 			minneed=need;
-			minremain=remain;
+			minremain=remain;//注意
 			path=temp;
 		}else if(need==minneed&amp;&amp;remain&lt;minremain){
 			minremain=remain;
 			path=temp;
 		}
-		temp.pop_back();
+		temp.pop_back();//注意
 		return;
 	}
 	temp.push_back(s);
@@ -2731,7 +2735,7 @@ int main(){
 }
 </code></pre>
 <h3 id="a105330-输出权值总和同为给定值的路径dfs">A1053(30 输出权值总和同为给定值的路径(dfs))</h3>
-<pre><code>#include&lt;cstdio&gt;
+<pre><code>1.#include&lt;cstdio&gt;
 #include&lt;algorithm&gt;
 #include&lt;vector&gt;
 using namespace std;
@@ -2772,6 +2776,53 @@ int main(){
 	}
 	path[0]=0;
 	dfs(0,1,tree[0].w);
+	return 0;
+}
+
+2.
+#include&lt;bits/stdc++.h&gt;
+using namespace std;
+const int maxn=110;
+int n,m,s,weight[maxn],notroot[maxn]={0};
+vector&lt;int&gt; tree[maxn];
+vector&lt;int&gt; t,path;
+bool cmp(int a,int b){
+	return weight[a]&gt;weight[b];
+} 
+void dfs(int root,int sum){
+	if(tree[root].size()!=0&amp;&amp;sum&gt;s)	return;
+	if(tree[root].size()==0&amp;&amp;sum==s){
+		t.push_back(root);
+		path=t;
+		for(int i=0;i&lt;path.size();i++){
+			if(i&gt;0) printf(&quot; &quot;);
+			printf(&quot;%d&quot;,weight[path[i]]);
+		}
+		printf(&quot;\n&quot;);
+		path.clear();
+		t.pop_back();
+		return;
+	}
+	t.push_back(root);
+	for(int i=0;i&lt;tree[root].size();i++) dfs(tree[root][i],sum+weight[tree[root][i]]);
+	t.pop_back();
+}
+int main(){
+	int root=0;
+	cin&gt;&gt;n&gt;&gt;m&gt;&gt;s;
+	for(int i=0;i&lt;n;i++) cin&gt;&gt;weight[i];
+	for(int i=0;i&lt;m;i++){
+		int id,k,temp;
+		cin&gt;&gt;id&gt;&gt;k;
+		while(k--){
+			cin&gt;&gt;temp;
+			notroot[temp]=1;
+			tree[id].push_back(temp);
+		}
+		sort(tree[id].begin(),tree[id].end(),cmp);
+	} 
+	while(notroot[root]!=0&amp;&amp;root&lt;n) root++;
+	dfs(root,weight[root]);
 	return 0;
 }
 </code></pre>
@@ -4083,10 +4134,6 @@ int main(){
 }
 
 
-
-
-
-
 two points
 #include&lt;algorithm&gt;
 #include&lt;cstdio&gt;
@@ -4644,7 +4691,6 @@ int main(){
 		   printf(&quot;%d&quot;,st+i);
     	}
 	}
-	
 	return 0;
 }
 </code></pre>
@@ -5591,13 +5637,14 @@ struct node{
 node* create(int prel,int prer,int postl,int postr){
 	if(prel&gt;prer) return NULL;
 	node*root=new node;
-	root-&gt;v=pre[prel];
+	root-&gt;v=pre[prel];//每次取先序序列的第一个为根节点
 	int k=prel+1;
 	while(k&lt;=prer&amp;&amp;pre[k]!=post[postr-1]) k++;
 	if(prel+1&lt;n&amp;&amp;postr-1&gt;=0&amp;&amp;pre[prel+1]==post[postr-1]) unique=false;
+	//如果先序序列的第二个元素等于后序序列的倒数第二个元素，说明树的个数不唯一，因为无法确定该结点属于左子树还是右子树
 	int numleft=k-prel-1;
 	root-&gt;left=create(prel+1,k-1,postl,postl+numleft-1);
-	root-&gt;right=create(k,prer,postl+numleft,postr-1);
+	root-&gt;right=create(k,prer,postl+numleft,postr-1);//如果树的个数不唯一，假设该不确定节点属于右子树
 	return root;
 }
 void inorder(node*root){
@@ -6358,64 +6405,48 @@ int main(){
 }
 </code></pre>
 <h3 id="a113725-map-排序">A1137(25 map 排序)</h3>
-<pre><code>#include&lt;iostream&gt;
-#include&lt;string&gt;
-#include&lt;map&gt;
-#include&lt;vector&gt;
-#include&lt;algorithm&gt;
-#include&lt;cmath&gt;
+<pre><code>#include&lt;bits/stdc++.h&gt;
 using namespace std;
-struct node{
-	string id;
-	int gp=-1,gm=-1,gf=-1,g;
-}stu[10001];
-map&lt;string,int&gt; stoint;
-int index=0;
-vector&lt;node&gt; v;
-int strtoint(string s){
-	if(stoint.count(s)==0) stoint[s]=index++;
-	return stoint[s];
-}
+struct node {
+	string name;
+	int gp,gm,gf,g;
+};
+int p,m,n,index1=1;
+map&lt;string,int&gt; mp;
+vector&lt;node&gt; v,ans;
 bool cmp(node a,node b){
-	return a.g!=b.g? a.g&gt;b.g : a.id&lt;b.id;
+	return a.g!=b.g? a.g&gt;b.g : a.name&lt;b.name;
 }
-int main(){
-	int p,m,n,score,tid;
-	string id;
-	cin&gt;&gt;p&gt;&gt;m&gt;&gt;n;
-	for(int i=0;i&lt;p;i++){
-		cin&gt;&gt;id&gt;&gt;score;
-		int tid=strtoint(id);
-		stu[tid].gp=score;
-		stu[tid].id=id;
-	}
-	for(int i=0;i&lt;m;i++){
-		cin&gt;&gt;id&gt;&gt;score;
-		int tid=strtoint(id);
-		stu[tid].gm=score;
-		stu[tid].id=id;
-	}
-	for(int i=0;i&lt;n;i++){
-		cin&gt;&gt;id&gt;&gt;score;
-		int tid=strtoint(id);
-		stu[tid].gf=score;
-		stu[tid].id=id;
-	}
-	for(int i=0;i&lt;index;i++){
-		if(stu[i].gp&gt;=200){
-			if(stu[i].gm&gt;stu[i].gf){
-				if(stu[i].gf!=-1) stu[i].g=round(stu[i].gm*0.4+stu[i].gf*0.6);
-				else stu[i].g=round(stu[i].gm*0.4);
-			}else{
-				if(stu[i].gf==-1) stu[i].g=0;
-				else stu[i].g=stu[i].gf;
-			}
-			if(stu[i].g&gt;=60) v.push_back(stu[i]);
+int main() {
+	scanf(&quot;%d%d%d&quot;,&amp;p,&amp;m,&amp;n);
+	string name;
+	int sc;
+	for(int i=0; i&lt;p; i++) {
+		cin&gt;&gt;name&gt;&gt;sc;
+		if(sc&gt;=200){
+			v.push_back(node {name,sc,-1,-1,0});
+			mp[name]=index1++;
 		}
 	}
-	sort(v.begin(),v.end(),cmp);
+	for(int i=0;i&lt;m;i++){
+		cin&gt;&gt;name&gt;&gt;sc;
+		if(mp[name]!=0) v[mp[name]-1].gm=sc;
+	}
+	for(int i=0;i&lt;n;i++){
+		cin&gt;&gt;name&gt;&gt;sc;
+		if(mp[name]!=0){
+			int id=mp[name]-1;
+			v[id].gf=sc;
+			if(v[id].gf&gt;=v[id].gm) v[id].g=v[id].gf;
+			if(v[id].gf&lt;v[id].gm)	v[id].g=round(0.4*v[id].gm+0.6*v[id].gf);
+		}
+	}
 	for(int i=0;i&lt;v.size();i++){
-		printf(&quot;%s %d %d %d %d\n&quot;,v[i].id.c_str(),v[i].gp,v[i].gm,v[i].gf,v[i].g);	
+		if(v[i].g&gt;=60) ans.push_back(v[i]);
+	}
+	sort(ans.begin(),ans.end(),cmp);
+	for(int i=0;i&lt;ans.size();i++){
+		printf(&quot;%s %d %d %d %d\n&quot;,ans[i].name.c_str(),ans[i].gp,ans[i].gm,ans[i].gf,ans[i].g);
 	}
 	return 0;
 }
@@ -6427,25 +6458,25 @@ using namespace std;
 vector&lt;int&gt; pre, in;
 bool flag = false;
 void postOrder(int prel, int inl, int inr) {
- if (inl &gt; inr || flag == true) return;
- int i = inl;
- while (in[i] != pre[prel]) i++;
- postOrder(prel+1, inl, i-1);
- postOrder(prel+i-inl+1, i+1, inr);
- if (flag == false) {
- printf(&quot;%d&quot;, in[i]);
- flag = true;
- }
+	if (inl &gt; inr || flag == true) return;
+	int i = inl;
+	while (in[i] != pre[prel]) i++;
+	postOrder(prel+1, inl, i-1);
+	postOrder(prel+i-inl+1, i+1, inr);
+	if (flag == false) {
+		printf(&quot;%d&quot;, in[i]);
+		flag = true;
+	}
 }
 int main() {
- int n;
- scanf(&quot;%d&quot;, &amp;n);
- pre.resize(n);
- in.resize(n);
- for (int i = 0; i &lt; n; i++) scanf(&quot;%d&quot;, &amp;pre[i]);
- for (int i = 0; i &lt; n; i++) scanf(&quot;%d&quot;, &amp;in[i]);
- postOrder(0, 0, n-1);
- return 0;
+	int n;
+	scanf(&quot;%d&quot;, &amp;n);
+	pre.resize(n);
+	in.resize(n);
+	for (int i = 0; i &lt; n; i++) scanf(&quot;%d&quot;, &amp;pre[i]);
+	for (int i = 0; i &lt; n; i++) scanf(&quot;%d&quot;, &amp;in[i]);
+	postOrder(0, 0, n-1);
+	return 0;
 }
 </code></pre>
 <h3 id="a113930-逻辑题-unordered_map">A1139(30 逻辑题 unordered_map)</h3>
@@ -6541,7 +6572,6 @@ bool cmp(node a,node b){
 int main(){
 	int n;
 	cin&gt;&gt;n;
-	//cout&lt;&lt;&quot;pppp\n&quot;;
 	for(int i=0;i&lt;n;i++){
 		string id,code;
 		int score,tid;
@@ -6721,7 +6751,7 @@ int main(){
 	int msize,n,m,temp,cnt=0;;
 	scanf(&quot;%d%d%d&quot;,&amp;msize,&amp;n,&amp;m);
 	while(!isprime(msize)) msize++;
-	vector&lt;int&gt; v(msize,0);
+	vector&lt;int&gt; v(msize,0);//注意初始化数组元素
 	for(int i=0;i&lt;n;i++){
 		scanf(&quot;%d&quot;,&amp;temp);
 		int flag=0;
@@ -6740,7 +6770,7 @@ int main(){
 		for(int j=0;j&lt;=msize;j++){//注意这里是等号,与插入时不同，要回到初始位置才知道查找失败 
 			int pos=(temp+j*j)%msize;
 			cnt++;
-			if(v[pos]==temp||v[pos]==0) break;
+			if(v[pos]==temp||v[pos]==0) break;//找到或没找到
 		}
 	}
 	printf(&quot;%.1f&quot;,cnt*1.0/m);
