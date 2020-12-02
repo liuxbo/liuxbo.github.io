@@ -7,7 +7,7 @@
 <meta name="description" content="菜鸡成长之路">
 <meta name="theme-color" content="#000">
 <title>PAT题解 | lxb&#39;blog</title>
-<link rel="shortcut icon" href="https://liuxbo.github.io/favicon.ico?v=1606870587152">
+<link rel="shortcut icon" href="https://liuxbo.github.io/favicon.ico?v=1606875930794">
 <link rel="stylesheet" href="https://liuxbo.github.io/styles/main.css">
 
 <link rel="stylesheet" href="/media/css/gemini.css">
@@ -640,7 +640,7 @@ window.addEventListener('load', function() {
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>31124<span class="pc-show">字数</span></span>
+      <span>31110<span class="pc-show">字数</span></span>
     </span>
   </div>
 </header>
@@ -5629,7 +5629,7 @@ int main(){
 #include&lt;vector&gt;
 using namespace std;
 int n,post[31],pre[30],num=0;
-bool unique=true;
+bool uniqu=true;
 struct node{
 	int v;
 	node*left,*right;
@@ -5640,7 +5640,7 @@ node* create(int prel,int prer,int postl,int postr){
 	root-&gt;v=pre[prel];//每次取先序序列的第一个为根节点
 	int k=prel+1;
 	while(k&lt;=prer&amp;&amp;pre[k]!=post[postr-1]) k++;
-	if(prel+1&lt;n&amp;&amp;postr-1&gt;=0&amp;&amp;pre[prel+1]==post[postr-1]) unique=false;
+	if(prel+1&lt;n&amp;&amp;postr-1&gt;=0&amp;&amp;pre[prel+1]==post[postr-1]) uniqu=false;
 	//如果先序序列的第二个元素等于后序序列的倒数第二个元素，说明树的个数不唯一，因为无法确定该结点属于左子树还是右子树
 	int numleft=k-prel-1;
 	root-&gt;left=create(prel+1,k-1,postl,postl+numleft-1);
@@ -5661,7 +5661,7 @@ int main(){
 	for(int i=0;i&lt;n;i++) scanf(&quot;%d&quot;,&amp;post[i]);
 	node*root=NULL;
 	root=create(0,n-1,0,n-1);
-	if(unique) printf(&quot;Yes\n&quot;);
+	if(uniqu) printf(&quot;Yes\n&quot;);
 	else printf(&quot;No\n&quot;);
 	inorder(root);
     printf(&quot;\n&quot;);
@@ -7170,44 +7170,40 @@ int main(){
 }
 </code></pre>
 <h3 id="a115530-完全二叉树-判断大顶堆小顶堆-dfs-打印路径">A1155(30 完全二叉树  判断大顶堆小顶堆 dfs  打印路径)</h3>
-<pre><code>#include&lt;cstdio&gt;
-#include&lt;vector&gt;
+<pre><code>#include&lt;bits/stdc++.h&gt;
 using namespace std;
-int n,t[1005],index;
-vector&lt;int&gt; v;
-void dfs(int i){
-	if(i*2+1&gt;n&amp;&amp;i*2&gt;n){
-		if(i&lt;=n){
-			for(int i=0;i&lt;v.size();i++){
-				if(i&gt;0) printf(&quot; &quot;);
-				printf(&quot;%d&quot;,v[i]);
-			}
-			printf(&quot;\n&quot;);
+int n,tree[1005];
+vector&lt;int&gt; temp;
+void dfs(int index){
+	if(index*2&gt;n&amp;&amp;index*2+1&gt;n){
+		temp.push_back(index);
+		for(int i=0;i&lt;temp.size();i++){
+			if(i&gt;0) printf(&quot; &quot;);
+			printf(&quot;%d&quot;,tree[temp[i]]);
 		}
+		printf(&quot;\n&quot;);
+		temp.pop_back();
 		return;
 	}
-	v.push_back(t[i*2+1]);
-	dfs(i*2+1);
-	v.pop_back();
-	v.push_back(t[i*2]);
-	dfs(i*2);
-	v.pop_back();
+	temp.push_back(index);
+	if(index*2+1&lt;=n) dfs(index*2+1);
+	if(index*2&lt;=n) dfs(index*2);
+	temp.pop_back();
 }
 int main(){
-	scanf(&quot;%d&quot;,&amp;n);
-	int flagmax=1,flagmin=1;
-	for(int i=1;i&lt;=n;i++) scanf(&quot;%d&quot;,&amp;t[i]);
-	v.push_back(t[1]);
-	for(int i=2;i&lt;=n;i++){
-		if(t[i]&lt;t[i/2]) flagmin=0;
-		if(t[i]&gt;t[i/2]) flagmax=0;
+	cin&gt;&gt;n;
+	bool minheap=true,maxheap=true;
+	for(int i=1;i&lt;=n;i++) cin&gt;&gt;tree[i];
+	for(int i=n;i&gt;=2;i--){
+		if(tree[i]&gt;tree[i/2]) maxheap=false;
+		if(tree[i]&lt;tree[i/2]) minheap=false;
 	}
 	dfs(1);
-	if(flagmin==1) printf(&quot;Min Heap&quot;);
-	else if(flagmax==1) printf(&quot;Max Heap&quot;);
-	else if(flagmin==0&amp;&amp;flagmax==0) printf(&quot;Not Heap&quot;);
+	if(minheap) printf(&quot;Min Heap\n&quot;);
+	else if(maxheap) printf(&quot;Max Heap\n&quot;);
+	else printf(&quot;Not Heap\n&quot;);
 	return 0;
-} 
+}
 </code></pre>
 
               </div>
