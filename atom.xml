@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://liuxbo.github.io</id>
     <title>lxb&apos;blog</title>
-    <updated>2020-11-29T12:09:11.313Z</updated>
+    <updated>2020-12-02T00:54:53.547Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://liuxbo.github.io"/>
     <link rel="self" href="https://liuxbo.github.io/atom.xml"/>
@@ -1732,219 +1732,6 @@ Error.
 </code></pre>
 <pre><code>
 </code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[PAT题型总结]]></title>
-        <id>https://liuxbo.github.io/post/pat-ti-xing-zong-jie/</id>
-        <link href="https://liuxbo.github.io/post/pat-ti-xing-zong-jie/">
-        </link>
-        <updated>2020-05-15T01:27:45.000Z</updated>
-        <content type="html"><![CDATA[<p>书上做标记   二刷文件做标记并加黑重要的题   更新PAT题解</p>
-<h3 id="1模拟题">1.模拟题</h3>
-<p>1042(洗牌器)</p>
-<p>1046(最短路径)</p>
-<p>1002(多项式相加)</p>
-<p>1009(多项式相乘)</p>
-<p><strong>A1017 （25 模拟 ，时间处理、排序、）</strong></p>
-<h3 id="2水题-逻辑题">2.水题、逻辑题</h3>
-<p>1006</p>
-<p>1036</p>
-<p>1093(25 逻辑题)</p>
-<p>1101(25 逻辑题)</p>
-<p>1113(25 水题)</p>
-<p>1116(20 水题)</p>
-<p>1104(20 片段和 逻辑题)</p>
-<p>1008(20 水题)</p>
-<p><strong>1117(25 逻辑题)</strong></p>
-<p>1120(20 水题)</p>
-<p>1124 (20 逻辑题)</p>
-<p><strong>1128(20  n皇后问题)</strong></p>
-<p><strong>1144(20 找丢失的最小正数)</strong> hash、map</p>
-<p><strong>1148(20 狼人杀 找到两个狼人)</strong></p>
-<h3 id="3数字-数学问题">3.数字、数学问题</h3>
-<p>1019(判断回文串 十进制转化为其他进制)</p>
-<p>1027(20 进制转换)</p>
-<p>1058(20 水题)</p>
-<p><strong>1069(20 数字黑洞)</strong></p>
-<p><strong>1049(30  数学问题：&quot;1&quot;的个数)</strong></p>
-<p>1081(20 分数相加)</p>
-<p><strong>1088(20  分数的加减乘除)</strong></p>
-<p><strong>1015(20 进制转化与素数判断)</strong></p>
-<p><strong>1096(20 找出连续的因数)</strong></p>
-<p><strong>1059(25 建立素数表 求素数因数)</strong></p>
-<p>1024(25 大整数反转相加，判断回文数)   //<strong>注意输入的数字是一位数，或者本身就是回文数</strong></p>
-<p>1023(20 大整数乘2)   <strong>//注意大整数四则运算的写法</strong></p>
-<p>1156(20 Sexy Primes  素数)</p>
-<h3 id="4字符串">4.字符串</h3>
-<p>1061(20 一对字符串相同的元素)</p>
-<p><strong>1073(20 科学计数法)</strong></p>
-<p><strong>1060(25 字符串 科学计数法)</strong></p>
-<p>1001(20 两数相加)</p>
-<p>1005(20 字符串)</p>
-<p>1035(20 字符串)</p>
-<p><strong>1077(20  多个字符串找公共后缀)</strong></p>
-<p><strong>1082(25 分段处理字符串)</strong></p>
-<p>1084(20 字符串)</p>
-<p>1071(25 map  字符串)</p>
-<p><strong>1108(20 字符串 sscanf、sprintf)</strong></p>
-<p><strong>1112(20 字符串、map、找出“坏键”)</strong>   先对对原字符串加工，在首尾各加上一个特殊字符</p>
-<p>1132(20 字符串 水题)</p>
-<p><strong>1136 (20 回文串 字符串)</strong></p>
-<p>1140(20 字符串) Look-and-say Sequence</p>
-<p>1152(20 字符串中找第一个k位素数)</p>
-<h3 id="5排序">5.排序</h3>
-<p>1062(25 按条件排序)</p>
-<p><strong>1012(25 条件排序)</strong></p>
-<p><strong>1016(25 排序 处理多条通话时间记录)</strong></p>
-<p>1025(25 条件排序)</p>
-<p>1028(25  排序)</p>
-<p><strong>1055(25 按条件查找并排序输出)</strong></p>
-<p><strong>1075(25 排序)</strong></p>
-<p>1083(25 排序)</p>
-<p><strong>1080(30 排序  按排名依次录取报考志愿)</strong></p>
-<p><strong>1095(30 校园停车 排序  两辆配对  时间查询输出)</strong></p>
-<p><strong>1089  (25 插入排序和归并排序)</strong></p>
-<p>1109(25 排序)</p>
-<p>1137(25 map 排序)</p>
-<p>1141(25 stl、排序)</p>
-<p><strong>1153(25 模拟 排序引用传参  unordered_map)</strong></p>
-<h3 id="6hash">6.<code>hash</code></h3>
-<p>1092(20 字符串 hash)</p>
-<p>1041(20 hash)</p>
-<p>1050(20 hash)</p>
-<p><strong>1048(25 hash 找出两个数的和为指定的数)</strong></p>
-<p>1134(25 hash散列)  <strong>注意初始化hashtable[maxn]={0}</strong></p>
-<p><strong>1145(25 hash 平方探查法插入与查找)</strong></p>
-<p><strong>1078(25 hash 平方探查)</strong></p>
-<h3 id="7贪心">7.贪心</h3>
-<p>1070(25 贪心)</p>
-<p>1037(25 贪心)</p>
-<p><strong>1067(25  贪心 swap排序，求最小交换次数)</strong></p>
-<p><strong>1038(30 贪心  求最小字符串序列)</strong></p>
-<p>1125(25 贪心 排序)</p>
-<h3 id="8二分-twopoints">8.二分 、<code>twopoints</code></h3>
-<p><strong>1085(25 二分 twopoints 多解法)</strong></p>
-<p><strong>1010(25 二分)</strong></p>
-<p><strong>1044(25 二分)</strong></p>
-<p><strong>1029(25 求中位数 twopoints)</strong></p>
-<h3 id="9stl">9.<code>STL</code></h3>
-<p><strong>1039(25 vector  hash)</strong></p>
-<p>1047(25 vector)</p>
-<p><strong>1063(25 set)</strong>    注意find的用法</p>
-<p>1054(20 map)</p>
-<p>1100(20 字符串 string map)</p>
-<p>1121 (25 map、set应用)</p>
-<p><strong>1129 (25 set的应用 结构体内运算符重载)</strong>  必看</p>
-<p>1149(25 map)</p>
-<p>1157(25 Anniversary unordered_map/set)</p>
-<h3 id="10栈-队列-链表">10.栈、队列、链表</h3>
-<p><strong>1051(25 栈)</strong></p>
-<p><strong>1056(25 queue队列)</strong></p>
-<p>1074(25 反转链表)</p>
-<p>1032(25 链表  找公共后缀)</p>
-<p><strong>1052(25 链表按key排序)</strong>   注意改题特判链表长度为0的情况，否则造成段错误</p>
-<p><strong>1097(25 链表分离)</strong>   注意特判移出的链表长度为0，否则造成段错误</p>
-<p><strong>1133(链表  重新排列)</strong></p>
-<p>1161(25 合并链表)</p>
-<h3 id="11dfs-bfs">11.DFS、BFS</h3>
-<p><strong>1103(30 DFS 分解因式)</strong>   经典DFS，必看</p>
-<p><strong>1091(30 经典BFS求矩阵中块的个数)</strong>   必看</p>
-<p><strong>1160 (20 Forever dfs+回溯剪枝)</strong></p>
-<h3 id="12树">12.树</h3>
-<ul>
-<li>
-<p>普通树</p>
-<p>1020(25 后序+中序建树，输出层序)</p>
-<p><strong>1086(25 栈模拟中序和先序建树，输出后序)</strong></p>
-<p>1102(25 二叉树反转)</p>
-<p>1090(25 树的dfs求深度)</p>
-<p>1079(25 树的dfs)</p>
-<p>1094(25 树的dfs)</p>
-<p>1106(25 树的dfs)</p>
-<p>**1053(30 输出权值总和同为给定值的路径(dfs)) ** 必看</p>
-<p><strong>1119 (30 树的前序和后序 求中序)</strong>  必看</p>
-<p><strong>1130(中序遍历二叉树 输出中缀表达式)</strong></p>
-<p><strong>1138(25 树 前序加中序输出后序)</strong>  看柳神解法</p>
-<p><strong>1159(30 map、sscanf、中序后序建树加树的综合性考察)</strong></p>
-<p><strong>1162(25 输出树的后缀表达式)</strong></p>
-</li>
-<li>
-<p>完全二叉树</p>
-<p><strong>1064(30 完全二叉树(中序遍历建树))</strong></p>
-<p><strong>1110(25 判断是否是完全二叉树 dfs)</strong></p>
-<p><strong>1123(30 AVL 、层序遍历、判断是否是完全二叉树)</strong></p>
-<p><strong>1147(30  判断大顶堆小顶堆 后序遍历)</strong></p>
-<p><strong>1155(30 完全二叉树  判断大顶堆小顶堆 dfs  打印路径)</strong></p>
-</li>
-<li>
-<p>二叉搜索树</p>
-<p><strong>1043(25 二叉搜索树的遍历与反转)</strong></p>
-<p><strong>1099(30 中序遍历建立二叉搜索树)</strong></p>
-<p><strong>1115(30 二叉搜索树建立与DFS)</strong></p>
-</li>
-<li>
-<p>平衡二叉树</p>
-<p><strong>1066(25 建立平衡二叉树)</strong>  背背模板</p>
-</li>
-<li>
-<p>红黑树</p>
-<p><strong>1135(30 判断红黑树 递归判断)</strong></p>
-</li>
-<li>
-<p>LCA</p>
-<p><strong>1143(30 树 LCA 最低公共祖先)</strong></p>
-<p><strong>1151(30  树 中序加先序求LCA)</strong></p>
-</li>
-</ul>
-<h3 id="13并查集">13.并查集</h3>
-<p><strong>1107(30 经典并查集)</strong>  必看</p>
-<p><strong>1114 (25 并查集)</strong>  偏难</p>
-<p>1118(25 并查集)</p>
-<p><strong>1158(25 电信诈骗 并查集 图)</strong></p>
-<h3 id="14堆">14.堆</h3>
-<p><strong>1098(25 判断插入排序和堆排序)</strong></p>
-<h3 id="15图">15.图</h3>
-<p>1013(25 图的dfs遍历，计算连通块个数)</p>
-<p><strong>1021(25 找出图中使深度最深的结点(首先判断是否能看成树))</strong>  必看，结论</p>
-<p><strong>1034(30 图的深度遍历、map、连通块、边权和点权)</strong></p>
-<p><strong>1076(30 图的bfs、记录给定最大层数上的结点和)</strong></p>
-<p><strong>1003(25 Dijkstra、点权、边权)</strong>  细节多，注意各种数组的初始化</p>
-<p><strong>1018(30 dijkst+dfs)</strong>  必看</p>
-<p><strong>1030(30 dijkst,距离最短加花费最少)</strong></p>
-<p><strong>1072(30 多源dijkst求最佳源)</strong></p>
-<p><strong>1087(30 dijkst+dfs,边权点权、总边权、平均点权)</strong></p>
-<p><strong>1111(30 两次dijkst加dfs,最短、最快路径、结点最少路径)</strong></p>
-<p><strong>1122(25 哈密顿回路  set)</strong></p>
-<p><strong>1126(25 欧拉图 欧拉回路 欧拉路径)</strong></p>
-<p><strong>1127(30 中序后序建树，bfs，输出z字形层序遍历)</strong>  两种方法(只是bfs不同)，方法一:层序遍历用结构体统计每层结点；方法二:层序遍历用当前队列的元素个数统计每层节点</p>
-<p><strong>1142(25 无向完全图 最大子图  两点相连)</strong>  <strong>考逻辑</strong></p>
-<p><strong>A1146(25 判断是否为拓扑排序序列)</strong></p>
-<p>1150(25 判断循环图 输出最小路径)</p>
-<p>1154(25 图  边的两端点的判断 )</p>
-<p><strong>1163(30 判断dijkst的合法路径)</strong></p>
-<h3 id="单词">单词</h3>
-<p>coefficients 系数</p>
-<p>Palindromic 回文的</p>
-<p>suffix 后缀</p>
-<p>infix   中缀</p>
-<p>prefix 前缀</p>
-<p>simultaneously 同时地</p>
-<p>simulate 模仿</p>
-<p>plate  碟；金属板；金属牌；感光底片</p>
-<p>ascending 上升的</p>
-<p>permutation 排列</p>
-<p>deduplication 去重</p>
-<p>recursive 递归的，循环的</p>
-<p>cluster 群</p>
-<p>repetition 重复，背诵</p>
-<p>acyclic 非循环的，非周期的</p>
-<p>cluster  群，聚集</p>
-<p>Eulerian Path   欧拉路径</p>
-<p>numerator 分子</p>
-<p>denominator 分母</p>
-<p>parenthesis 括号</p>
-<p>syntax  语法</p>
 ]]></content>
     </entry>
     <entry>
@@ -11081,6 +10868,38 @@ isfri[abs(stoi(a))*10000+abs(stoi(b))]=isfri[abs(stoi(b))*10000+abs(stoi(a))]=tr
 <p>将图当做树去处理时，注意无向图是双向的，可能会回溯已经访问的结点，要注意避免；在统计图的边权和或者点权和等信息时，为了避免重复访问或者累加，可以在访问后将点权或边权设为0</p>
 </li>
 </ul>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Hello Gridea]]></title>
+        <id>https://liuxbo.github.io/post/hello-gridea/</id>
+        <link href="https://liuxbo.github.io/post/hello-gridea/">
+        </link>
+        <updated>2018-12-11T16:00:00.000Z</updated>
+        <summary type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
+✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
+✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
+<!-- more -->
+<p><a href="https://github.com/getgridea/gridea">Github</a><br>
+<a href="https://gridea.dev/">Gridea 主页</a><br>
+<a href="http://fehey.com/">示例网站</a></p>
+<h2 id="特性">特性👇</h2>
+<p>📝  你可以使用最酷的 <strong>Markdown</strong> 语法，进行快速创作</p>
+<p>🌉  你可以给文章配上精美的封面图和在文章任意位置插入图片</p>
+<p>🏷️  你可以对文章进行标签分组</p>
+<p>📋  你可以自定义菜单，甚至可以创建外部链接菜单</p>
+<p>💻  你可以在 <strong>Windows</strong>，<strong>MacOS</strong> 或 <strong>Linux</strong> 设备上使用此客户端</p>
+<p>🌎  你可以使用 <strong>𝖦𝗂𝗍𝗁𝗎𝖻 𝖯𝖺𝗀𝖾𝗌</strong> 或 <strong>Coding Pages</strong> 向世界展示，未来将支持更多平台</p>
+<p>💬  你可以进行简单的配置，接入 <a href="https://github.com/gitalk/gitalk">Gitalk</a> 或 <a href="https://github.com/SukkaW/DisqusJS">DisqusJS</a> 评论系统</p>
+<p>🇬🇧  你可以使用<strong>中文简体</strong>或<strong>英语</strong></p>
+<p>🌁  你可以任意使用应用内默认主题或任意第三方主题，强大的主题自定义能力</p>
+<p>🖥  你可以自定义源文件夹，利用 OneDrive、百度网盘、iCloud、Dropbox 等进行多设备同步</p>
+<p>🌱 当然 <strong>Gridea</strong> 还很年轻，有很多不足，但请相信，它会不停向前 🏃</p>
+<p>未来，它一定会成为你离不开的伙伴</p>
+<p>尽情发挥你的才华吧！</p>
+<p>😘 Enjoy~</p>
 ]]></content>
     </entry>
 </feed>
