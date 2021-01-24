@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://liuxbo.github.io</id>
     <title>lxb&apos;blog</title>
-    <updated>2021-01-21T02:00:20.189Z</updated>
+    <updated>2021-01-24T00:45:44.578Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://liuxbo.github.io"/>
     <link rel="self" href="https://liuxbo.github.io/atom.xml"/>
@@ -2270,20 +2270,20 @@ int main() {
         <link href="https://liuxbo.github.io/post/idea-de-shi-yong/">
         </link>
         <updated>2020-05-06T13:22:10.000Z</updated>
-        <content type="html"><![CDATA[<ul>
+        <content type="html"><![CDATA[<p>**</p>
+<ul>
 <li>
 <p>构成</p>
 <p>文件从大到小依次是project-&gt;module-&gt;package，</p>
 </li>
 </ul>
 <p>​       自己的代码放在src文件下</p>
-<p>​       package的命名一般由数字、小数点 、小写字母构成(例如 cn.itcast.day04.demo01 每个小数点前都是一个文</p>
-<p>​       件夹，包含小数点后的文件，是一组层级文件)</p>
+<p>​       package的命名一般由数字、小数点 、小写字母构成(例如 cn.itcast.day04.demo01 每       个小数点前都是一个文件夹，包含小数点后的文件，是一组层级文件)</p>
 <ul>
 <li>设置和操作</li>
 </ul>
 <p>​       导入一个模块：file-&gt;project Structure-&gt;import module</p>
-<p>​       settings-&gt;keymap-&gt;Mainmenu-&gt;code-&gt;completion-&gt;basic(将其改为Alt+/) ，用于代码提示快捷输入。</p>
+<p>​       settings-&gt;keymap-&gt;Mainmenu-&gt;code-&gt;completion-&gt;basic(将其改为Alt+/) ，用       于代码提示快捷输入。</p>
 <ul>
 <li>
 <p>常用快捷键</p>
